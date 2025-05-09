@@ -1,0 +1,27 @@
+.sidenavActiveLink {
+    background-color: gray !important;
+    color: white !important;
+    svg{
+      fill: white !important;
+    }
+}
+
+.logoContainer{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 15px 20px;
+    cursor: pointer;
+    svg{
+        width: 100%;
+        height: 100%;
+        fill: #000;
+    }
+}
+
+.drawerContentContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}

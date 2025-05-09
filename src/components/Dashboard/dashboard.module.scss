@@ -1,0 +1,20 @@
+.dashboard_container {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden !important;
+  gap: 1rem;
+}
+
+#root{
+  overflow-y: hidden !important;
+}
+
+.dashboard_card{
+  padding: 1rem;
+  border-radius: 8px !important;
+  background-color: var(--color-decimal) !important;
+  overflow-y: auto !important;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}

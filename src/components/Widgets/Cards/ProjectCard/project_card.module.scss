@@ -1,0 +1,27 @@
+.projectDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  .projectDetailsItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 0.5rem;
+    font-size: 0.875rem !important;
+    color: var(--text-secondary);
+  }
+}
+.projectColorDisplay {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem !important;
+  color: var(--text-secondary);
+  .colorDisplay {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+  }
+}

@@ -1,0 +1,9 @@
+.quickStatsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  height: 16%;
+  div {
+    flex: 1;
+  }
+}
