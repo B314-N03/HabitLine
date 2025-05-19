@@ -1,0 +1,16 @@
+.taskPrioritySelect{
+    border-radius: 8px !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    > div{
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+}
+
+.taskPriority{
+    display: flex;
+    gap: 0.5rem;
+}

@@ -4,14 +4,16 @@ import SearchIcon from '@mui/icons-material/Search';
 import { AddButton } from "../../../Widgets/Cards/Buttons/AddButton";
 
 interface NonMobileHeaderProps {
+    setOpenProjectModal: React.Dispatch<React.SetStateAction<boolean>>;
     setOpenTaskModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function NonMobileHeader({
+    setOpenProjectModal,
     setOpenTaskModal
 }: NonMobileHeaderProps) {
-    const handleAddProject = () => {
-        // Logic to add a project
+    const handleOpenProjectModal = () => {
+        setOpenProjectModal(true);
     }
     const handleOpenTaskModal = () => {
         setOpenTaskModal(true);
@@ -30,7 +32,7 @@ function NonMobileHeader({
                 </div>
                 <div className={styles.buttonContainer}>
                     <AddButton 
-                        onClick={handleAddProject}
+                        onClick={handleOpenProjectModal}
                         title="Add Project"
                         variant="contained"
                     />

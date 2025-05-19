@@ -16,3 +16,6 @@ export const pagesOutsideWebapp = [
         path: "/forgot-password", 
     },
 ]
+
+
+ 

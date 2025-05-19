@@ -1,15 +1,18 @@
 import type { TaskPriority, TaskType } from "./ITask";
 
+export type TaskCardVariant = "xsmall" | "small" |  "medium" | "large";
+
+
 export interface ITaskCard {
     priority: TaskPriority;
     taskType: TaskType;
-    projectId: number;
-    projectName: string;
-    projectColor: string;
+    projectId: string;
     title: string;
     description: string;
     createdAt: Date;
     updatedAt: Date;
     handleClick?: () => void;
-    id: number;
+    id: string;
+    variant?: TaskCardVariant;
+    showProject?: boolean
 }

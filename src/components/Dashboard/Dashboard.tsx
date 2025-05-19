@@ -6,8 +6,8 @@ import styles from "./dashboard.module.scss"
 function Dashboard() {
   return (
     <main className={styles.dashboard_container}>
-        <MostUrgentTasks />
         <QuickStats />
+        <MostUrgentTasks />
         <ActiveProjects />
     </main>
   )

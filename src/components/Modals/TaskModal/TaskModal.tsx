@@ -1,12 +1,11 @@
-import type { ITask } from "../../../Interfaces/ITask";
+import type { ITaskFrontend } from "../../../Interfaces/ITask";
 import TaskForm from "../../Forms/TaskForm/TaskForm";
 import BaseModal from "../BaseModal/BaseModal";
-
 interface TaskModalProps {
     isOpen: boolean;
     onClose: () => void;
     title: string;
-    task: ITask
+    task: ITaskFrontend
 }
 
 function TaskModal({
@@ -22,7 +21,12 @@ function TaskModal({
             size="large"
             title={title}
         >
-            <TaskForm task={task} />
+            <TaskForm 
+                task={task}
+                onClose={onClose}
+                isEditing={title.toLowerCase().includes("edit")}
+            />
+
         </BaseModal>
     )
 }

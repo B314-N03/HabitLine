@@ -2,8 +2,20 @@
 
 export type TaskPriority = 'Low' | 'Medium' | 'High' | 'Critical';
 export type TaskType = 'Bug' | 'Feature' | 'ToDo' | 'Research';
+export type TaskStatus = 'on_hold' | 'to_do' | 'in_progress' | 'in_review' | 'done';
+
+export interface ITaskFrontend {
+    id: string;
+    title: string;
+    description: string;
+    priority: TaskPriority;
+    taskType: TaskType;
+    projectId: string;
+    status: TaskStatus
+}
+
 export interface ITask {
-    id: number;
+    id: string;
     title: string;
     description: string;
     completed: boolean;
@@ -11,9 +23,8 @@ export interface ITask {
     updatedAt: Date;
     priority: TaskPriority;
     taskType: TaskType;
-    projectId: number;
-    projectName?: string;
-    projectColor?: string;
+    projectId: string;
+    status: TaskStatus
 } 
 
 

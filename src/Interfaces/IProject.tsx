@@ -1,10 +1,17 @@
 export interface IProject {
     title: string;
     description: string;
-    completed: number;
     openTasks: number;
-    createdAt: string;
-    updatedAt: string;
-    id: number;
+    doneTasks: number;
+    createdAt: Date;
+    updatedAt: Date;
+    id: string;
     projectColor: string;
+}
+
+export interface IProjectFrontend {
+    title: string;
+    description: string;
+    projectColor: string;
+    id: string;
 }

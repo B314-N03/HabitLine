@@ -1,5 +1,5 @@
 import { createContext, useState, type ReactNode } from "react";
-import type { IUserContext } from "../Interfaces/IUserContext";
+import type { IUserContext } from "../Interfaces/Contexts/IUserContext";
 
 const UserContext = createContext<IUserContext>({
     id: 0,

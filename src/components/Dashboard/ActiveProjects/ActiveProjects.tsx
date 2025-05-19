@@ -1,8 +1,30 @@
 import { Box, Card, Typography } from "@mui/material"
 import ProjectCard from "../../Widgets/Cards/ProjectCard/ProjectCard"
 import dashboardStyles from "../dashboard.module.scss"
+import { useState } from "react"
+import type { IProject } from "../../../Interfaces/IProject"
+import ProjectModal from "../../Modals/ProjectModal/ProjectModal"
+import { useProjects } from "../../../hooks/useProjects"
 
 function ActiveProjects() {
+  const {data: projects, isLoading, isError} = useProjects()
+  const [projectModalOpen, setProjectModalOpen] = useState(false)
+  const [projectToView, setProjectToView] = useState<IProject>({
+    id: "",
+    title: "",
+    description: "",
+    projectColor: "",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    openTasks: 0,
+    doneTasks: 0
+  })
+
+  const handleShowProjectModal = (project: IProject) => {
+    setProjectToView(project)
+    setProjectModalOpen(true)
+  }
+
   return (
     <Card className={dashboardStyles.dashboard_card} elevation={6}>
     <Box>
@@ -10,28 +32,34 @@ function ActiveProjects() {
         Active Projects:
       </Typography>
     </Box>
-    <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}>
-      <ProjectCard 
-        title="AGHSP"
-        description="Der in Unity geschriebene Schießsimulator"
-        completed={5}
-        openTasks={2}
-        createdAt="2023-01-01T00:00:00Z"
-        updatedAt="2023-01-10T00:00:00Z"
-        id={1}
-        projectColor="red"
-        />
-      <ProjectCard 
-        title="Podmans Otter Attack"
-        description="Ein in Unity geschriebenes Spiel, in dem man gegen Otter kämpft"
-        completed={5}
-        openTasks={2}
-        createdAt="2023-01-01T00:00:00Z"
-        updatedAt="2023-01-10T00:00:00Z"
-        id={1}
-        projectColor="green"
-        />
+    <div className={dashboardStyles.scrollContainerCards}>
+      <div className={dashboardStyles.cardsContainer}>
+        {isLoading || isError ? (
+            <Typography variant="h6" component="h6" sx={{ fontWeight: 'bold' }} color="info">{isLoading ? "Loading..." : "Error"}</Typography>
+          ) : (
+            projects?.map((project) => (
+              <ProjectCard 
+                key={project.id}
+                title={project.title}
+                description={project.description}
+                openTasks={project.openTasks}
+                doneTasks={project.doneTasks}
+                createdAt={project.createdAt}
+                updatedAt={project.updatedAt}
+                id={project.id}
+                projectColor={project.projectColor}
+                handleClick={() => handleShowProjectModal(project)}
+              />
+            ))
+          )}
+      </div>
     </div>
+    <ProjectModal 
+      isOpen={projectModalOpen}
+      onClose={() => {setProjectModalOpen(false)}}
+      title="Edit Project"
+      project={projectToView}
+    ></ProjectModal>
   </Card>  
   )
 }

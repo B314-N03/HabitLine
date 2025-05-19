@@ -7,41 +7,70 @@ function ProjectCard(
     { 
         title,
         description,
-        completed,
         openTasks,
+        doneTasks,
         createdAt,
         updatedAt,
         projectColor,
-        id
+        id,
+        handleClick
     }
     : IProjectCard) {
+      const totalTasks = doneTasks + openTasks
+      const calculatedCompletionState = doneTasks / totalTasks * 100
+
+      const projectDetails = [
+        {
+          title: "Project Color",
+          value:
+            <div className={styles.projectColorDisplay}> 
+              <div className={styles.colorDisplay} style={{ backgroundColor: projectColor }} />
+            </div>
+        },
+        {
+          title: "Done Tasks",
+          value: doneTasks,
+          color:"success"
+        },
+        {
+          title: "Open Tasks",
+          value: openTasks,
+          color:"error" 
+        },
+        {
+          title: "Completed",
+          value: isNaN(calculatedCompletionState) ? "No Tasks" : calculatedCompletionState + "%",
+          color: isNaN(calculatedCompletionState) ? "grey" : "success"
+        },
+        {
+          title: "Last Update",
+          value: new Date(updatedAt).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" }),
+          color: "warning"
+        },
+        {
+          title: "Created At",
+          value: new Date(createdAt).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" }),
+          color: "info"
+        }
+      ]
   return (
-    <Card key={id} sx={{ padding: 2, marginTop: 2, borderRadius: 2, width:"350px" }} elevation={6}>
+    <Card key={id} className={styles.projectCard} elevation={6} onClick={handleClick}>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between',height:"100%" }}>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <h3 style={{ fontWeight: 'bold' }}>{title}</h3>
             <p>{description}</p>
           </div>
           <div className={styles.projectDetails}>
-          <Divider />
-            <div className={styles.projectDetailsItem}>
-              Project Color: <div className={styles.projectColorDisplay} >
-                <div className={styles.colorDisplay} style={{ backgroundColor: projectColor }} />
+            <Divider />
+            {projectDetails.map((detail, index) => (
+              <div className={styles.projectDetailsItem} key={index}>
+                {detail.title}: 
+                <Typography variant="h6" component="h6" sx={{ fontWeight: 'bold' }} color={detail.color}>
+                  {detail.value}
+                </Typography>
               </div>
-            </div>
-            <div className={styles.projectDetailsItem}>
-              Completed: <Typography variant="h6" component="h6" sx={{ fontWeight: 'bold' }} color="success" >{completed}</Typography>
-            </div>
-            <div className={styles.projectDetailsItem}>
-              Open Tasks: <Typography variant="h6" component="h6" sx={{ fontWeight: 'bold' }} color="error">{openTasks}</Typography>
-            </div>
-            <div className={styles.projectDetailsItem}>
-              Last Update: <Typography variant="h6" component="h6" sx={{ fontWeight: 'bold' }} color="warning">{new Date(updatedAt).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" })}</Typography>
-            </div>
-            <div className={styles.projectDetailsItem}>
-              Created At: <Typography variant="h6" component="h6" sx={{ fontWeight: 'bold' }} color="info">{new Date(createdAt).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" })}</Typography>
-            </div>
-          </div>
+            ))}
+        </div>
         </div>
     </Card>
   )

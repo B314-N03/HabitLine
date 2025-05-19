@@ -1,0 +1,33 @@
+.projectform{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: 100%;   
+}
+
+.projectformInputs{
+    display: flex;
+    gap: 2rem;
+}
+
+.projectformHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    .projectformHeaderRight{
+        display: flex;
+        gap: 1rem;
+        flex-direction: row;
+    }
+}
+
+.modal_footer_buttons{
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}

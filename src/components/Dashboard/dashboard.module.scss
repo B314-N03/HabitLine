@@ -13,8 +13,27 @@
   padding: 1rem;
   border-radius: 8px !important;
   background-color: var(--color-decimal) !important;
-  overflow-y: auto !important;
   display: flex;
   flex-direction: column;
   gap: .5rem;
+  position: relative;
+}
+
+.cardsContainer{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: fit-content;
+  margin: 0px 0px 25px 0px;
+}
+
+.dashboard_card_title{
+  font-weight: 600 !important;
+}
+
+.scrollContainerCards{
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100% !important;
+  border-radius: 4px;
 }

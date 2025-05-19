@@ -11,11 +11,14 @@ import styles from './header_inside_webapp.module.scss';
 import MobileHeader from './Mobile/MobileHeader';
 import NonMobileHeader from './NonMobile/NonMobileHeader';
 import TaskModal from '../../Modals/TaskModal/TaskModal';
+import ProjectModal from '../../Modals/ProjectModal/ProjectModal';
+import { taskModalNewTaskData } from '../../Helpers/modalBoilerPlateData';
 
 function HeaderInsideWebapp() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const { loggedIn, setLoggedIn, username, avatar} = useContext(UserContext);
   const showAvatarForDev = true;
+  const [openProjectModal, setOpenProjectModal] = useState(false);
   const [openTaskModal, setOpenTaskModal] = useState(false);
   
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -38,6 +41,7 @@ function HeaderInsideWebapp() {
           />
 
          <NonMobileHeader
+            setOpenProjectModal={setOpenProjectModal}
             setOpenTaskModal={setOpenTaskModal}
          />
 
@@ -55,11 +59,18 @@ function HeaderInsideWebapp() {
         </Toolbar>
       </Container>
       <Divider />
+      <ProjectModal
+        isOpen={openProjectModal}
+        onClose={() => {setOpenProjectModal(false)}} title="Add Project"
+        project={{
+          id: "",title: "", description: "", projectColor: "", createdAt: new Date(), updatedAt: new Date(), openTasks: 0, doneTasks: 0}}
+      />
       <TaskModal 
         isOpen={openTaskModal}
         onClose={() => {setOpenTaskModal(false)}} title="Add Task"
-        task={{id: 0, title: "", description: "", completed: false, createdAt: new Date(), updatedAt: new Date(), priority: "Medium", taskType: "ToDo", projectId: 0}}
+        task={taskModalNewTaskData}
       />
+      
     </AppBar>
   );
 }
