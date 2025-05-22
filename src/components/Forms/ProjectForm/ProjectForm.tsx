@@ -6,9 +6,9 @@ import DeleteBin from '@mui/icons-material/Delete';
 import CrossIcon from '@mui/icons-material/Clear';
 import IconButton from "../../Widgets/Cards/Buttons/IconButton";
 import type { IProject } from "../../../Interfaces/IProject";
-import TaskDescriptionInput from "../TaskForm/TaskDescriptionInput/TaskDescriptionInput";
 import ProjectColorInput from "./ProjectColorInput/ProjectColorInput";
 import { useCreateOrUpdateProject } from "../../../hooks/useProjects";
+import RichTextEditor from "../FormWidgets/RichtTextEditor/RichTextEditor";
 
 interface ProjectFormProps {
     project: IProject,
@@ -70,9 +70,9 @@ function ProjectForm({
                 setColorState={setProjectColorState}
             />
            
-            <TaskDescriptionInput 
-                descriptionState={descriptionState}
-                setDescriptionState={setDescriptionState}
+            <RichTextEditor
+                editorValue={descriptionState}
+                setEditorValue={setDescriptionState}
             />
             <div className={styles.modal_footer_buttons}>
                 

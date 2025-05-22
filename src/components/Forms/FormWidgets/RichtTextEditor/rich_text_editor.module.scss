@@ -1,0 +1,19 @@
+.richTextEditorContainer {
+    min-height: 300px !important;    
+    &.hideToolbar{
+        min-height: 20px !important;  
+        max-height: 100px !important;
+        border: none !important;
+    }
+    &.hideToolbar > div:nth-child(1){
+        display: none !important;
+    }
+    &.hideToolbar > div:nth-child(2){
+        padding: 1rem 1.5rem !important;
+    }
+}
+
+.richTextEditorContainer > div:nth-child(2) {
+    padding: 1.5rem;
+}
+

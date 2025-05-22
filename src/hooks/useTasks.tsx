@@ -37,6 +37,24 @@ export const useCreateOrUpdateTask = () => {
   });
 };
 
-export const useProjectColor = () => {
-    
+export const useDeleteTask = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const res = await fetch(`${BackendUrl}${Endpoints.deleteTask}${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (!res.ok) throw new Error("Failed to delete task");
+      console.log(res);
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 };

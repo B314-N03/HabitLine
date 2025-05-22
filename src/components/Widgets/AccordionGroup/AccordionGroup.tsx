@@ -63,6 +63,7 @@ export default function AccordionGroup({
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+      event.preventDefault();
       setExpanded(newExpanded ? panel : false);
     };
 
@@ -73,9 +74,10 @@ export default function AccordionGroup({
           key={item.title}
           expanded={expanded === `panel${item.title}`}
           onChange={handleChange(`panel${item.title}`)}
+          disabled={item.title.includes("No Tasks")}
         >
           <AccordionSummary aria-controls={`panel${item.title}-content`} id={`panel${item.title}-header`}>
-            <Typography>{item.title}</Typography>
+            <Typography>{item.title} </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>

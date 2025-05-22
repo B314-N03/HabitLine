@@ -5,13 +5,13 @@ import type { ITaskFrontend } from "../../../Interfaces/ITask";
 import TaskTypeInput from "./TaskTypeInput/TaskTypeInput";
 import TaskPriorityInput from "./TaskPriorityInput/TaskPriorityInput";
 import TaskProjectInput from "./TaskProjectInput/TaskProjectInput";
-import TaskDescriptionInput from "./TaskDescriptionInput/TaskDescriptionInput";
 import CheckMark from '@mui/icons-material/Check';
 import DeleteBin from '@mui/icons-material/Delete';
 import CrossIcon from '@mui/icons-material/Clear';
 import IconButton from "../../Widgets/Cards/Buttons/IconButton";
-import { useCreateOrUpdateTask } from "../../../hooks/useTasks";
+import { useCreateOrUpdateTask, useDeleteTask } from "../../../hooks/useTasks";
 import TaskCurrentStateInput from "./TaskCurrentStateInput/TaskCurrentStateInput";
+import RichTextEditor from "../FormWidgets/RichtTextEditor/RichTextEditor";
 
 interface TaskFormProps {
     task: ITaskFrontend,
@@ -31,7 +31,7 @@ function TaskForm({
     const [projectState, setProjectState] = useState(projectId);
     const [currentTaskState, setCurrentTaskState] = useState(status);
     const mutation = useCreateOrUpdateTask();
-
+    const deleteMutation = useDeleteTask();
     const handleSubmit = () => {
         mutation.mutate(
             {
@@ -57,6 +57,13 @@ function TaskForm({
             },   
         )
     }
+
+    const handleDelete = () => 
+        deleteMutation.mutate(
+            id, 
+            { onSuccess: () => {
+                onClose()
+            } });
 
 
     return (
@@ -106,10 +113,12 @@ function TaskForm({
                 />
 
             </div>
-            <TaskDescriptionInput 
-                descriptionState={descriptionState}
-                setDescriptionState={setDescriptionState}
+
+            <RichTextEditor 
+                editorValue={descriptionState}
+                setEditorValue={setDescriptionState}
             />
+
             <div className={styles.modal_footer_buttons}>
                 <IconButton 
                     onClick={onClose}
@@ -119,7 +128,7 @@ function TaskForm({
                 />
                 <IconButton 
                     disabled={!isEditing}
-                    onClick={handleSubmit}
+                    onClick={handleDelete}
                     title="Delete"
                     icon={<DeleteBin />}
                     color="error"

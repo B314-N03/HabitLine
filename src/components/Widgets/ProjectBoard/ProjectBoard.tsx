@@ -4,7 +4,8 @@ import type { ITask, TaskStatus } from "../../../Interfaces/ITask";
 import styles from "./project_board.module.scss";
 import { useState } from "react";
 import TaskCard from "../Cards/TaskCard/TaskCard";
-// Utility: Format 'on_hold' → 'On Hold'
+import { useCreateOrUpdateTask } from "../../../hooks/useTasks";
+import TaskModal from "../../Modals/TaskModal/TaskModal";
 const formatStatusLabel = (status: TaskStatus): string => {
   return status
     .split("_")
@@ -21,6 +22,9 @@ const allStatuses: TaskStatus[] = [
 ];
 
 function ProjectBoard({ tasks }: { tasks: ITask[] }) {
+  const [openTaskModal, setOpenTaskModal] = useState(false);
+  const [taskToView, setTaskToView] = useState<ITask>({} as ITask);
+  const mutation = useCreateOrUpdateTask();
   const [columns, setColumns] = useState(() =>
     allStatuses.reduce((acc, status) => {
       acc[status] = tasks.filter((task) => task.status === status);
@@ -37,7 +41,7 @@ function ProjectBoard({ tasks }: { tasks: ITask[] }) {
     const [movedTask] = sourceCol.splice(source.index, 1);
     movedTask.status = destination.droppableId as TaskStatus;
     destCol.splice(destination.index, 0, movedTask);
-
+    mutation.mutate({...movedTask, isEditing: true});
     setColumns({
       ...columns,
       [source.droppableId]: sourceCol,
@@ -56,7 +60,9 @@ function ProjectBoard({ tasks }: { tasks: ITask[] }) {
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                <h3 className={styles.columnTitle}>{formatStatusLabel(status)}</h3>
+                <h4 className={styles.columnTitle}>
+                  {`${formatStatusLabel(status)} ${columns[status].length}`}
+                </h4>
                 {columns[status].map((task, index) => (
                   <Draggable draggableId={task.id} index={index} key={task.id}>
                     {(provided) => (
@@ -74,7 +80,7 @@ function ProjectBoard({ tasks }: { tasks: ITask[] }) {
                           description={task.description}
                           createdAt={task.createdAt}
                           updatedAt={task.updatedAt}
-                          handleClick={() => {}}
+                          handleClick={() => {setTaskToView(task); setOpenTaskModal(true)}}
                           projectId={task.projectId}
                           variant="xsmall"
                           showProject={false}
@@ -89,6 +95,12 @@ function ProjectBoard({ tasks }: { tasks: ITask[] }) {
           </Droppable>
         ))}
       </DragDropContext>
+      <TaskModal
+        isOpen={openTaskModal}
+        onClose={() => setOpenTaskModal(false)}
+        title="Edit Task"
+        task={taskToView}
+      ></TaskModal>
     </div>
   );
 }

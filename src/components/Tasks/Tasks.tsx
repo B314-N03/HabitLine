@@ -39,7 +39,8 @@ function Tasks() {
   const accordionItems: AccordionItem[] = projects.map((project: IProject) => {
     const projectTasks = tasks.filter((task: ITask) => task.projectId === project.id);
     return {
-      title: `${project.title} (${project.openTasks} open tasks)`,
+      title: 
+        `${project.title} ${project.openTasks + project.doneTasks > 0 ? `(${project.openTasks} open task${project.openTasks > 1 ? 's' : " "})` : "(No Tasks)"}`,
       content: <ProjectBoard tasks={projectTasks} />,
     };
   });

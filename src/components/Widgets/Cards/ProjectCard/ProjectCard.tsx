@@ -39,11 +39,12 @@ function ProjectCard(
         },
         {
           title: "Completed",
-          value: isNaN(calculatedCompletionState) ? "No Tasks" : calculatedCompletionState + "%",
+          value: isNaN(calculatedCompletionState) ? "No Tasks" : Math.floor(calculatedCompletionState) + "%",
           color: isNaN(calculatedCompletionState) ? "grey" : "success"
         },
         {
           title: "Last Update",
+          // value: new Date(updatedAt).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" }),
           value: new Date(updatedAt).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" }),
           color: "warning"
         },

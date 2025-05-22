@@ -4,6 +4,7 @@ import styles from "./task_card.module.scss"
 import { taskTypeMap } from "../../../Helpers/TaskTypeMap"
 import { priorityMap } from "../../../Helpers/TaskPriorityMap"
 import { useProjectInfosForTask } from "../../../../hooks/useProjectInfosForTask"
+import RichTextEditor from "../../../Forms/FormWidgets/RichtTextEditor/RichTextEditor"
 
 function TaskCard(
     {
@@ -26,7 +27,7 @@ function TaskCard(
         <Card className={`${styles.taskCard} ${styles[variant]}`} elevation={6} onClick={handleClick}>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <h3 style={{ fontWeight: 'bold' }}>{title}</h3>
-                    <p>{description}</p>
+                    <RichTextEditor editorValue={description} setEditorValue={() => {}} readOnly showOnlyText />
                 </div>
                 {/* <Divider /> */}
                 <div className={styles.taskDetails}>
