@@ -1,7 +1,7 @@
 import { Box, Input } from "@mui/material"
 import styles from "./non_mobile_header.module.scss"
 import SearchIcon from '@mui/icons-material/Search';
-import { AddButton } from "../../../Widgets/Cards/Buttons/AddButton";
+import { AddButton } from "../../../Widgets/Buttons/AddButton";
 
 interface NonMobileHeaderProps {
     setOpenProjectModal: React.Dispatch<React.SetStateAction<boolean>>;

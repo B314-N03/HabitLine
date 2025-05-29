@@ -4,11 +4,11 @@ import { Input } from "@mui/material";
 import CheckMark from '@mui/icons-material/Check';
 import DeleteBin from '@mui/icons-material/Delete';
 import CrossIcon from '@mui/icons-material/Clear';
-import IconButton from "../../Widgets/Cards/Buttons/IconButton";
 import type { IProject } from "../../../Interfaces/IProject";
 import ProjectColorInput from "./ProjectColorInput/ProjectColorInput";
 import { useCreateOrUpdateProject } from "../../../hooks/useProjects";
 import RichTextEditor from "../FormWidgets/RichtTextEditor/RichTextEditor";
+import IconButtonHL from "../../Widgets/Buttons/IconButton";
 
 interface ProjectFormProps {
     project: IProject,
@@ -76,21 +76,21 @@ function ProjectForm({
             />
             <div className={styles.modal_footer_buttons}>
                 
-                <IconButton 
+                <IconButtonHL
                     onClick={onClose}
                     title="Cancel"
                     icon={<CrossIcon />}
                     color="grey"
                 />
             
-                <IconButton 
+                <IconButtonHL
                     disabled={!isEditing}
                     onClick={onClose}
                     title="Delete"
                     icon={<DeleteBin />}
                     color="error"
                 />
-                <IconButton
+                <IconButtonHL
                     onClick={handleSubmit}
                     title="Save"
                     icon={<CheckMark />}

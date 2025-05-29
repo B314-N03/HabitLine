@@ -11,7 +11,7 @@
     --color-decimal: #9b9b9b;
     --color-11th: #f8f8f8;
     --color-12th: #ffffff;
-    
+    --bg-main: #ffffff;
 
     --font-size-small: 12px;
     --font-size-medium: 16px;
@@ -25,6 +25,16 @@
     --line-height-medium: 1.5;
     --line-height-large: 1.75;
 
+}
+
+.light-theme{
+    --bg-main:#ffffff;
+    --text-main: #000000;
+}
+
+.dark-theme {
+    --bg-main: #121212;
+    --text-main: #ffffff;
 }
 
 #root{

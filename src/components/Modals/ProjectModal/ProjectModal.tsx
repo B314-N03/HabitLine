@@ -22,7 +22,11 @@ function ProjectModal({
             size="large"
             title={title}
         >
-            <ProjectForm project={project} onClose={onClose} isEditing={title.toLowerCase().includes("edit")} />
+            <ProjectForm
+                project={project}
+                onClose={onClose}
+                    isEditing={title.toLowerCase().includes("edit")}
+            />
 
         </BaseModal>
     )

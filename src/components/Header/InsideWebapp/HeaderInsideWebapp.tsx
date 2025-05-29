@@ -67,7 +67,7 @@ function HeaderInsideWebapp() {
       />
       <TaskModal 
         isOpen={openTaskModal}
-        onClose={() => {setOpenTaskModal(false)}} title="Add Task"
+        onClose={() => {setOpenTaskModal(false)}} modalTitle="Add Task"
         task={taskModalNewTaskData}
       />
       

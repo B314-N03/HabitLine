@@ -1,6 +1,6 @@
 import styles from './splash_screen.module.scss' 
 import { Card, Typography } from "@mui/material"
-import LinkButton from '../Widgets/Cards/Buttons/LinkButton'
+import LinkButton from '../Widgets/Buttons/LinkButton'
 
 function SplashScreen() {
     const mvp = false

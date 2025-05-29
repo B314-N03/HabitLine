@@ -12,7 +12,7 @@ interface IconButtonProps {
     color?: "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning" | "grey"
 }
 
-function IconButton({
+function IconButtonHL({
     onClick,
     disabled = false,
     variant = "contained",
@@ -35,4 +35,4 @@ function IconButton({
   )
 }
 
-export default IconButton
+export default IconButtonHL

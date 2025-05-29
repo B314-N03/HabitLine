@@ -3,7 +3,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #fff;
+    background-color: var(--bg-main);
+    color: var(--text-main) !important;
     border-radius: 8px;
     padding: 2rem;
     overflow-y: auto;
@@ -33,4 +34,19 @@
 .modal_close{
     cursor: pointer;
     font-weight: bold;
+}
+
+.modal_body{
+    flex: 1;
+    overflow-y: auto;
+}
+
+
+.modal_footer_buttons{
+    // position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
 }

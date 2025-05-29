@@ -5,7 +5,8 @@ import HandleNavsChange from "../components/Helpers/NavsChange/HandleNavsChange"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ThemeProvider } from "@mui/material";
-import theme from "../providers/ThemeProvider";
+import theme from "../providers/ThemeProviderMUI";
+import { ThemeProviderHL } from "../providers/ThemeProvider";
 
 
 function App() {
@@ -13,13 +14,18 @@ function App() {
     return (
     <>
         <Router>
-            <QueryClientProvider client={queryClient}>
-                <UserProvider>
-                    <Routes />
-                    <HandleNavsChange />
-                    <ReactQueryDevtools initialIsOpen={false} />
-                </UserProvider>
-            </QueryClientProvider>
+            <ThemeProviderHL>
+                <ThemeProvider theme={theme}>
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Consolas" />
+                    <QueryClientProvider client={queryClient}>
+                        <UserProvider>
+                            <Routes />
+                            <HandleNavsChange />
+                            <ReactQueryDevtools initialIsOpen={false} />
+                        </UserProvider>
+                    </QueryClientProvider>
+                </ThemeProvider>
+            </ThemeProviderHL>
         </Router>
     </>
   )

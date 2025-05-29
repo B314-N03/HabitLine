@@ -1,7 +1,6 @@
 import SettingsIcon from '@mui/icons-material/Settings';
 import HomeIcon from '@mui/icons-material/Home';
 import AnalyticsIcon from '@mui/icons-material/TrendingUp';
-import InventoryIcon from '@mui/icons-material/Inventory';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import SupportIcon from '@mui/icons-material/Support';
 import type { ISideNavPage } from '../../Interfaces/ISideNavPage';
@@ -18,11 +17,6 @@ export const pages: ISideNavPage[] = [
         title: 'Dashboard',
         icon: React.createElement(HomeIcon), 
         path: '/dashboard'
-    },
-    {
-        title: 'Projects',
-        icon: React.createElement(InventoryIcon), 
-        path: '/projects'
     },
     {
         title: 'Tasks',

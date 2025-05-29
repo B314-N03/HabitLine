@@ -1,27 +1,17 @@
 import { Box, Card, Typography } from "@mui/material"
 import TaskCard from "../../Widgets/Cards/TaskCard/TaskCard"
 import dashboardStyles from "../dashboard.module.scss"
-import { useMemo, useState } from "react"
-import type { ITask } from "../../../Interfaces/ITask"
+import { useEffect, useMemo, useState } from "react"
+import type { ITask, ITaskFrontend } from "../../../Interfaces/ITask"
 import TaskModal from "../../Modals/TaskModal/TaskModal"
 import { useTasks } from "../../../hooks/useTasks"
+import { taskModalNewTaskData } from "../../Helpers/modalBoilerPlateData"
 
 function MostUrgentTasks() {
   const {data: tasks, isLoading, isError} = useTasks()
   
   const [openTaskModal, setOpenTaskModal] = useState(false)
-  const [taskToView, setTaskToView] = useState<ITask>({
-    id: "",
-    title: "",
-    description: "",
-    completed: false, 
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    priority: "Medium",
-    taskType: "Feature",
-    projectId: "",
-    status: "to_do"
-  })
+  const [taskToView, setTaskToView] = useState<ITaskFrontend>(taskModalNewTaskData)
   
   const sortedTasks = useMemo(() => {
     const priorityOrder = {
@@ -40,8 +30,11 @@ function MostUrgentTasks() {
 
   const handleCardClick = (task: ITask) => {
     setTaskToView(task)
-    setOpenTaskModal(true)
   }
+  useEffect(() => {
+    if (taskToView === taskModalNewTaskData) return;
+    setOpenTaskModal(true)
+  }, [taskToView])
 
   return (
     <Card className={dashboardStyles.dashboard_card} elevation={6}>
@@ -77,7 +70,7 @@ function MostUrgentTasks() {
       <TaskModal
         isOpen={openTaskModal}
         onClose={() => setOpenTaskModal(false)}
-        title="Edit Task"
+        modalTitle="Edit Task"
         task={taskToView}
       />
     </Card>
