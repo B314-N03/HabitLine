@@ -13,7 +13,10 @@ function NonMobileSideNav() {
           boxSizing: 'border-box',
           width: drawerWidth,
           height: `100%`,
-          paddingBottom: '10px'
+          backgroundColor: 'var(--bg-main)',
+          paddingBottom: '10px',
+          color: 'var(--text-main)',
+          borderRight: '1px solid var(--divider-border-color)',
         },
       }}
       open

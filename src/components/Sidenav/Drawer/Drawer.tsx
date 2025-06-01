@@ -1,8 +1,9 @@
-import { Divider, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import styles from "./drawer.module.scss";
 import PagesSection from "./PagesSection/PagesSection";
 import ToolingSection from "./ToolingSection/ToolingSection";
 import HabitLineLogo from "../../../assets/Images/HabitLineLogo.png";
+import StyledDivider from "../../Widgets/StyledDivider/StyledDivider";
 export function DrawerWebapp() {
     return (
         <>
@@ -12,7 +13,7 @@ export function DrawerWebapp() {
                 Habit Line
                 </Typography>
             </div>
-            <Divider />
+            <StyledDivider orientation="horizontal"/>
 
             <div className={styles.drawerContentContainer}>
 

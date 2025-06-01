@@ -7,9 +7,9 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import { UserContext } from '../../../providers/UserProvider';
 import { useLocation } from 'react-router-dom';
-import { Divider } from '@mui/material';
 import MobileHeader from './Mobile/MobileHeader';
 import NonMobileHeader from './NonMobile/NonMobileHeader';
+import StyledDivider from '../../Widgets/StyledDivider/StyledDivider';
 
 
 function HeaderOutsideWebapp() {
@@ -61,7 +61,7 @@ function HeaderOutsideWebapp() {
             </Box>}
         </Toolbar>
       </Container>
-      <Divider />
+      <StyledDivider orientation="horizontal"/>
     </AppBar>
   );
 }

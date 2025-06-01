@@ -29,10 +29,16 @@ function SelectHL<T extends string>({
                 onChange={handleChange}
                 label={title}
                 className={styles.styledSelect}
+                sx={{
+                    '& .MuiOutlinedInput-notchedOutline': {
+                        border: '1px solid var(--divider-border-color)',
+                    },
+                    color: 'var(--text-main)'
+                }}
             >
                 {children}
             </Select>
-            {helperText && !value && <FormHelperText>{helperText}</FormHelperText>}
+            {helperText && !value && <FormHelperText sx={{ color: 'var(--text-main)' }}>{helperText}</FormHelperText>}
         </FormControl>
     );
 }

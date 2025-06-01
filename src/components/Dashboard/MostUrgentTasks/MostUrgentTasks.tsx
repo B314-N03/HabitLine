@@ -9,7 +9,7 @@ import { taskModalNewTaskData } from "../../Helpers/modalBoilerPlateData"
 
 function MostUrgentTasks() {
   const {data: tasks, isLoading, isError} = useTasks()
-  
+
   const [openTaskModal, setOpenTaskModal] = useState(false)
   const [taskToView, setTaskToView] = useState<ITaskFrontend>(taskModalNewTaskData)
   
@@ -21,26 +21,42 @@ function MostUrgentTasks() {
       "Low": 3
     }
     if (!tasks) return null;
-    return [...tasks].sort((a, b) => {
+    return [...tasks].filter((task) => task.status != "done").sort((a, b) => {
       const priorityA = priorityOrder[a.priority] ?? 4;
       const priorityB = priorityOrder[b.priority] ?? 4;
       return priorityA - priorityB;
     });
   }, [tasks]);
-
+  /**
+   * Function to handle the click event on a task card
+   * @param task The task object that was clicked
+   */
   const handleCardClick = (task: ITask) => {
     setTaskToView(task)
   }
+
+  /**
+   * Use effect to open the task modal with the task details
+   * when the user clicks on a task
+   */
   useEffect(() => {
     if (taskToView === taskModalNewTaskData) return;
+
     setOpenTaskModal(true)
   }, [taskToView])
+
+  /**
+   * Use effect to reset the taskToView state when the modal is closed
+   */
+  useEffect(() => {
+    if(!openTaskModal) setTaskToView(taskModalNewTaskData)
+  },[openTaskModal])
 
   return (
     <Card className={dashboardStyles.dashboard_card} elevation={6}>
       <Box>
         <Typography variant="h5" component="h5" className={dashboardStyles.dashboard_card_title}>
-          Most Urgent Tasks:
+          Most Urgent open Tasks:
         </Typography>
       </Box>
       <div className={dashboardStyles.scrollContainerCards}>

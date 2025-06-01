@@ -9,7 +9,7 @@ interface ProjectColorInputProps {
 function ProjectColorInput({
   colorState,
   setColorState
-} : ProjectColorInputProps) {
+} : ProjectColorInputProps) { 
   return (
     <div className={styles.projectColorInputContainer}>
       <Typography>Project Color: </Typography>

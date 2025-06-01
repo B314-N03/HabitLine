@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from './ProjectForm.module.scss'
+import styles from './projectform.module.scss'
 import { Input } from "@mui/material";
 import CheckMark from '@mui/icons-material/Check';
 import DeleteBin from '@mui/icons-material/Delete';

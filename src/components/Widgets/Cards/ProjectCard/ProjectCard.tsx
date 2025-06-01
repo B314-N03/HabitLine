@@ -1,6 +1,7 @@
-import { Card, Divider, Typography } from "@mui/material"
+import { Card, Typography } from "@mui/material"
 import type { IProjectCard } from "../../../../Interfaces/IProjectCard";
 import styles from "./project_card.module.scss"
+import StyledDivider from "../../StyledDivider/StyledDivider";
 
 
 function ProjectCard(
@@ -62,7 +63,7 @@ function ProjectCard(
             <p>{description}</p>
           </div>
           <div className={styles.projectDetails}>
-            <Divider />
+            <StyledDivider orientation="horizontal" />
             {projectDetails.map((detail, index) => (
               <div className={styles.projectDetailsItem} key={index}>
                 {detail.title}: 

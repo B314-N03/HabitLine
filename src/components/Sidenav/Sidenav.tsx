@@ -5,7 +5,7 @@ import MobileSideNav from './Mobile/MobileSideNav';
 
 export default function SideNav() {
     return (
-        <Box sx={{ display: 'flex'}}>
+        <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <NonMobileSideNav/>
             <MobileSideNav/>

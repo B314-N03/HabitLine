@@ -1,6 +1,8 @@
 .richTextEditorContainer {
     min-height: 300px !important;    
+    overflow-y: auto !important;
     &.hideToolbar{
+        overflow: hidden !important;
         min-height: 20px !important;  
         max-height: 100px !important;
         border: none !important;

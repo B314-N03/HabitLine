@@ -8,7 +8,6 @@
     --color-septenary: #f8e71c;
     --color-octonary: #bd10e0;
     --color-nonary: #4a4a4a;
-    --color-decimal: #9b9b9b;
     --color-11th: #f8f8f8;
     --color-12th: #ffffff;
     --bg-main: #ffffff;
@@ -30,23 +29,29 @@
 .light-theme{
     --bg-main:#ffffff;
     --text-main: #000000;
+    --divider-border-color: rgba(0, 0, 0, 0.12);
+    --color-decimal: #9b9b9b;
 }
 
 .dark-theme {
     --bg-main: #121212;
     --text-main: #ffffff;
+    --divider-border-color: rgba(255, 255, 255, 0.12);
+    --color-decimal: #535252;
 }
 
 #root{
     width: 100vw;
     height: 100vh;
+    background-color: var(--bg-main);
 }
 
 
 body{
-    font-family: Roboto !important;
+    // font-family: Roboto !important;
     margin: 0;
     overflow-x: hidden;
+
 }
 
 main{

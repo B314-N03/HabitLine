@@ -1,8 +1,8 @@
 .sidenavActiveLink {
-    background-color: gray !important;
-    color: white !important;
+    background-color: var(--text-main) !important;
+    color: var(--bg-main) !important;
     svg{
-      fill: white !important;
+      fill: var(--bg-main) !important;
     }
 }
 

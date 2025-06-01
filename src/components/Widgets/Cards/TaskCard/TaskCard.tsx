@@ -1,10 +1,11 @@
-import { Button, Card, Divider, Typography } from "@mui/material"
+import { Card, Typography, Chip } from "@mui/material"
 import { type ITaskCard } from "../../../../Interfaces/ITaskCard"
 import styles from "./task_card.module.scss"
 import { taskTypeMap } from "../../../Helpers/TaskTypeMap"
 import { priorityMap } from "../../../Helpers/TaskPriorityMap"
 import { useProjectInfosForTask } from "../../../../hooks/useProjectInfosForTask"
 import RichTextEditor from "../../../Forms/FormWidgets/RichtTextEditor/RichTextEditor"
+import StyledDivider from "../../StyledDivider/StyledDivider"
 
 function TaskCard(
     {
@@ -24,12 +25,12 @@ function TaskCard(
     const projectInfos = useProjectInfosForTask(projectId);
 
     return (
-        <Card className={`${styles.taskCard} ${styles[variant]}`} elevation={6} onClick={handleClick}>
+        <Card sx={{overflow:"unset"}} className={`${styles.taskCard} ${styles[variant]}`} elevation={6} onClick={handleClick}>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <h3 style={{ fontWeight: 'bold' }}>{title}</h3>
-                    <RichTextEditor editorValue={description} setEditorValue={() => {}} readOnly showOnlyText />
+                    <h3 className={styles.taskCardTitle}>{title}</h3>
+                    <StyledDivider orientation="horizontal" />
+                    {<RichTextEditor editorValue={description} setEditorValue={() => {}} readOnly showOnlyText />}
                 </div>
-                {/* <Divider /> */}
                 <div className={styles.taskDetails}>
                     {["medium", "large"].includes(variant) && 
                     <>
@@ -44,13 +45,16 @@ function TaskCard(
                 <div className={styles.taskDetailsFooter}>
                     <div className={styles.taskDetailsFooterItem}>
                             {taskTypeMap[taskType]}
-                            <Divider orientation="vertical" flexItem sx={{borderRightWidth: 2}}/>
+                            <StyledDivider orientation="vertical" flexItem customSX={{borderRightWidth: 2}}/>
                             {priorityMap[priority]}
                     </div>
                    {showProject && <div className={styles.taskDetailsFooterItem}>
-                        <Button sx={{backgroundColor: projectInfos?.color ? projectInfos?.color : "#fff", borderRadius: 2}} size="small"  variant="contained">
-                            {projectInfos?.title}
-                        </Button>
+                        <Chip
+                            sx={{backgroundColor: projectInfos?.color ? projectInfos?.color : "#fff", borderRadius: 2, color: projectInfos?.color ? "#fff" : "#000"}}
+                            size="small" 
+                            variant="filled"
+                            label={projectInfos?.title}    
+                        />
                     </div>}
                 </div> 
                 </div>

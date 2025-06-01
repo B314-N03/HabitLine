@@ -17,6 +17,8 @@
   flex-direction: column;
   gap: .5rem;
   position: relative;
+  overflow: unset !important;
+  color: var(--text-main) !important;
 }
 
 .cardsContainer{

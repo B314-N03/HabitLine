@@ -1,8 +1,9 @@
-import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from "@mui/material"
+import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from "@mui/material"
 import { NavLink } from "react-router-dom"
 import type { ISideNavPage } from "../../../../Interfaces/ISideNavPage"
 import { pages } from "../../const"
 import styles from "../drawer.module.scss"
+import StyledDivider from "../../../Widgets/StyledDivider/StyledDivider"
 
 
 function PagesSection() {
@@ -12,10 +13,10 @@ function PagesSection() {
                 Pages
             </Typography>
             {pages.map((page: ISideNavPage) => (
-                <NavLink key={page.title} to={page.path} style={{ textDecoration: 'none', color: 'black' }}>
+                <NavLink key={page.title} to={page.path} style={{ textDecoration: 'none', color: 'var(--text-main)' }}>
                     <ListItem key={page.title} disablePadding>
                         <ListItemButton className={`${location.pathname === page.path ? styles.sidenavActiveLink : ''}`}>
-                            <ListItemIcon>
+                            <ListItemIcon sx={{ color: 'var(--text-main)' }}>
                                 {page.icon}
                             </ListItemIcon>
                             <ListItemText primary={page.title} />
@@ -24,7 +25,7 @@ function PagesSection() {
                 </NavLink>
             ))}
             
-            <Divider />
+            <StyledDivider orientation="horizontal" />
 
         </List>
     )
