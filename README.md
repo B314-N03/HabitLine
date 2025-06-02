@@ -1,54 +1,51 @@
-# React + TypeScript + Vite
+# HabitLine
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**HabitLine** is a web application designed to help users build and maintain daily habits through a visually engaging timeline interface. Built with React, TypeScript, and Vite, HabitLine offers a responsive and interactive user experience.
 
-Currently, two official plugins are available:
+![HabitLineShowcase](https://github.com/user-attachments/assets/05deca8b-59a1-4bb3-8a38-21c46c4a71d5)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- ✅ **Habit Tracking** – Monitor your daily habits and visualize progress over time.
+- 📅 **Interactive Timeline** – View and interact with a dynamic timeline showing habit completion.
+- ⚙️ **Customizable Habits** – Add, edit, and delete habits based on your goals.
+- 📱 **Responsive Design** – Works across desktops, tablets, and smartphones.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Tech Stack
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [SCSS](https://sass-lang.com/)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📁 Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+HabitLine/
+├── docs/ # Documentation assets
+├── mockdata/ # Example/mock data
+├── public/ # Static files (e.g. index.html)
+└── src/ # Application source code
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+
+## 🧑‍💻 Getting Started
+
+### Prerequisites
+
+- Node.js (v18+ recommended)
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/B314-N03/HabitLine.git
+   cd HabitLine
+2. **Install dependencies**:
+    ```bash
+    npm install
+3. **Run the development server**:
+    ```bash
+    npm run dev
+4. **Build for production**:
+    ```bash
+    npm run build
