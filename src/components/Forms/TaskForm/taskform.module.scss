@@ -21,5 +21,12 @@
         gap: 1rem;
         flex-direction: row;
     }
+    .taskFormHeaderTitle{
+        width: 30%;
+        color: var(--text-main) !important;
+        &::before{
+            border-color: var(--divider-border-color) !important;
+        }
+    }
 }
 

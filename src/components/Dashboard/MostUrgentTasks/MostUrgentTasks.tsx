@@ -1,4 +1,4 @@
-import { Box, Card, Typography } from "@mui/material"
+import { Alert, Box, Card, Snackbar, Typography } from "@mui/material"
 import TaskCard from "../../Widgets/Cards/TaskCard/TaskCard"
 import dashboardStyles from "../dashboard.module.scss"
 import { useEffect, useMemo, useState } from "react"
@@ -6,13 +6,15 @@ import type { ITask, ITaskFrontend } from "../../../Interfaces/ITask"
 import TaskModal from "../../Modals/TaskModal/TaskModal"
 import { useTasks } from "../../../hooks/useTasks"
 import { taskModalNewTaskData } from "../../Helpers/modalBoilerPlateData"
+import SucessSnackbar from "../../Widgets/Snackbars/SucessSnackbar"
 
 function MostUrgentTasks() {
   const {data: tasks, isLoading, isError} = useTasks()
 
   const [openTaskModal, setOpenTaskModal] = useState(false)
   const [taskToView, setTaskToView] = useState<ITaskFrontend>(taskModalNewTaskData)
-  
+  const [openSnackBar, setOpenSnackBar] = useState(false)
+  const [snackBarMessage, setSnackBarMessage] = useState('')
   const sortedTasks = useMemo(() => {
     const priorityOrder = {
       "Critical": 0,
@@ -88,7 +90,11 @@ function MostUrgentTasks() {
         onClose={() => setOpenTaskModal(false)}
         modalTitle="Edit Task"
         task={taskToView}
+        isEditing
+        setOpenSnackBar={setOpenSnackBar}
+        setSnackBarMessage={setSnackBarMessage}
       />
+      <SucessSnackbar openSnackBar={openSnackBar} setOpenSnackBar={setOpenSnackBar} snackBarMessage={snackBarMessage} />
     </Card>
   )
 }

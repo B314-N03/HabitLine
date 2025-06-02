@@ -2,16 +2,23 @@ import { Box, Input } from "@mui/material"
 import styles from "./non_mobile_header.module.scss"
 import SearchIcon from '@mui/icons-material/Search';
 import { AddButton } from "../../../Widgets/Buttons/AddButton";
+import SucessSnackbar from "../../../Widgets/Snackbars/SucessSnackbar";
 
 interface NonMobileHeaderProps {
     setOpenProjectModal: React.Dispatch<React.SetStateAction<boolean>>;
     setOpenTaskModal: React.Dispatch<React.SetStateAction<boolean>>;
+    openSnackBar: boolean;
+    setOpenSnackBar: React.Dispatch<React.SetStateAction<boolean>>;
+    snackBarMessage: string
 }
 
 function NonMobileHeader({
     setOpenProjectModal,
-    setOpenTaskModal
-}: NonMobileHeaderProps) {
+    setOpenTaskModal,
+    openSnackBar,
+    setOpenSnackBar,
+    snackBarMessage
+}: NonMobileHeaderProps) {    
     const handleOpenProjectModal = () => {
         setOpenProjectModal(true);
     }
@@ -42,6 +49,11 @@ function NonMobileHeader({
                         variant="contained"
                     />
                 </div>
+                <SucessSnackbar 
+                    snackBarMessage={snackBarMessage}
+                    openSnackBar={openSnackBar}
+                    setOpenSnackBar={setOpenSnackBar}
+                />
             </Box>
         </>
     )

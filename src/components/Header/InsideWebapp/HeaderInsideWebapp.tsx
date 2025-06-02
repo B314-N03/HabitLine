@@ -24,6 +24,8 @@ function HeaderInsideWebapp() {
   const [openProjectModal, setOpenProjectModal] = useState(false);
   const [openTaskModal, setOpenTaskModal] = useState(false);
   const {theme, toggleTheme} = useContext(ThemeContext);
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [snackBarMessage, setSnackBarMessage] = useState('');
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -47,6 +49,9 @@ function HeaderInsideWebapp() {
          <NonMobileHeader
             setOpenProjectModal={setOpenProjectModal}
             setOpenTaskModal={setOpenTaskModal}
+            openSnackBar={openSnackBar}
+            setOpenSnackBar={setOpenSnackBar}
+            snackBarMessage={snackBarMessage}
          />
           <Avatar sx={{backgroundColor: 'var(--color-primary)',mr:2,cursor: 'pointer'}} onClick={toggleTheme}>
             {theme === 'light' ? <MoonIcon /> : <LightModeIcon />}
@@ -75,6 +80,8 @@ function HeaderInsideWebapp() {
         isOpen={openTaskModal}
         onClose={() => {setOpenTaskModal(false)}} modalTitle="Add Task"
         task={taskModalNewTaskData}
+        setOpenSnackBar={setOpenSnackBar}
+        setSnackBarMessage={setSnackBarMessage}
       />
       
     </AppBar>
