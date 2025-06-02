@@ -19,14 +19,17 @@
 - [SCSS](https://sass-lang.com/)
 
 ## 📁 Project Structure
-
-HabitLine/
-├── docs/ # Documentation assets
-├── mockdata/ # Example/mock data
-├── public/ # Static files (e.g. index.html)
-└── src/ # Application source code
-
-
+   ```plaintext
+      HabitLine/
+      ├── docs/            # Documentation assets
+      ├── mockdata/        # Example/mock data
+      ├── public/          # Static files (e.g. index.html)
+      └── src/             # Application source code
+          ├── assets/      # Images, fonts, and other assets
+          ├── components/  # Reusable React components
+          ├── pages/       # Route-specific components/pages
+          └── styles/      # Global and component-specific styles
+   ``` 
 ## 🧑‍💻 Getting Started
 
 ### Prerequisites
@@ -49,3 +52,7 @@ HabitLine/
 4. **Build for production**:
     ```bash
     npm run build
+
+## 📄 License
+
+This project is licensed under the MIT License.
