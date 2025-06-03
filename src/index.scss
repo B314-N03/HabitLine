@@ -10,7 +10,6 @@
     --color-nonary: #4a4a4a;
     --color-11th: #f8f8f8;
     --color-12th: #ffffff;
-    --bg-main: #ffffff;
 
     --font-size-small: 12px;
     --font-size-medium: 16px;
@@ -28,21 +27,26 @@
 
 .light-theme{
     --bg-main:#ffffff;
+    --bg-secondary: #535353;
     --text-main: #000000;
     --divider-border-color: rgba(0, 0, 0, 0.12);
+    --divider-border-color-secondary: #8d8d8d;
     --color-decimal: #9b9b9b;
 }
 
 .dark-theme {
     --bg-main: #121212;
+    --bg-secondary: #f8f8f8;
     --text-main: #ffffff;
     --divider-border-color: rgba(255, 255, 255, 0.12);
+    --divider-border-color-secondary: #d3d3d346;
     --color-decimal: #535252;
 }
 
 #root{
     width: 100vw;
     min-height: 100vh;
+    height: 100%;
     background-color: var(--bg-main);
 }
 

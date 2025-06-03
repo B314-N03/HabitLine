@@ -18,8 +18,9 @@
   margin-bottom: 8px;
   text-transform: capitalize;
   padding: 8px;
-  background-color: #bdbbbb;
-  border-radius: 4px;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  border-radius: 6px;
 }
 
 .card {

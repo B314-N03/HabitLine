@@ -26,6 +26,7 @@ function RichTextEditor({
                 className: `${styles.richTextEditorContainer} ${showOnlyText ? styles.hideToolbar : ''}`,
             }}
             disabled={readOnly}
+            sx={{ color: 'var(--text-main)' }}
         />
   )
 }

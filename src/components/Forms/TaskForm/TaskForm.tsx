@@ -7,8 +7,11 @@ import TaskProjectInput from "./TaskProjectInput/TaskProjectInput";
 import TaskCurrentStateInput from "./TaskCurrentStateInput/TaskCurrentStateInput";
 import RichTextEditor from "../FormWidgets/RichtTextEditor/RichTextEditor";
 import CommentSection from '../FormWidgets/CommentSection/CommentSection';
+import formatDateHumanFriendly from '../../Helpers/FormatDateHumanFriendly';
 
 interface TaskFormProps {
+    createdAt: Date;
+    lastUpdatedAt: Date;
     taskTypeState: ITaskFrontend['taskType'];
     setTaskTypeState: (value: ITaskFrontend['taskType']) => void;
     titleState: string;
@@ -21,9 +24,12 @@ interface TaskFormProps {
     setProjectState: (value: ITaskFrontend['projectId']) => void;
     currentTaskState: ITaskFrontend['status'];
     setCurrentTaskState: (value: ITaskFrontend['status']) => void;
+    isEditing?: boolean
 }
 
 function TaskForm({
+    createdAt,
+    lastUpdatedAt,
     taskTypeState,
     setTaskTypeState,
     titleState,
@@ -35,11 +41,11 @@ function TaskForm({
     projectState,
     setProjectState,
     currentTaskState,
-    setCurrentTaskState
+    setCurrentTaskState,
+    isEditing = false
 } : TaskFormProps) {
-   
-
-
+    const createdAtDate = formatDateHumanFriendly(createdAt);
+    const updatedAtDate = formatDateHumanFriendly(lastUpdatedAt);
     return (
     <form className={styles.taskform}>
             <div className={styles.taskFormHeader}>
@@ -52,10 +58,10 @@ function TaskForm({
                 />
                 <div className={styles.taskFormHeaderRight}>
                     <div className={styles.taskFormHeaderRightItem}>
-                        Created At: <span>{new Date().toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" })}</span>
+                        Created At: <span>{createdAtDate}</span>
                     </div>
                     <div className={styles.taskFormHeaderRightItem}>
-                        Updated At: <span>{new Date().toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" })}</span>
+                        Updated At: <span>{updatedAtDate}</span>
                     </div>
                 </div>
             </div>
@@ -93,12 +99,12 @@ function TaskForm({
                 setEditorValue={setDescriptionState}
             />
 
-            <CommentSection 
+           {isEditing && <CommentSection 
                 comments={[]}
                 onAddComment={() => {}}
                 onDeleteComment={() => {}}
                 onEditComment={() => {}}
-            />
+            />}
     </form>
   )
 }

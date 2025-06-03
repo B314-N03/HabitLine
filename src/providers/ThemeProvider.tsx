@@ -7,12 +7,16 @@ const ThemeContext = createContext<IThemeContext>({
 });
 
 const ThemeProviderHL: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [theme, setTheme] = useState<"light" | "dark">("light");
+    const [theme, setTheme] = useState<"light" | "dark">(() => {
+        const savedTheme = localStorage.getItem("theme");
+        return savedTheme ? JSON.parse(savedTheme) : "light";
+    });
     const toggleTheme = () => {
         setTheme(theme === "light" ? "dark" : "light");  
     };
     useEffect(() => {
         document.getElementsByTagName('body')[0].className = `${theme}-theme`;
+        localStorage.setItem("theme", JSON.stringify(theme));
     }, [theme]);
 
     return (

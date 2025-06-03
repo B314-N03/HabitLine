@@ -15,7 +15,7 @@ function ActiveProjects() {
     description: "",
     projectColor: "",
     createdAt: new Date(),
-    updatedAt: new Date(),
+    lastUpdatedAt: new Date(),
     openTasks: 0,
     doneTasks: 0
   })
@@ -45,7 +45,7 @@ function ActiveProjects() {
                 openTasks={project.openTasks}
                 doneTasks={project.doneTasks}
                 createdAt={project.createdAt}
-                updatedAt={project.updatedAt}
+                updatedAt={project.lastUpdatedAt}
                 id={project.id}
                 projectColor={project.projectColor}
                 handleClick={() => handleShowProjectModal(project)}

@@ -13,7 +13,7 @@ interface IBaseModalProps {
     isOpen: boolean;
     onClose: () => void;
     children: ReactNode;
-    size?: "small" | "medium" | "large";
+    size?: "small" | "medium" | "large" | "fit_content";
     title: string,
     showFooter?: boolean;
     displayedButtons?: ModalFooterButtons[];

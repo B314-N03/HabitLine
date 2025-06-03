@@ -19,4 +19,4 @@ export const Endpoints = {
     deleteProject: "/api/projects/delete/"
 }
 
-export const BackendUrl = "http://localhost:8080"
+export const BackendUrl = "http://192.168.178.37:8080"

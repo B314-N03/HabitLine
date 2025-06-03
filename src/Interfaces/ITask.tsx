@@ -20,7 +20,7 @@ export interface ITask {
     description: string;
     completed: boolean;
     createdAt: Date;
-    updatedAt: Date;
+    lastUpdatedAt: Date;
     priority: TaskPriority;
     taskType: TaskType;
     projectId: string;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useCreateOrUpdateTask, useDeleteTask } from "../../../hooks/useTasks";
-import type { ITaskFrontend } from "../../../Interfaces/ITask";
+import type { ITask } from "../../../Interfaces/ITask";
 import TaskForm from "../../Forms/TaskForm/TaskForm";
 import BaseModal from "../BaseModal/BaseModal";
 
@@ -8,7 +8,7 @@ interface TaskModalProps {
     isOpen: boolean;
     onClose: () => void;
     modalTitle: string;
-    task: ITaskFrontend;
+    task: ITask;
     isEditing?: boolean;
     setOpenSnackBar?: (open: boolean) => void;
     setSnackBarMessage?: (message: string) => void;
@@ -101,7 +101,9 @@ function TaskModal({
             onCancel={handleCancel}
             isEditing={isEditing}
         >
-            <TaskForm 
+            <TaskForm
+                createdAt={task.createdAt}
+                lastUpdatedAt={task.lastUpdatedAt}
                 taskTypeState={taskTypeState}
                 setTaskTypeState={setTaskTypeState}
                 titleState={titleState}

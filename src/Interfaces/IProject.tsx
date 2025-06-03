@@ -4,7 +4,7 @@ export interface IProject {
     openTasks: number;
     doneTasks: number;
     createdAt: Date;
-    updatedAt: Date;
+    lastUpdatedAt: Date;
     id: string;
     projectColor: string;
 }

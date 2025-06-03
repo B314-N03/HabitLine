@@ -24,6 +24,7 @@ function SelectHL<T extends string>({
     }
     return (
         <FormControl fullWidth error={error}>
+            <label className={styles.styledSelectLabel}>{title}</label>
             <Select
                 value={value}
                 onChange={handleChange}
@@ -31,7 +32,16 @@ function SelectHL<T extends string>({
                 className={styles.styledSelect}
                 sx={{
                     '& .MuiOutlinedInput-notchedOutline': {
+                        border: '1px solid var(--divider-border-color-secondary)',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
                         border: '1px solid var(--divider-border-color)',
+                    },
+                    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        border: '1px solid var(--divider-border-color)',
+                    },
+                    '& .MuiSelect-icon': {
+                        color: 'var(--text-main)',
                     },
                     color: 'var(--text-main)'
                 }}

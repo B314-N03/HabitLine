@@ -10,11 +10,13 @@ import { useLocation } from 'react-router-dom';
 import MobileHeader from './Mobile/MobileHeader';
 import NonMobileHeader from './NonMobile/NonMobileHeader';
 import StyledDivider from '../../Widgets/StyledDivider/StyledDivider';
+import LoginModal from '../../Modals/LoginModal/LoginModal';
 
 
 function HeaderOutsideWebapp() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const { loggedIn, setLoggedIn, username, avatar} = useContext(UserContext);
+  const { loggedIn, username, avatar} = useContext(UserContext);
+  const [openLoginModal, setOpenLoginModal] = useState(false);
   const location = useLocation();  
   const pagesSplash = ['Products', 'Pricing', 'Blog'];
   const pagesDashboard = [""];
@@ -31,6 +33,10 @@ function HeaderOutsideWebapp() {
   
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+  
+  const handleClickLogin = () => {
+    setOpenLoginModal(true);
   };
   
   return (
@@ -55,13 +61,17 @@ function HeaderOutsideWebapp() {
             </Box> 
           : 
             <Box sx={{ flexGrow: 0 }}>
-              <Button variant="contained" color="primary" onClick={() => setLoggedIn(true)}>
+              <Button variant="contained" color="primary" onClick={handleClickLogin}>
                 Login
               </Button>
             </Box>}
         </Toolbar>
       </Container>
       <StyledDivider orientation="horizontal"/>
+      <LoginModal
+        open={openLoginModal}
+        handleClose={() => setOpenLoginModal(false)}
+      />
     </AppBar>
   );
 }

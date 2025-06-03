@@ -28,7 +28,8 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
     {...props}
   />
 ))(({ theme }) => ({
-  backgroundColor: 'rgba(0, 0, 0, .03)',
+  backgroundColor: 'var(--color-decimal)',
+  color: 'var(--text-main)',
   flexDirection: 'row-reverse',
   [`& .${accordionSummaryClasses.expandIconWrapper}.${accordionSummaryClasses.expanded}`]:
     {
@@ -38,13 +39,14 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
     marginLeft: theme.spacing(1),
   },
   ...theme.applyStyles('dark', {
-    backgroundColor: 'rgba(255, 255, 255, .05)',
+    backgroundColor: 'var(--color-decimal)',
   }),
 }));
 
 const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
-  borderTop: '1px solid rgba(0, 0, 0, .125)',
+  borderTop: '1px solid var(--divider-border-color)',
+  backgroundColor: 'var(--color-decimal)',
 }));
 
 export interface AccordionItem {

@@ -6,8 +6,8 @@ import type { ITask } from "../../Interfaces/ITask";
 import { useEffect, useState } from "react";
 import AccordionGroup, { type AccordionItem } from "../Widgets/AccordionGroup/AccordionGroup";
 import ProjectBoard from "../Widgets/ProjectBoard/ProjectBoard";
-import { Alert, Snackbar } from "@mui/material";
 import TaskModal from "../Modals/TaskModal/TaskModal";
+import SucessSnackbar from "../Widgets/Snackbars/SucessSnackbar";
 
 function Tasks() {
   const { data: projects, isLoading } = useProjects();
@@ -63,20 +63,11 @@ function Tasks() {
         setOpenSnackBar={setOpenSnackBar}
         setSnackBarMessage={setSnackBarMessage}
       />
-      <Snackbar
-        open={openSnackBar}
-        autoHideDuration={4000}
-        onClose={() => setOpenSnackBar(false)}
-      >
-        <Alert
-          onClose={() => setOpenSnackBar(false)}
-          severity="success"
-          variant="filled"
-          sx={{ width: "100%" }}
-        >
-          {snackBarMessage}
-        </Alert>
-      </Snackbar>
+      <SucessSnackbar
+        openSnackBar={openSnackBar}
+        setOpenSnackBar={setOpenSnackBar}
+        snackBarMessage={snackBarMessage}
+      />
     </main>
   );
 }
