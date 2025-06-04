@@ -2,6 +2,8 @@ import { Card, Typography } from "@mui/material"
 import type { IProjectCard } from "../../../../Interfaces/IProjectCard";
 import styles from "./project_card.module.scss"
 import StyledDivider from "../../StyledDivider/StyledDivider";
+import formatDateHumanFriendly from "../../../Helpers/FormatDateHumanFriendly";
+import RichTextEditor from "../../../Forms/FormWidgets/RichtTextEditor/RichTextEditor";
 
 
 function ProjectCard(
@@ -45,13 +47,12 @@ function ProjectCard(
         },
         {
           title: "Last Update",
-          // value: new Date(updatedAt).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" }),
-          value: new Date(updatedAt).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" }),
+          value: formatDateHumanFriendly(updatedAt,false),
           color: "warning"
         },
         {
           title: "Created At",
-          value: new Date(createdAt).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" }),
+          value:  formatDateHumanFriendly(createdAt,false),
           color: "info"
         }
       ]
@@ -60,7 +61,7 @@ function ProjectCard(
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between',height:"100%" }}>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <h3 style={{ fontWeight: 'bold' }}>{title}</h3>
-            <p>{description}</p>
+            <RichTextEditor editorValue={description} setEditorValue={() => {}} readOnly showOnlyText />
           </div>
           <div className={styles.projectDetails}>
             <StyledDivider orientation="horizontal" />

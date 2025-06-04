@@ -99,7 +99,7 @@ function ProjectBoard({ tasks, setTaskToView, setOpenTaskModal}: ProjectBoardPro
                           title={task.title}
                           description={task.description}
                           createdAt={task.createdAt}
-                          updatedAt={task.updatedAt}
+                          updatedAt={task.lastUpdatedAt}
                           handleClick={() => handleCardClick(task)}
                           projectId={task.projectId}
                           variant="xsmall"

@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import styles from './comment_section.module.scss'
+import { Input } from '@mui/material';
 
 interface CommentSectionProps {
     comments: string[];
@@ -13,6 +15,7 @@ function CommentSection({
     onDeleteComment,
     onEditComment
 }: CommentSectionProps) {
+    const [commentInput, setCommentInput] = useState('');
   return (
     <div className={styles.commentSection}>
         <h3 className={styles.commentSectionTitle}>Comments</h3>
@@ -33,7 +36,7 @@ function CommentSection({
         </div>
         <div className={styles.commentSectionInput}>
             
-            <input type="text" placeholder="Add a comment..." />
+            <Input value={commentInput} onChange={(e) => setCommentInput(e.target.value)} />
             <button type="button" onClick={() => onAddComment("")}>Add Comment</button>
         </div>
     </div>

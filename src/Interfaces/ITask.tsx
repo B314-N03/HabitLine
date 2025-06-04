@@ -11,7 +11,8 @@ export interface ITaskFrontend {
     priority: TaskPriority;
     taskType: TaskType;
     projectId: string;
-    status: TaskStatus
+    status: TaskStatus;
+    comments: string[]
 }
 
 export interface ITask {
@@ -24,7 +25,8 @@ export interface ITask {
     priority: TaskPriority;
     taskType: TaskType;
     projectId: string;
-    status: TaskStatus
+    status: TaskStatus;
+    comments: string[]
 } 
 
 

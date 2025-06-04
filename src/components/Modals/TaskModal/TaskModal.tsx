@@ -30,6 +30,7 @@ function TaskModal({
     const [priorityState, setPriorityState] = useState(task.priority);
     const [projectState, setProjectState] = useState(task.projectId);
     const [currentTaskState, setCurrentTaskState] = useState(task.status);
+    const [commentState, setCommentState] = useState([]);
     const mutation = useCreateOrUpdateTask();
     const deleteMutation = useDeleteTask();
 
@@ -54,6 +55,7 @@ function TaskModal({
                 taskType: taskTypeState,
                 projectId: projectState,
                 status: currentTaskState,
+                comments: commentState,
                 isEditing
             }, 
             {
@@ -116,6 +118,11 @@ function TaskModal({
                 setProjectState={setProjectState}
                 currentTaskState={currentTaskState}
                 setCurrentTaskState={setCurrentTaskState}
+                comments={task.comments}
+                onAddComment={() => {}}
+                onDeleteComment={() => {}}
+                onEditComment={() => {}}
+                isEditing={isEditing}
             />
          
 

@@ -1,4 +1,4 @@
-function formatDateHumanFriendly(dateInput: Date): string {
+function formatDateHumanFriendly(dateInput: Date, time?: boolean): string {
     const date = new Date(dateInput);
     const now = new Date();
 
@@ -8,22 +8,22 @@ function formatDateHumanFriendly(dateInput: Date): string {
     yesterday.setDate(now.getDate() - 1);
     const isYesterday = date.toDateString() === yesterday.toDateString();
 
-    const timeString = date.toLocaleTimeString("en-US", {
+    const timeString = time ? "at " + date.toLocaleTimeString("en-US", {
         hour: "2-digit",
         minute: "2-digit",
         hour12: false,
-    });
+    }) : "";
 
     if (isToday) {
-        return `Today at ${timeString}`;
+        return `Today ${timeString}`;
     } else if (isYesterday) {
-        return `Yesterday at ${timeString}`;
+        return `Yesterday ${timeString}`;
     } else {
         return date.toLocaleDateString("en-US", {
             day: "numeric",
             month: "long",
             year: "numeric",
-        }) + ` at ${timeString}`;
+        }) + ` ${timeString}`;
     }
 }
 

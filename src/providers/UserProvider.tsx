@@ -14,6 +14,7 @@ const UserContext = createContext<IUserContext>({
     setLoggedIn: () => {},
     avatar: "",
     setAvatar: () => {},
+    lastLoginDate: new Date(),
 });
 
 const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -23,7 +24,7 @@ const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [password, setPassword] = useState<string>("");
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [avatar, setAvatar] = useState<string>("");
-
+    const lastLoginDate = new Date()
 
     return (
         <UserContext.Provider value={{ 
@@ -33,6 +34,7 @@ const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
             password, setPassword,
             loggedIn, setLoggedIn,
             avatar, setAvatar,
+            lastLoginDate
         }}>
             {children}
         </UserContext.Provider>

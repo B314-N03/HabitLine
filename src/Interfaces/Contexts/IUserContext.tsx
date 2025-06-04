@@ -11,4 +11,5 @@ export interface IUserContext {
     setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
     avatar: string;
     setAvatar: React.Dispatch<React.SetStateAction<string>>;
+    lastLoginDate: Date;
 }

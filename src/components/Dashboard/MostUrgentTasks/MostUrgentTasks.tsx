@@ -1,8 +1,8 @@
-import { Alert, Box, Card, Snackbar, Typography } from "@mui/material"
+import { Box, Card,  Typography } from "@mui/material"
 import TaskCard from "../../Widgets/Cards/TaskCard/TaskCard"
 import dashboardStyles from "../dashboard.module.scss"
 import { useEffect, useMemo, useState } from "react"
-import type { ITask, ITaskFrontend } from "../../../Interfaces/ITask"
+import type { ITask  } from "../../../Interfaces/ITask"
 import TaskModal from "../../Modals/TaskModal/TaskModal"
 import { useTasks } from "../../../hooks/useTasks"
 import { taskModalNewTaskData } from "../../Helpers/modalBoilerPlateData"
@@ -12,7 +12,7 @@ function MostUrgentTasks() {
   const {data: tasks, isLoading, isError} = useTasks()
 
   const [openTaskModal, setOpenTaskModal] = useState(false)
-  const [taskToView, setTaskToView] = useState<ITaskFrontend>(taskModalNewTaskData)
+  const [taskToView, setTaskToView] = useState<ITask>(taskModalNewTaskData)
   const [openSnackBar, setOpenSnackBar] = useState(false)
   const [snackBarMessage, setSnackBarMessage] = useState('')
   const sortedTasks = useMemo(() => {
@@ -74,11 +74,12 @@ function MostUrgentTasks() {
                 title={task.title}
                 description={task.description}
                 createdAt={task.createdAt}
-                updatedAt={task.updatedAt}
+                updatedAt={task.lastUpdatedAt}
                 id={task.id}
                 projectId={task.projectId}
                 handleClick={() => handleCardClick(task)}
                 variant="small"
+                
               />
             ))
           )}

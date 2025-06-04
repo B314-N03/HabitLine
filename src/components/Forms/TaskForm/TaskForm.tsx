@@ -24,6 +24,10 @@ interface TaskFormProps {
     setProjectState: (value: ITaskFrontend['projectId']) => void;
     currentTaskState: ITaskFrontend['status'];
     setCurrentTaskState: (value: ITaskFrontend['status']) => void;
+    comments: string[];
+    onAddComment: (comment: string) => void;
+    onDeleteComment: (index: number) => void;
+    onEditComment: (index: number, newComment: string) => void;
     isEditing?: boolean
 }
 
@@ -42,10 +46,14 @@ function TaskForm({
     setProjectState,
     currentTaskState,
     setCurrentTaskState,
+    comments,
+    onAddComment,
+    onDeleteComment,
+    onEditComment,
     isEditing = false
 } : TaskFormProps) {
-    const createdAtDate = formatDateHumanFriendly(createdAt);
-    const updatedAtDate = formatDateHumanFriendly(lastUpdatedAt);
+    const createdAtDate = formatDateHumanFriendly(createdAt, true);
+    const updatedAtDate = formatDateHumanFriendly(lastUpdatedAt, true);
     return (
     <form className={styles.taskform}>
             <div className={styles.taskFormHeader}>
@@ -56,14 +64,14 @@ function TaskForm({
                     className={styles.taskFormHeaderTitle}
                     sx={{ width: '30%' }}
                 />
-                <div className={styles.taskFormHeaderRight}>
+                {isEditing && <div className={styles.taskFormHeaderRight}>
                     <div className={styles.taskFormHeaderRightItem}>
                         Created At: <span>{createdAtDate}</span>
                     </div>
                     <div className={styles.taskFormHeaderRightItem}>
                         Updated At: <span>{updatedAtDate}</span>
                     </div>
-                </div>
+                </div>}
             </div>
             
             <div className={styles.taskformInputs}>
@@ -100,10 +108,10 @@ function TaskForm({
             />
 
            {isEditing && <CommentSection 
-                comments={[]}
-                onAddComment={() => {}}
-                onDeleteComment={() => {}}
-                onEditComment={() => {}}
+                comments={comments}
+                onAddComment={onAddComment}
+                onDeleteComment={onDeleteComment}
+                onEditComment={onEditComment}
             />}
     </form>
   )
