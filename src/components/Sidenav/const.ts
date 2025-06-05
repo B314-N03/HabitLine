@@ -26,7 +26,7 @@ export const pages: ISideNavPage[] = [
     {
         title: 'Daily Tasks',
         icon: React.createElement(ChecklistIcon),
-        path: '/daily-Tasks'
+        path: '/daily-tasks'
     },
     {
         title: 'Analytics',
