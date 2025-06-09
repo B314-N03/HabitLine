@@ -155,4 +155,32 @@ p{
     &quaternary{
         background-color: var(--color-quaternary) !important;
     }
+
+    &skeleton{
+        background-color: var(--color-decimal) !important;
+    }
+}
+
+.w{
+    &Full{
+        width: 100% !important;
+    }
+    &75{
+        width: 75% !important;
+    }
+    &50{
+        width: 50% !important;
+    }
+    &33{
+        width: 33% !important;
+    }
+    &25{
+        width: 25% !important;
+    }
+    &10{
+        width: 10% !important;
+    }
+    &5{
+        width: 5% !important;
+    }
 }

@@ -39,3 +39,16 @@
   width: 100% !important;
   border-radius: 4px;
 }
+
+.skeletonContainer{
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+}
+
+.flex{
+  display: flex !important;
+  overflow: hidden;
+  gap: 1rem;
+  margin-bottom: 24px !important;
+}
