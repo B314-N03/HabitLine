@@ -30,7 +30,7 @@ function TaskModal({
     const [priorityState, setPriorityState] = useState(task.priority);
     const [projectState, setProjectState] = useState(task.projectId);
     const [currentTaskState, setCurrentTaskState] = useState(task.status);
-    const [commentState, setCommentState] = useState([]);
+    const [commentState, setCommentState] = useState(task.comments);
     const mutation = useCreateOrUpdateTask();
     const deleteMutation = useDeleteTask();
 
@@ -78,7 +78,8 @@ function TaskModal({
         id, 
         { onSuccess: () => {
             onClose()
-        } });
+        }}
+    );
 
     const handleCancel = () => {
         setTitleState('');
@@ -87,7 +88,22 @@ function TaskModal({
         setTaskTypeState('Bug');
         setCurrentTaskState('to_do');
         setProjectState('');
+        setCommentState([]);
         onClose();
+    }
+
+    const handleAddComment = (comment: string) => {
+        setCommentState((prevComments: string[]) => [...prevComments, comment]);
+    }
+
+    const handleDeleteComment = (index: number) => {
+        setCommentState((prevComments: string[]) => prevComments.filter((_, i) => i !== index));
+    }
+
+    const handleEditComment = (index: number, newComment: string) => {
+        setCommentState((prevComments: string[]) => 
+            prevComments.map((comment, i) => (i === index ? newComment : comment))
+        );
     }
 
     return (
@@ -118,10 +134,10 @@ function TaskModal({
                 setProjectState={setProjectState}
                 currentTaskState={currentTaskState}
                 setCurrentTaskState={setCurrentTaskState}
-                comments={task.comments}
-                onAddComment={() => {}}
-                onDeleteComment={() => {}}
-                onEditComment={() => {}}
+                comments={commentState}
+                onAddComment={handleAddComment}
+                onDeleteComment={handleDeleteComment}
+                onEditComment={handleEditComment}
                 isEditing={isEditing}
             />
          

@@ -18,7 +18,7 @@ function HeaderOutsideWebapp() {
   const { loggedIn, username, avatar} = useContext(UserContext);
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const location = useLocation();  
-  const pagesSplash = ['Products', 'Pricing', 'Blog'];
+  const pagesSplash = ['Features', 'Pricing', 'Blog'];
   const pagesDashboard = [""];
   const [pathIsSplashScreen, setPathIsSplashScreen] = useState(location.pathname === '/'); 
   const activePages = pathIsSplashScreen ? pagesSplash : pagesDashboard;
@@ -38,9 +38,11 @@ function HeaderOutsideWebapp() {
   const handleClickLogin = () => {
     setOpenLoginModal(true);
   };
+
+  return null; 
   
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: 'var(--color-tertiary)', zIndex: 1300 }}>
+    <AppBar position="fixed" sx={{ backgroundColor: 'var(--bg-main)', zIndex: 1300 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <MobileHeader 

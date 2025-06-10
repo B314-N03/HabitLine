@@ -1,0 +1,11 @@
+.dailyTask {
+  display: flex;
+  flex-direction: row;
+  padding: .5rem 2rem .5rem 0rem ;
+  border-radius: 8px;
+  gap: 1rem;
+  align-items: center;
+  cursor: pointer;
+  // width: 100%;
+  border: 1px solid var(--divider-border-color);
+}

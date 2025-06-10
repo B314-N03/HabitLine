@@ -1,0 +1,11 @@
+.dailyTaskModalContent{
+    display: flex;
+    flex-direction: column;
+}
+
+.titleInput{
+    color: var(--text-main) !important;
+    &::before{
+        border-color: var(--divider-border-color) !important;
+    }
+}

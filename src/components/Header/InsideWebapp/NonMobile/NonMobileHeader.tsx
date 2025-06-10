@@ -10,6 +10,7 @@ interface NonMobileHeaderProps {
     openSnackBar: boolean;
     setOpenSnackBar: React.Dispatch<React.SetStateAction<boolean>>;
     snackBarMessage: string
+    setOpenDailyTaskModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function NonMobileHeader({
@@ -17,13 +18,18 @@ function NonMobileHeader({
     setOpenTaskModal,
     openSnackBar,
     setOpenSnackBar,
-    snackBarMessage
+    snackBarMessage,
+    setOpenDailyTaskModal
 }: NonMobileHeaderProps) {    
     const handleOpenProjectModal = () => {
         setOpenProjectModal(true);
     }
     const handleOpenTaskModal = () => {
         setOpenTaskModal(true);
+    }
+
+    const handleOpenDailyTaskModal = () => {
+        setOpenDailyTaskModal(true);
     }
     
     return (
@@ -46,6 +52,11 @@ function NonMobileHeader({
                     <AddButton
                         onClick={handleOpenTaskModal}
                         title="Add Task"
+                        variant="contained"
+                    />
+                    <AddButton
+                        onClick={handleOpenDailyTaskModal}
+                        title="Add Daily Task"
                         variant="contained"
                     />
                 </div>

@@ -13,3 +13,9 @@ export const taskModalNewTaskData: ITask = {
     completed: false,
     comments: []
 }
+
+export const dailyTaskModalNewTaskData = {
+    id: ``,
+    title: ``,
+    completed: false,
+}

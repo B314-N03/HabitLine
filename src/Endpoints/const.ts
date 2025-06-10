@@ -1,5 +1,4 @@
 export const Endpoints = {
-    
     getTasks: "/api/tasks",
     getTask: "/api/tasks/",
     createTask: "/api/tasks/create",

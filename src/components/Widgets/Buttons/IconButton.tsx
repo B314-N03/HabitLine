@@ -9,7 +9,8 @@ interface IconButtonProps {
     size?: "small" | "medium" | "large"
     title: string,
     icon: JSX.Element,
-    color?: "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning" | "grey"
+    color?: "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning" | "grey",
+    customClass?: string
 }
 
 function IconButtonHL({
@@ -20,6 +21,7 @@ function IconButtonHL({
     title,
     icon,
     color = "primary",
+    customClass = ""
 }: IconButtonProps) {
   return (
     <Button 
@@ -30,7 +32,7 @@ function IconButtonHL({
         startIcon={icon}
         title={title}
         color={color === "grey" ? "inherit" : color}
-        className={color === "grey" ? styles.greyButton : ""}
+        className={`${customClass} ${color === "grey" ? styles.greyButton : ""}`}
     >{ title }</Button>
   )
 }
