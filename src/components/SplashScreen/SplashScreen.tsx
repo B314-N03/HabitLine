@@ -27,25 +27,12 @@ import HabitLineLogo from '../../assets/Images/HabitLineLogo.png';
 import styles from './splash_screen.module.scss' 
 import IconButtonHL from '../Widgets/Buttons/IconButton';
 import { GoogleIcon } from '../../assets/CustomIcons/GoogleIcon';
+import { useState } from 'react';
+import StyledTextField from '../StyledComponents/StyledTextField/StyledTextField';
+import LoginCard from './LoginCard/LoginCard';
 
 function SplashScreen() {
-    const loginMethods = [
-        { 
-            icon: <GitHub />, 
-            label: 'Login with GitHub',
-            color: '#1976d2'
-        },
-        { 
-            icon: <GoogleIcon />,
-            label: 'Login with Google',
-            color: '#333'
-        },
-        { 
-            icon: <Microsoft />,
-            label: 'Login with Microsoft',
-            color: '#db4437'
-        },
-    ];
+ 
     const features = [
     {
       icon: <SmartToy className={styles.featureIcon} style={{ color: '#1976d2' }} />,
@@ -126,6 +113,7 @@ function SplashScreen() {
     }
   ];
 
+
   return (
     <Box className={styles.container}>
       {/* Hero Section */}
@@ -164,53 +152,7 @@ function SplashScreen() {
 
             <Divider variant='middle' orientation='vertical' className={styles.divider} />
 
-            <Card className={styles.loginCard} elevation={3}>
-              <CardContent>
-                <Typography variant="h6" component="h3" fontWeight="bold">
-                  Login
-                </Typography>
-                <TextField
-                  label="Email"
-                  variant="outlined"
-                  fullWidth
-                  margin="normal"
-                />
-                <TextField
-                  label="Password"
-                  type="password"
-                  variant="outlined"
-                  fullWidth
-                  margin="normal"
-                />
-                <Button variant="contained" size="large" fullWidth>
-                  Login
-                </Button>
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 2, mb: 2 }}>
-                  Don't have an account? <a href="/signup">Sign up</a>
-                </Typography>
-
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 1, mb: 2 }}>
-                  Forgot your password? <a href="/reset-password">Reset it</a>
-                </Typography>
-
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 1, mb: 2 }}>	
-                    or
-                </Typography>
-                <Box className={styles.loginMethods}>
-                  {loginMethods.map((method, index) => (
-                    <IconButtonHL
-                      key={index}
-                      variant="contained"
-                      onClick={() => console.log(`Login with ${method.label}`)}
-                      title={method.label}
-                      icon={method.icon}
-                      customClass= {styles.loginMethodButton}
-                    />
-                  ))}
-                </Box>
-
-              </CardContent>
-            </Card>
+           <LoginCard />
 
         </Container>
       </Box>

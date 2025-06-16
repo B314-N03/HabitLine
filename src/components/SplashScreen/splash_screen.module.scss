@@ -12,6 +12,11 @@
 .heroContent{
     display: flex !important;
     gap: 4rem ;
+
+    @media screen and (max-width: 960px) {
+      flex-direction: column;
+      
+    }
 }
 
 .heroContentLeft {
@@ -51,36 +56,11 @@
   flex-wrap: wrap;
 }
 
-.loginCard{
-    background: white;
-    border-radius: 16px;
-    padding: 32px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    max-width: 400px;
-    margin: 0 auto;
+.divider{
+    height: unset !important;
 }
 
-.loginMethods {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 12px
-}
 
-.loginMethodButton{
-    display: flex !important;
-    text-align: center !important;
-    gap: 2rem !important;
-    border-radius: 8px;
-    width: 100%;
-    background: #fff !important;
-    border: 1px solid grey !important;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    color: var(--bg-main) !important;
-    justify-content: start !important;
-    padding-left: 40px !important;
-    
-}
 
 .featuresSection {
   padding: 80px 24px;

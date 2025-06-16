@@ -1,0 +1,36 @@
+.loginCard{
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    width: 40%;
+    margin: 0 auto;
+}
+
+.loginCardContent{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.loginMethods {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px
+}
+
+.loginMethodButton{
+    display: flex !important;
+    text-align: center !important;
+    gap: 2rem !important;
+    border-radius: 8px;
+    width: 100%;
+    background: #fff !important;
+    border: 1px solid grey !important;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: var(--bg-main) !important;
+    justify-content: center !important;
+    
+}
+

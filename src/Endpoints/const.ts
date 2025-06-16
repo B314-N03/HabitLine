@@ -22,7 +22,14 @@ export const Endpoints = {
     getProjects: "/api/projects",
     createProject: "/api/projects/create",
     updateProject: "/api/projects/update",
-    deleteProject: "/api/projects/delete/"
+    deleteProject: "/api/projects/delete/",
+
+
+    login: "/api/auth/login",
+    register: "/api/auth/register",
+    forgotPassword: "/api/auth/forgot-password",
+    resetPassword: "/api/auth/reset-password",
+    me: "/api/auth/me",
 }
 
 export const BackendUrl = "http://localhost:8080"

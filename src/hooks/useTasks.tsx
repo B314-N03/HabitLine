@@ -2,12 +2,13 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { BackendUrl, Endpoints } from "../Endpoints/const";
 import type { ITask, ITaskFrontend } from "../Interfaces/ITask";
 import { omit } from "../components/Helpers/Omit";
+import { fetchWithAuth } from "../lib/fetchWithAuth";
 
 export const useTasks = () =>
   useQuery<ITask[]>({
     queryKey: ['tasks'],
     queryFn: async () => {
-      const res = await fetch(`${BackendUrl}${Endpoints.getTasks}`);
+      const res = await fetchWithAuth(`${BackendUrl}${Endpoints.getTasks}`);
       if (!res.ok) throw new Error("Failed to fetch tasks");
       return res.json();
     },
@@ -22,7 +23,7 @@ export const useCreateOrUpdateTask = () => {
         const {isEditing, ...rest} = task
         const payload = isEditing ? rest : omit(rest, ['id'])
         const endpoint = task.isEditing ? Endpoints.updateTask : Endpoints.createTask;
-        const res = await fetch(`${BackendUrl}${endpoint}`, {
+        const res = await fetchWithAuth(`${BackendUrl}${endpoint}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
@@ -41,7 +42,7 @@ export const useDeleteTask = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id: string) => {
-      const res = await fetch(`${BackendUrl}${Endpoints.deleteTask}${id}`, {
+      const res = await fetchWithAuth(`${BackendUrl}${Endpoints.deleteTask}${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });
