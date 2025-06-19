@@ -1,0 +1,38 @@
+.pricingSection {
+  padding: 80px 24px;
+}
+
+.pricingGrid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap: 32px !important;
+  margin-top: 48px;
+}
+
+.pricingCard {
+  border-radius: 16px;
+  padding: 24px;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+
+    li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+  }
+}
+
+.pricingHighlight {
+  border: 2px solid #1976d2;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+}

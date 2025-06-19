@@ -8,9 +8,7 @@ export const useDailyTasks = () =>
   useQuery<IDailyTask[]>({
     queryKey: ['daily_tasks'],
     queryFn: async () => {
-      const res = await fetchWithAuth(`${BackendUrl}${Endpoints.getDailyTasks}`);
-      if (!res.ok) throw new Error("Failed to fetch tasks");
-      return res.json();
+      return await fetchWithAuth(`${BackendUrl}${Endpoints.getDailyTasks}`);
     },
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
@@ -23,13 +21,11 @@ export const useCreateOrUpdateDailyTask = () => {
         const {isEditing, ...rest} = dailyTask
         const payload = isEditing ? rest : omit(rest, ['id'])
         const endpoint = dailyTask.isEditing ? Endpoints.updateDailyTask : Endpoints.createDailyTask;
-        const res = await fetchWithAuth(`${BackendUrl}${endpoint}`, {
+        return await fetchWithAuth(`${BackendUrl}${endpoint}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
         });
-        if (!res.ok) throw new Error("Failed to submit daily_task");
-        return res.json();
     },
     onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['daily_tasks'] });

@@ -1,0 +1,56 @@
+.heroSection {
+  padding: 200px 24px 100px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  text-align: center;
+}
+
+.heroContent{
+    display: flex !important;
+    gap: 4rem ;
+
+    @media screen and (max-width: 960px) {
+      flex-direction: column;
+      
+    }
+}
+
+.heroContentLeft {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  gap: 12px;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.heroSubtitle {
+  max-width: 600px;
+  margin: 0 auto 40px !important;
+  color: #666;
+  line-height: 1.6 !important;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.divider{
+    height: unset !important;
+}

@@ -4,7 +4,8 @@ import { useLocation } from "react-router-dom";
 
 const ThemeContext = createContext<IThemeContext>({
     theme: "light",
-    toggleTheme: () => {}
+    toggleTheme: () => {},
+    setTheme: () => {},
 });
 
 const ThemeProviderHL: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -30,7 +31,7 @@ const ThemeProviderHL: React.FC<{ children: ReactNode }> = ({ children }) => {
     
 
     return (
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
             {children}
         </ThemeContext.Provider>
     );

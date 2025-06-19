@@ -1,0 +1,27 @@
+.testimonialsSection {
+  padding: 80px 24px;
+}
+
+.testimonialsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonialCard {
+  text-align: left;
+}
+
+.rating {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.testimonialText {
+  font-style: italic;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}

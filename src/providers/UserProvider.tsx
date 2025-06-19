@@ -1,40 +1,47 @@
-import { createContext, useState, type ReactNode } from "react";
+import { createContext,  type ReactNode } from "react";
 import type { IUserContext } from "../Interfaces/Contexts/IUserContext";
+import { useMe } from "../hooks/useAuth";
 
 const UserContext = createContext<IUserContext>({
-    id: 0,
-    setId: () => {},
+    id: "",
     username: "",
-    setUsername: () => {},
     email: "",
-    setEmail: () => {},
     password: "",
-    setPassword: () => {},
     loggedIn: false,
-    setLoggedIn: () => {},
     avatar: "",
-    setAvatar: () => {},
     lastLoginDate: new Date(),
 });
 
 const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [id, setId] = useState<number>(0);
-    const [username, setUsername] = useState<string>("Bela");
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [loggedIn, setLoggedIn] = useState<boolean>(false);
-    const [avatar, setAvatar] = useState<string>("");
-    const lastLoginDate = new Date()
 
+    const {data: user } = useMe()
+
+    if (user) {
+        return (
+            <UserContext.Provider value={{ 
+                id: user.id,
+                username: user.username,
+                email: user.email,
+                password: user.password,
+                loggedIn: true,
+                avatar: user.avatar,
+                lastLoginDate: new Date(user.lastLoginDate),
+            }}>
+                {children}
+            </UserContext.Provider>
+        );
+    }
+    
+    // If no user data is available, provide default values
     return (
         <UserContext.Provider value={{ 
-            id, setId,
-            username, setUsername,
-            email, setEmail,
-            password, setPassword,
-            loggedIn, setLoggedIn,
-            avatar, setAvatar,
-            lastLoginDate
+            id: "",
+            username: "",
+            email: "",
+            password: "",
+            loggedIn: false,
+            avatar: "",
+            lastLoginDate: new Date(),
         }}>
             {children}
         </UserContext.Provider>

@@ -21,7 +21,7 @@ function IconButtonHL({
     title,
     icon,
     color = "primary",
-    customClass = ""
+    customClass = "",
 }: IconButtonProps) {
   return (
     <Button 
@@ -33,7 +33,11 @@ function IconButtonHL({
         title={title}
         color={color === "grey" ? "inherit" : color}
         className={`${customClass} ${color === "grey" ? styles.greyButton : ""}`}
-    >{ title }</Button>
+    >
+      <div className={`${styles.iconButtonContent}`}>
+        {title}
+      </div>
+    </Button>
   )
 }
 

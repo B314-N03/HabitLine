@@ -1,0 +1,32 @@
+.ctaSection {
+  padding: 80px 24px;
+  background: #1976d2;
+  color: white;
+  text-align: center;
+}
+
+.ctaTitle {
+  color: white;
+  margin-bottom: 24px !important;
+}
+
+.ctaSubtitle {
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto 32px !important;
+  line-height: 1.6 !important;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.ctaDisclaimer {
+  opacity: 0.8;
+  font-size: 14px;
+}
+

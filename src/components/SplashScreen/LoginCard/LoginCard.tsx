@@ -1,19 +1,21 @@
 import styles from './login_card.module.scss';
-import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, TextField, Typography, type CardProps } from '@mui/material';
 import StyledTextField from '../../StyledComponents/StyledTextField/StyledTextField';
 import IconButtonHL from '../../Widgets/Buttons/IconButton';
 import { useState } from 'react';
 import { GitHub, Microsoft } from '@mui/icons-material';
 import { GoogleIcon } from '../../../assets/CustomIcons/GoogleIcon';
 import { useLogin, useRegister } from '../../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 
-function LoginCard(props: any) {
+function LoginCard(props: CardProps) {
    const [startRegistration, setStartRegistration] = useState(false);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate();
     const loginMethods = [
         { 
             icon: <GitHub />, 
@@ -33,7 +35,6 @@ function LoginCard(props: any) {
     ];
     const handleClickRegister = () => {
         setStartRegistration(!startRegistration);
-        navigator.vibrate(300);
     };
 
     const loginMutation = useLogin();
@@ -50,7 +51,20 @@ function LoginCard(props: any) {
         // Call register mutation if you have it:
         registerMutation.mutate({ email, password });
       } else {
-        loginMutation.mutate({ email, password });
+        loginMutation.mutate({ email, password },
+          {
+
+            onSuccess: (data) => {
+              // Handle successful login, e.g., redirect or show success message
+              console.log('Login successful:', data);
+              navigate('/dashboard'); // Redirect to dashboard or another page
+            },
+            onError: (error) => {
+              // Handle login error
+              console.error('Login failed:', error);
+            }
+          }
+        );
       }
     };
     return(

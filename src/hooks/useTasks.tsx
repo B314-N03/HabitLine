@@ -4,19 +4,17 @@ import type { ITask, ITaskFrontend } from "../Interfaces/ITask";
 import { omit } from "../components/Helpers/Omit";
 import { fetchWithAuth } from "../lib/fetchWithAuth";
 
-export const useTasks = () =>
+const useTasks = () =>
   useQuery<ITask[]>({
     queryKey: ['tasks'],
     queryFn: async () => {
-      const res = await fetchWithAuth(`${BackendUrl}${Endpoints.getTasks}`);
-      if (!res.ok) throw new Error("Failed to fetch tasks");
-      return res.json();
+      return await fetchWithAuth(`${BackendUrl}${Endpoints.getTasks}`);
     },
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
   });
 
-export const useCreateOrUpdateTask = () => {
+const useCreateOrUpdateTask = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (task: ITaskFrontend & { isEditing?: boolean }) => {
@@ -38,7 +36,7 @@ export const useCreateOrUpdateTask = () => {
   });
 };
 
-export const useDeleteTask = () => {
+const useDeleteTask = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id: string) => {
@@ -59,3 +57,5 @@ export const useDeleteTask = () => {
     },
   });
 };
+
+export { useTasks, useCreateOrUpdateTask, useDeleteTask };

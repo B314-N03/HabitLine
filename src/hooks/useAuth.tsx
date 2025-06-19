@@ -1,20 +1,23 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { BackendUrl, Endpoints } from "../Endpoints/const";
 import { fetchWithAuth } from "../lib/fetchWithAuth";
+import { useNavigate } from "react-router-dom";
 
-export const useLogin = () => {
+
+
+const useLogin = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async ({ email, password }: { email: string; password: string }) => {
-      const res = await fetchWithAuth(`${BackendUrl}${Endpoints.login}`, {
+      const res: Response = await fetch(`${BackendUrl}${Endpoints.login}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-
-      if (!res.ok) throw new Error("Login failed");
-
+      
+      if (!res.ok) throw new Error("Login failed" + (res));
+      
       const data = await res.json();
 
       // Store JWT in localStorage
@@ -28,7 +31,7 @@ export const useLogin = () => {
   });
 };
 
-export const useRegister = () => {
+const useRegister = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -60,32 +63,29 @@ export const useRegister = () => {
   });
 };
 
-export const useLogout = () => {
+const useLogout = () => {
   const queryClient = useQueryClient();
-
+  const navigate = useNavigate();
   return () => {
     localStorage.removeItem("token");
+    navigate("/");
     queryClient.clear();
   };
 };
 
-export const useMe = () =>
+const useMe = () =>
   useQuery({
     queryKey: ["me"],
     queryFn: async () => {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("Not authenticated");
 
-      const res = await fetchWithAuth(`${BackendUrl}${Endpoints.me}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const user = await fetchWithAuth(`${BackendUrl}${Endpoints.me}`)
 
-      if (!res.ok) throw new Error("Invalid token");
-
-      return res.json();
+      return user;
     },
     retry: false,
     refetchOnWindowFocus: false,
   });
+
+export { useLogin, useRegister, useLogout, useMe };

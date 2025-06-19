@@ -1,6 +1,6 @@
 import { useProjects } from "./useProjects";
 
-export const useProjectInfosForTask = (projectKey: string) => {
+const useProjectInfosForTask = (projectKey: string) => {
   const { data: projects } = useProjects();
 
   if (!projects) return undefined;
@@ -13,3 +13,5 @@ export const useProjectInfosForTask = (projectKey: string) => {
     color:  project?.projectColor
   };
 };
+
+export { useProjectInfosForTask };

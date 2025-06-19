@@ -1,4 +1,3 @@
-import HeaderOutsideWebapp from "../../Header/OutsideWebapp/HeaderOutsideWebapp";
 import { pagesOutsideWebapp } from "./const";
 import { useEffect, useState } from "react";
 import HeaderInsideWebapp from "../../Header/InsideWebapp/HeaderInsideWebapp";
@@ -20,7 +19,7 @@ function HandleNavsChange() {
   return (
         isOutsideWebapp
           ?
-            <HeaderOutsideWebapp />
+            null
           : 
           <>
             <HeaderInsideWebapp />

@@ -6,9 +6,11 @@ export const fetchWithAuth = async (
 
   const headers = {
     ...(options.headers || {}),
-    Authorization: token ? `Bearer ${token}` : "",
+    Authorization: `Bearer ${token}`,
     "Content-Type": "application/json",
   };
+
+  console.log("Token used for request:", token);
 
   const res = await fetch(url, {
     ...options,

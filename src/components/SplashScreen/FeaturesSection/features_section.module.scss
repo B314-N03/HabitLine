@@ -1,0 +1,51 @@
+.featuresSection {
+  padding: 80px 24px;
+}
+
+.featuresGrid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+  gap: 32px !important;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.featureCard {
+  transition: all 0.3s ease;
+height: 190px !important;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  }
+  
+  &.highlighted {
+    border: 2px solid #1976d2;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  }
+}
+
+.featureHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.featureIcon {
+  font-size: 32px !important;
+}
+
+.aiBadge {
+  background: #1976d2;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+}
+
+
