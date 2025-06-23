@@ -1,5 +1,5 @@
 import styles from './taskform.module.scss'
-import { Input } from "@mui/material";
+import { Input, TextField } from "@mui/material";
 import type { ITaskFrontend } from "../../../Interfaces/ITask";
 import TaskTypeInput from "./TaskTypeInput/TaskTypeInput";
 import TaskPriorityInput from "./TaskPriorityInput/TaskPriorityInput";
@@ -8,6 +8,7 @@ import TaskCurrentStateInput from "./TaskCurrentStateInput/TaskCurrentStateInput
 import RichTextEditor from "../FormWidgets/RichtTextEditor/RichTextEditor";
 import CommentSection from '../FormWidgets/CommentSection/CommentSection';
 import formatDateHumanFriendly from '../../Helpers/FormatDateHumanFriendly';
+import StyledTextField from '../../StyledComponents/StyledTextField/StyledTextField';
 
 interface TaskFormProps {
     createdAt: Date;
@@ -57,8 +58,8 @@ function TaskForm({
     return (
     <form className={styles.taskform}>
             <div className={styles.taskFormHeader}>
-                <Input 
-                    placeholder="Title"
+                <StyledTextField
+                    label="Title"
                     value={titleState}
                     onChange={(e) => setTitleState(e.target.value)} 
                     className={styles.taskFormHeaderTitle}
