@@ -10,7 +10,8 @@ interface IconButtonProps {
     title: string,
     icon: JSX.Element,
     color?: "inherit" | "primary" | "secondary" | "success" | "error" | "info" | "warning" | "grey",
-    customClass?: string
+    customClass?: string,
+    contentCustomClass?: string
 }
 
 function IconButtonHL({
@@ -22,6 +23,7 @@ function IconButtonHL({
     icon,
     color = "primary",
     customClass = "",
+    contentCustomClass = ""
 }: IconButtonProps) {
   return (
     <Button 
@@ -34,7 +36,7 @@ function IconButtonHL({
         color={color === "grey" ? "inherit" : color}
         className={`${customClass} ${color === "grey" ? styles.greyButton : ""}`}
     >
-      <div className={`${styles.iconButtonContent}`}>
+      <div className={`${contentCustomClass} ${styles.iconButtonContent}`}>
         {title}
       </div>
     </Button>

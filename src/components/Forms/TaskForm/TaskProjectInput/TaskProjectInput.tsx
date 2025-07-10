@@ -1,7 +1,7 @@
 import { MenuItem } from "@mui/material";
 import styles from "./task_project_input.module.scss";
 import { useProjects } from "../../../../hooks/useProjects";
-import SelectHL from "../../../Widgets/Cards/Select/SelectHL";
+import SelectHL from "../../../Widgets/Select/SelectHL";
 interface ITaskProjectInputProps {
     title: string;
     value: string;
@@ -17,25 +17,25 @@ function TaskProjectInput({
     error = false,
     helperText
 }: ITaskProjectInputProps) {
-    const {data: projects } = useProjects();
+    const { data: projects } = useProjects();
 
-  return (
-    <SelectHL<string> 
-        title={title}
-        value={value}
-        setState={setState}
-        error={error}
-        helperText={helperText}>
-        {
-            projects?.map((project) => (
-                <MenuItem key={project.id} value={project.id} className={styles.taskProject}>
-                    {project.title}
-                </MenuItem>
-            ))
-        }
+    return (
+        <SelectHL<string>
+            title={title}
+            value={value}
+            setState={setState}
+            error={error}
+            helperText={helperText}>
+            {
+                projects?.map((project) => (
+                    <MenuItem key={project.id} value={project.id} className={styles.taskProject}>
+                        {project.title}
+                    </MenuItem>
+                ))
+            }
 
-    </SelectHL>
-  )
+        </SelectHL>
+    )
 }
 
 export default TaskProjectInput

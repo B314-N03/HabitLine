@@ -30,6 +30,8 @@ export const Endpoints = {
     forgotPassword: "/api/auth/forgot-password",
     resetPassword: "/api/auth/reset-password",
     me: "/api/auth/me",
+    refresh: "/api/auth/refresh",
+    logout: "/api/auth/logout",
 }
 
 export const BackendUrl = "http://localhost:8080"

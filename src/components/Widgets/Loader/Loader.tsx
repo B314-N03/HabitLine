@@ -1,15 +1,15 @@
-import React from 'react'
+// import React from 'react'
 
-interface Props {
+// interface Props {
     
-}
+// }
 
-function Loader(props: Props) {
-    const {} = props
+// function Loader(props: Props) {
+//     const {} = props
 
-    return (
-        <div>Loader</div>        
-    )
-}
+//     return (
+//         <div>Loader</div>        
+//     )
+// }
 
-export default Loader
+// export default Loader

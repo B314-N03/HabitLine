@@ -2,5 +2,7 @@ export interface IUser {
     id: string,
     username: string,
     email: string,
-    password: string
+    region: string,
+    avatar?: string,
+    lastLoginAt?: string,
 }

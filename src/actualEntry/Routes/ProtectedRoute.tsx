@@ -3,8 +3,8 @@ import { useMe } from "../../hooks/useAuth";
 import type { JSX } from "@emotion/react/jsx-runtime";
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  const { data,isLoading, isError } = useMe();
-  console.log(data)
+  const { isLoading, isError } = useMe();
+
 
   if (isLoading) return <div>Loading auth...</div>;
 

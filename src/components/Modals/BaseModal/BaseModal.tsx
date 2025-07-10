@@ -1,5 +1,5 @@
 import type { JSX } from "@emotion/react/jsx-runtime";
-import { Modal } from "@mui/material";
+import { Modal, Typography } from "@mui/material";
 import styles from "./base_modal.module.scss";
 import XIcon from '@mui/icons-material/Clear';
 import { type ReactNode } from "react";
@@ -21,6 +21,7 @@ interface IBaseModalProps {
     onSave?: () => void;
     onCancel?: () => void;
     isEditing?: boolean;
+    showCloseButton?: boolean
 }
 
 function BaseModal({
@@ -34,7 +35,8 @@ function BaseModal({
     onDelete,
     onSave,
     onCancel,
-    isEditing = false
+    isEditing = false,
+    showCloseButton = true
 }: IBaseModalProps): JSX.Element {
 
 
@@ -50,8 +52,8 @@ function BaseModal({
         >
             <div className={`${styles.modal_content } ${styles[size]}`}  >
                 <div className={styles.modal_header}>
-                    <h3 className={styles.modal_title}>{title}</h3>
-                    <XIcon onClick={onClose} className={styles.modal_close} fontSize="large" />
+                    <Typography variant="h5" component="h5" sx={{ fontWeight: 'bold' }} className={styles.modal_title}>{title}</Typography>
+                    {showCloseButton && <XIcon onClick={onClose} className={styles.modal_close} fontSize="large" />}
                 </div>
                 <div className={styles.modal_body}>
                     {children}

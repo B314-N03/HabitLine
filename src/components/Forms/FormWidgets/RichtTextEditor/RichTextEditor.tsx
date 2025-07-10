@@ -13,7 +13,7 @@ function RichTextEditor({
     readOnly = false,
     showOnlyText = false
 }: RichTextEditorProps) {
-    
+
     const handleChange = (event: ContentEditableEvent) => {
         setEditorValue(event.target.value)
     };
@@ -26,9 +26,9 @@ function RichTextEditor({
                 className: `${styles.richTextEditorContainer} ${showOnlyText ? styles.hideToolbar : ''}`,
             }}
             disabled={readOnly}
-            sx={{ color: 'var(--text-main)' }}
+            style={{ color: 'var(--text-main)' }}
         />
-  )
+    )
 }
 
 export default RichTextEditor

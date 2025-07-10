@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { BackendUrl, Endpoints } from "../Endpoints/const";
 import { fetchWithAuth } from "../lib/fetchWithAuth";
 import { useNavigate } from "react-router-dom";
+import type { IUser } from "../Interfaces/IUser";
 
 
 
@@ -74,7 +75,7 @@ const useLogout = () => {
 };
 
 const useMe = () =>
-  useQuery({
+  useQuery<IUser>({
     queryKey: ["me"],
     queryFn: async () => {
       const token = localStorage.getItem("token");

@@ -1,8 +1,33 @@
+import { isTokenExpired } from "../components/Helpers/isTokenExpired";
+import { BackendUrl, Endpoints } from "../Endpoints/const";
+
 export const fetchWithAuth = async (
   url: string,
   options: RequestInit = {}
 ) => {
-  const token = localStorage.getItem("token");
+  let token = localStorage.getItem("token");
+
+  if (!token || isTokenExpired(token)) {
+    console.log("Token expired or missing. Attempting to refresh...");
+    try {
+      const refreshRes = await fetch(`${BackendUrl}${Endpoints.refresh}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token }),
+      });
+
+      if (!refreshRes.ok) throw new Error("Failed to refresh token");
+
+      const refreshData = await refreshRes.json();
+      token = refreshData.token;
+
+      localStorage.setItem("token", token ?? "");
+    } catch (err) {
+      console.error("Token refresh failed:", err);
+      localStorage.removeItem("token");
+      throw new Error("Authentication failed. Please log in again.");
+    }
+  }
 
   const headers = {
     ...(options.headers || {}),
@@ -10,15 +35,12 @@ export const fetchWithAuth = async (
     "Content-Type": "application/json",
   };
 
-  console.log("Token used for request:", token);
-
   const res = await fetch(url, {
     ...options,
     headers,
   });
 
   if (!res.ok) {
-    // Optional: log or redirect to login on 401
     throw new Error(`Request failed: ${res.status}`);
   }
 

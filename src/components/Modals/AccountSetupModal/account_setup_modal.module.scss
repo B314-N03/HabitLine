@@ -1,0 +1,30 @@
+.modal {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    gap: 1rem;
+    max-width: unset !important;
+}
+
+.modal_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.modal_body {
+    flex-grow: 1;
+    width: 100%;
+}
+
+.modal_footer_buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.modal_close {
+    cursor: pointer;
+}

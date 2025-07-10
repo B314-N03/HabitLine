@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
+import AccountSetup from "../../components/AccountSetup/AccountSetup";
 
 const Dashboard = lazy(() => import("../../components/Dashboard/Dashboard"));
 const Tasks = lazy(() => import("../../components/Tasks/Tasks"));
@@ -14,6 +15,11 @@ function RoutesComponent() {
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
           <Route index element={<SplashScreen />} />
+          <Route path="/account-setup" element={
+            <ProtectedRoute>
+              <AccountSetup />
+            </ProtectedRoute>
+          } />
           <Route path="/dashboard" element={
             <ProtectedRoute>
               <Dashboard />
