@@ -1,5 +1,5 @@
 import { BrowserRouter as Router } from "react-router-dom";
-import Routes from "./Routes";
+import Routes from "../Routes";
 import HandleNavsChange from "../components/Helpers/NavsChange/HandleNavsChange";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
