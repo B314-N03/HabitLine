@@ -9,7 +9,7 @@ import styles from './splash_screen.module.scss'
 import { useContext, useEffect } from 'react';
 import { ThemeContext } from '../../providers/ThemeProvider';
 import { useNavigate } from 'react-router-dom';
-import StyledDivider from '../Widgets/StyledDivider/StyledDivider';
+import StyledDivider from '../../components/Widgets/StyledDivider/StyledDivider';
 
 function SplashScreen() {
   const { setTheme } = useContext(ThemeContext);

@@ -1,15 +1,15 @@
-import { Box, Card,  Typography } from "@mui/material"
-import TaskCard from "../../Widgets/Cards/TaskCard/TaskCard"
+import { Box, Card, Typography } from "@mui/material"
 import dashboardStyles from "../dashboard.module.scss"
 import { useEffect, useMemo, useState } from "react"
-import type { ITask  } from "../../../Interfaces/ITask"
-import TaskModal from "../../Modals/TaskModal/TaskModal"
+import type { ITask } from "../../../Interfaces/ITask"
 import { useTasks } from "../../../hooks/useTasks"
-import { taskModalNewTaskData } from "../../Helpers/modalBoilerPlateData"
-import SucessSnackbar from "../../Widgets/Snackbars/SucessSnackbar"
+import { taskModalNewTaskData } from "../../../components/Helpers/modalBoilerPlateData"
+import TaskCard from "../../../components/Widgets/Cards/TaskCard/TaskCard"
+import TaskModal from "../../../components/Modals/TaskModal/TaskModal"
+import SucessSnackbar from "../../../components/Widgets/Snackbars/SucessSnackbar"
 
 function MostUrgentTasks() {
-  const {data: tasks, isLoading, isError} = useTasks()
+  const { data: tasks, isLoading, isError } = useTasks()
 
   const [openTaskModal, setOpenTaskModal] = useState(false)
   const [taskToView, setTaskToView] = useState<ITask>(taskModalNewTaskData)
@@ -51,8 +51,8 @@ function MostUrgentTasks() {
    * Use effect to reset the taskToView state when the modal is closed
    */
   useEffect(() => {
-    if(!openTaskModal) setTaskToView(taskModalNewTaskData)
-  },[openTaskModal])
+    if (!openTaskModal) setTaskToView(taskModalNewTaskData)
+  }, [openTaskModal])
 
   return (
     <Card className={dashboardStyles.dashboard_card} elevation={6}>
@@ -79,7 +79,7 @@ function MostUrgentTasks() {
                 projectId={task.projectId}
                 handleClick={() => handleCardClick(task)}
                 variant="small"
-                
+
               />
             ))
           )}

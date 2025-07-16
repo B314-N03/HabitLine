@@ -1,11 +1,13 @@
 import styles from './login_card.module.scss';
 import { Box, Button, Card, CardContent, TextField, Typography, type CardProps } from '@mui/material';
-import IconButtonHL from '../../Widgets/Buttons/IconButton';
 import { useState } from 'react';
 import { GitHub, Microsoft } from '@mui/icons-material';
-import { GoogleIcon } from '../../../assets/CustomIcons/GoogleIcon';
-import { useLogin, useRegister } from '../../../hooks/useAuth';
-import AccountSetupModal from '../../Modals/AccountSetupModal/AccountSetupModal';
+import { GoogleIcon } from '../../../../assets/CustomIcons/GoogleIcon';
+import { useLogin, useRegister } from '../../../../hooks/useAuth';
+import type { IUser } from '../../../../Interfaces/IUser';
+import { useNavigate } from 'react-router-dom';
+import IconButtonHL from '../../Buttons/IconButton';
+import AccountSetupModal from '../../../Modals/AccountSetupModal/AccountSetupModal';
 
 
 function LoginCard(props: CardProps) {
@@ -37,7 +39,7 @@ function LoginCard(props: CardProps) {
 
   const loginMutation = useLogin();
   const registerMutation = useRegister();
-
+  const navigate = useNavigate();
   const handleSubmit = () => {
     if (!email || !password) return;
 
@@ -64,12 +66,17 @@ function LoginCard(props: CardProps) {
       loginMutation.mutate({ email, password },
         {
 
-          onSuccess: (data) => {
+          onSuccess: (data: { user: IUser }) => {
             localStorage.setItem('user', JSON.stringify(data.user));
-            setShowSetupAccountModal(true); // Open account setup modal
+            localStorage.setItem('lastLogin', new Date().toISOString());
+            if (!data.user.username || !data.user.region) {
+              setShowSetupAccountModal(true);
+            }
+            else {
+              navigate('/dashboard');
+            }
           },
           onError: (error) => {
-            // Handle login error
             console.error('Login failed:', error);
           }
         }

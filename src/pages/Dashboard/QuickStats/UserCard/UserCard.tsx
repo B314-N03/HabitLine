@@ -1,7 +1,7 @@
 import { Card, Typography } from '@mui/material'
 import baseStyles from '../../dashboard.module.scss'
-import formatDateHumanFriendly from '../../../Helpers/FormatDateHumanFriendly'
 import { useMe } from '../../../../hooks/useAuth'
+import formatDateHumanFriendly from '../../../../components/Helpers/FormatDateHumanFriendly'
 
 function UserCard() {
     const { data: user } = useMe()
