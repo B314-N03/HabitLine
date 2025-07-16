@@ -3,7 +3,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import AnalyticsIcon from '@mui/icons-material/TrendingUp';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import SupportIcon from '@mui/icons-material/Support';
-import type { ISideNavPage } from '../../Interfaces/ISideNavPage';
+import type { ISideNavPage, ISideNavTooling } from '../../Interfaces/ISideNavPage';
 import React from 'react';
 import LogoutIcon from '@mui/icons-material/Logout';
 import FeedbackIcon from '@mui/icons-material/Feedback';
@@ -15,12 +15,12 @@ export const drawerWidth = 240;
 export const pages: ISideNavPage[] = [
     {
         title: 'Dashboard',
-        icon: React.createElement(HomeIcon), 
+        icon: React.createElement(HomeIcon),
         path: '/dashboard'
     },
     {
         title: 'Tasks',
-        icon: React.createElement(CalendarViewWeekIcon), 
+        icon: React.createElement(CalendarViewWeekIcon),
         path: '/tasks'
     },
     {
@@ -30,35 +30,46 @@ export const pages: ISideNavPage[] = [
     },
     {
         title: 'Analytics',
-        icon: React.createElement(AnalyticsIcon), 
+        icon: React.createElement(AnalyticsIcon),
         path: '/analytics'
     },
 ];
 
-export const tooling = [
+export const tooling: ISideNavTooling[] = [
     {
         title: 'Settings',
-        icon: React.createElement(SettingsIcon), 
-        path: '/settings'
+        icon: React.createElement(SettingsIcon),
+        path: '/settings',
+        type: 'link'
+    },
+    {
+        title: 'Toggle Theme',
+        icon: React.createElement(ChangeCircleIcon),
+        path: '/toggle-theme',
+        type: 'button'
     },
     {
         title: 'Changelogs',
-        icon: React.createElement(ChangeCircleIcon), 
-        path: '/changelogs'
+        icon: React.createElement(ChangeCircleIcon),
+        path: '/changelogs',
+        type: 'link'
     },
     {
         title: 'Support',
-        icon: React.createElement(SupportIcon), 
-        path: '/support'
+        icon: React.createElement(SupportIcon),
+        path: '/support',
+        type: 'link'
     },
     {
         title: 'Feedback',
-        icon: React.createElement(FeedbackIcon), 
-        path: '/feedback'
+        icon: React.createElement(FeedbackIcon),
+        path: '/feedback',
+        type: 'link'
     },
     {
         title: 'Logout',
-        icon: React.createElement(LogoutIcon), 
-        path: '/logout'
+        icon: React.createElement(LogoutIcon),
+        path: '/logout',
+        type: 'button',
     }
 ]

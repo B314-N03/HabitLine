@@ -5,3 +5,8 @@ export interface ISideNavPage {
     icon: JSX.Element;
     path: string;
 }
+
+export interface ISideNavTooling extends ISideNavPage {
+    type: 'link' | 'button';
+    onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+}
