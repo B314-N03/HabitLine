@@ -1,16 +1,19 @@
-// hooks/useLocations.ts
 import { useEffect, useState } from 'react';
 
 export interface CityOption {
   city: string;
   country: string;
+  lat: string;
+  lon: string;
 }
 
-const API_KEY = 'b118209ec8msh321cabe30b3f6c8p193798jsn147195523442'; // Replace with your actual RapidAPI key
 
 export const useLocations = (query: string) => {
   const [results, setResults] = useState<CityOption[]>([]);
   const [loading, setLoading] = useState(false);
+
+
+  const API_KEY = process.env.API_KEY_RAPIDAPI || '';
 
   useEffect(() => {
     const controller = new AbortController();
@@ -36,9 +39,11 @@ export const useLocations = (query: string) => {
 
         const data = await res.json();
         console.log(data);
-        const cities: CityOption[] = data.data.map((item: { name: string; country: string }) => ({
+        const cities: CityOption[] = data.data.map((item: { name: string; country: string, latitude: number, longitude: number }) => ({
           city: item.name,
           country: item.country,
+          lat: item.latitude.toString(),
+          lon: item.longitude.toString(),
         }));
         setResults(cities);
       } catch (error) {
@@ -55,6 +60,7 @@ export const useLocations = (query: string) => {
       clearTimeout(debounceTimer);
       controller.abort();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   return { results, loading };

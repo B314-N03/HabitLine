@@ -5,7 +5,7 @@ import styles from './weather_card.module.scss'
 import { Card, Typography } from '@mui/material'
 function WeatherCard() {
     const { data: user } = useMe()
-    const userlocation = user?.region || undefined
+    const userlocation = user?.weather?.region || undefined
     const [isLoadingWeather, setIsLoadingWeather] = useState(false)
     const [weatherData, setWeatherData] = useState({})
     useEffect(() => {

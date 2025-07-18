@@ -15,7 +15,7 @@ export const Endpoints = {
     getUsers: "/api/users",
     getUser: "/api/users/",
     createUser: "/api/users/create",
-    updateUser: "/api/users/",
+    updateUser: "/api/users/update",
     deleteUser: "/api/users/delete/",
 
     getProject: "/api/projects/",

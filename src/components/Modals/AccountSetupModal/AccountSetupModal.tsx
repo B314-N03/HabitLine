@@ -4,9 +4,9 @@ import AccountForm from '../../Forms/AccountForm/AccountForm';
 import styles from './account_setup_modal.module.scss';
 import StyledDivider from '../../Widgets/StyledDivider/StyledDivider';
 import { useCreateOrUpdateUser } from '../../../hooks/useUsers';
-import { useMe } from '../../../hooks/useAuth';
 import type { IUser } from '../../../Interfaces/IUser';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface AccountSetupModalProps {
   isOpen: boolean;
@@ -15,23 +15,67 @@ interface AccountSetupModalProps {
 
 function AccountSetupModal({ isOpen, setIsOpen }: AccountSetupModalProps) {
   const userMutation = useCreateOrUpdateUser();
-  const { data: user } = useMe();
-
-  const [formData, setFormData] = useState<IUser>({
-    id: user?.id || '',
-    username: user?.username || '',
-    email: user?.email || '',
-    region: user?.region || '',
+  const user = localStorage.getItem('user') || '';
+  const parsedUser: IUser = user ? JSON.parse(user) : null;
+  const username = parsedUser?.username || '';
+  const region = parsedUser?.weather?.region || '';
+  const userId = parsedUser?.id || '';
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState<Partial<IUser>>({
+    username: username || '',
+    weather: {
+      region: region || '',
+      lat: "",
+      lon: ""
+    }
   });
 
-  const handleAddFormUpdate = (fieldKey: keyof IUser, value: string) => {
-    setFormData((prev) => ({ ...prev, [fieldKey]: value }));
+
+  type WeatherFieldKey = keyof IUser['weather'];
+  type UserFieldKey = keyof IUser | `weather.${WeatherFieldKey}`;
+
+  const handleAddFormUpdate = (fieldKey: UserFieldKey, value: string) => {
+    if (fieldKey.startsWith('weather.')) {
+      const weatherKey = fieldKey.split('.')[1] as WeatherFieldKey;
+      setFormData((prev) => ({
+        ...prev,
+        weather: {
+          ...prev.weather,
+          [weatherKey]: value,
+        } as IUser['weather'],
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [fieldKey]: value,
+      }));
+    }
   };
 
+
+
   const handleSaveAccountDetails = () => {
-    userMutation.mutate({ ...formData, isEditing: true }, {
-      onSuccess: () => setIsOpen(false),
-    });
+    userMutation.mutate({
+      id: userId || '',
+      email: '',
+      username: formData.username || '',
+      weather: {
+        region: formData.weather?.region || '',
+        lat: "",
+        lon: ""
+      },
+      isEditing: true
+    },
+      {
+        onSuccess: () => {
+          setIsOpen(false);
+          navigate('/dashboard');
+        },
+        onError: (error) => {
+          console.error('Error updating user:', error);
+        }
+      }
+    );
   };
 
   return (
@@ -50,10 +94,12 @@ function AccountSetupModal({ isOpen, setIsOpen }: AccountSetupModalProps) {
         <Typography variant="body1">Complete the account setup to get started.</Typography>
         <StyledDivider orientation="horizontal" />
         <AccountForm
-          username={formData.username}
+          username={formData.username || ''}
           setUsername={(value) => handleAddFormUpdate('username', value)}
-          region={formData.region}
-          setRegion={(value) => handleAddFormUpdate('region', value)}
+          region={formData.weather?.region || ''}
+          setRegion={(value) => handleAddFormUpdate('weather.region', value)}
+          setLongitude={(value) => handleAddFormUpdate('weather.lon', value)}
+          setLatitude={(value) => handleAddFormUpdate('weather.lat', value)}
         />
       </Container>
     </BaseModal>

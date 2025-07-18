@@ -7,8 +7,10 @@ import StyledTextField from '../../../StyledComponents/StyledTextField/StyledTex
 interface LocationInputProps {
   selectedRegion: string;
   onSelect: (region: string) => void;
+  setLongitude: (lon: string) => void;
+  setLatitude: (lat: string) => void;
 }
-const LocationInput: React.FC<LocationInputProps> = ({ onSelect }) => {
+const LocationInput: React.FC<LocationInputProps> = ({ onSelect, setLongitude, setLatitude }) => {
   const [inputValue, setInputValue] = useState('');
   const { results, loading } = useLocations(inputValue);
 
@@ -17,7 +19,13 @@ const LocationInput: React.FC<LocationInputProps> = ({ onSelect }) => {
       options={results}
       getOptionLabel={(option) => `${option.city}, ${option.country}`}
       onInputChange={(_, value) => setInputValue(value)}
-      onChange={(_, value) => onSelect(value ? `${value.city}, ${value.country}` : '')}
+      onChange={(_, value) => {
+        setLatitude(value?.lat || '');
+        setLongitude(value?.lon || '');
+        onSelect(value ?
+          `${value.city}, ${value.country}` :
+          '')
+      }}
       loading={loading}
       renderInput={(params) => (
         <StyledTextField

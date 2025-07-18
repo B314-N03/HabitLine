@@ -2,7 +2,11 @@ export interface IUser {
     id: string,
     username: string,
     email: string,
-    region: string,
+    weather: {
+        region: string,
+        lat: string,
+        lon: string
+    }
     avatar?: string,
     lastLoginAt?: string,
 }

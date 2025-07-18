@@ -16,9 +16,9 @@ const useLogin = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      
-      if (!res.ok) throw new Error("Login failed" + (res));
-      
+
+      if (!res.ok) throw new Error("Login failed" + (res.statusText));
+
       const data = await res.json();
 
       // Store JWT in localStorage
@@ -73,6 +73,7 @@ const useLogout = () => {
     queryClient.clear();
   };
 };
+
 
 const useMe = () =>
   useQuery<IUser>({
