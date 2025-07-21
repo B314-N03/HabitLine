@@ -2,7 +2,7 @@ import { Box, Input } from "@mui/material"
 import styles from "./non_mobile_header.module.scss"
 import SearchIcon from '@mui/icons-material/Search';
 import { AddButton } from "../../../Widgets/Buttons/AddButton";
-import SucessSnackbar from "../../../Widgets/Snackbars/SucessSnackbar";
+import SucessSnackbar from "../../../Widgets/Snackbars/SuccessSnackbar";
 
 interface NonMobileHeaderProps {
     setOpenProjectModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,7 +20,7 @@ function NonMobileHeader({
     setOpenSnackBar,
     snackBarMessage,
     setOpenDailyTaskModal
-}: NonMobileHeaderProps) {    
+}: NonMobileHeaderProps) {
     const handleOpenProjectModal = () => {
         setOpenProjectModal(true);
     }
@@ -31,7 +31,7 @@ function NonMobileHeader({
     const handleOpenDailyTaskModal = () => {
         setOpenDailyTaskModal(true);
     }
-    
+
     return (
         <>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 5 }}>
@@ -44,7 +44,7 @@ function NonMobileHeader({
                     <SearchIcon className={styles.searchIcon} />
                 </div>
                 <div className={styles.buttonContainer}>
-                    <AddButton 
+                    <AddButton
                         onClick={handleOpenProjectModal}
                         title="Add Project"
                         variant="contained"
@@ -60,7 +60,7 @@ function NonMobileHeader({
                         variant="contained"
                     />
                 </div>
-                <SucessSnackbar 
+                <SucessSnackbar
                     snackBarMessage={snackBarMessage}
                     openSnackBar={openSnackBar}
                     setOpenSnackBar={setOpenSnackBar}

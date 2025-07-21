@@ -6,7 +6,7 @@ import { useTasks } from "../../../hooks/useTasks"
 import { taskModalNewTaskData } from "../../../components/Helpers/modalBoilerPlateData"
 import TaskCard from "../../../components/Widgets/Cards/TaskCard/TaskCard"
 import TaskModal from "../../../components/Modals/TaskModal/TaskModal"
-import SucessSnackbar from "../../../components/Widgets/Snackbars/SucessSnackbar"
+import SucessSnackbar from "../../../components/Widgets/Snackbars/SuccessSnackbar"
 
 function MostUrgentTasks() {
   const { data: tasks, isLoading, isError } = useTasks()

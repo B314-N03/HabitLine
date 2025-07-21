@@ -13,8 +13,12 @@ export const useLocations = (query: string) => {
   const [loading, setLoading] = useState(false);
 
 
-  const API_KEY = process.env.API_KEY_RAPIDAPI || '';
-
+  const API_KEY = import.meta.env.VITE_API_KEY_RAPIDAPI ?? '';
+  if (!API_KEY) {
+    console.warn(
+      '⚠️  Env var VITE_API_KEY_RAPIDAPI is not defined – requests will fail'
+    );
+  }
   useEffect(() => {
     const controller = new AbortController();
 
@@ -38,7 +42,6 @@ export const useLocations = (query: string) => {
         );
 
         const data = await res.json();
-        console.log(data);
         const cities: CityOption[] = data.data.map((item: { name: string; country: string, latitude: number, longitude: number }) => ({
           city: item.name,
           country: item.country,

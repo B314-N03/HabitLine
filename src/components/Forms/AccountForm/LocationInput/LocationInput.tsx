@@ -14,6 +14,8 @@ const LocationInput: React.FC<LocationInputProps> = ({ onSelect, setLongitude, s
   const [inputValue, setInputValue] = useState('');
   const { results, loading } = useLocations(inputValue);
 
+
+
   return (
     <Autocomplete
       options={results}

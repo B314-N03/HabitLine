@@ -28,7 +28,9 @@ export const useCreateOrUpdateUser = () => {
         body: JSON.stringify(userWithoutEmail),
       });
       if (!res.ok) throw new Error("Failed to submit user");
-      return res.json();
+      const userData: IUser = await res.json();
+      localStorage.setItem('user', JSON.stringify(userData));
+      return userData;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['users'] });

@@ -69,7 +69,7 @@ function LoginCard(props: CardProps) {
           onSuccess: (data: { user: IUser }) => {
             localStorage.setItem('user', JSON.stringify(data.user));
             localStorage.setItem('lastLogin', new Date().toISOString());
-            if (!data.user.username || !data.user.weather.region) {
+            if (!data.user.username || !data.user.weather?.region) {
               setShowSetupAccountModal(true);
             }
             else {

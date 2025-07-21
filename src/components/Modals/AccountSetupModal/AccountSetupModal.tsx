@@ -61,8 +61,8 @@ function AccountSetupModal({ isOpen, setIsOpen }: AccountSetupModalProps) {
       username: formData.username || '',
       weather: {
         region: formData.weather?.region || '',
-        lat: "",
-        lon: ""
+        lat: formData.weather?.lat || '',
+        lon: formData.weather?.lon || ''
       },
       isEditing: true
     },

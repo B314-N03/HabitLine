@@ -4,10 +4,11 @@ import { useTasks } from "../../hooks/useTasks";
 import type { IProject } from "../../Interfaces/IProject";
 import type { ITask } from "../../Interfaces/ITask";
 import { useEffect, useState } from "react";
-import AccordionGroup, { type AccordionItem } from "../Widgets/AccordionGroup/AccordionGroup";
-import ProjectBoard from "../Widgets/ProjectBoard/ProjectBoard";
-import TaskModal from "../Modals/TaskModal/TaskModal";
-import SucessSnackbar from "../Widgets/Snackbars/SucessSnackbar";
+import type { AccordionItem } from "../../components/Widgets/AccordionGroup/AccordionGroup";
+import ProjectBoard from "../../components/Widgets/ProjectBoard/ProjectBoard";
+import AccordionGroup from "../../components/Widgets/AccordionGroup/AccordionGroup";
+import TaskModal from "../../components/Modals/TaskModal/TaskModal";
+import SuccessSnackbar from "../../components/Widgets/Snackbars/SuccessSnackbar";
 
 function Tasks() {
   const { data: projects, isLoading } = useProjects();
@@ -45,7 +46,7 @@ function Tasks() {
   const accordionItems: AccordionItem[] = projects.map((project: IProject) => {
     const projectTasks = tasks.filter((task: ITask) => task.projectId === project.id);
     return {
-      title: 
+      title:
         `${project.title} ${project.openTasks + project.doneTasks > 0 ? `(${project.openTasks} open task${project.openTasks > 1 ? 's' : " "})` : "(No Tasks)"}`,
       content: <ProjectBoard tasks={projectTasks} key={project.id} setOpenTaskModal={setOpenTaskModal} setTaskToView={setTaskToView} />,
     };
@@ -54,7 +55,7 @@ function Tasks() {
   return (
     <main>
       <AccordionGroup items={accordionItems} />
-       <TaskModal
+      <TaskModal
         isOpen={openTaskModal}
         onClose={() => setOpenTaskModal(false)}
         modalTitle="Edit Task"
@@ -63,7 +64,7 @@ function Tasks() {
         setOpenSnackBar={setOpenSnackBar}
         setSnackBarMessage={setSnackBarMessage}
       />
-      <SucessSnackbar
+      <SuccessSnackbar
         openSnackBar={openSnackBar}
         setOpenSnackBar={setOpenSnackBar}
         snackBarMessage={snackBarMessage}

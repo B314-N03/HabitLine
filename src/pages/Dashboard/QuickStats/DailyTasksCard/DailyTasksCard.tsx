@@ -16,8 +16,9 @@ function DailyTasksCard() {
                 ) : isError ? (
                     <p>Error loading daily tasks.</p>
                 ) : dailyTasks && dailyTasks.length > 0 ? (
-                    dailyTasks.map((task) => (
+                    dailyTasks.map((task, index) => (
                         <DailyTaskDisplay
+                            key={task.id || 'task-' + index}
                             dailyTask={task}
                         />
                     ))

@@ -7,17 +7,17 @@ import DailyTasksCard from "./DailyTasksCard/DailyTasksCard"
 
 function QuickStats() {
     return (
-    <div className={styles.quickStatsContainer}>
-       <UserCard />
-       <DailyTasksCard />
-        <WeatherCard />
-        <Card className={dashboardStyles.dashboard_card} elevation={6} >
-            <Typography variant="h5" component="h5" sx={{ fontWeight: 'bold' }}>
-                Done Tasks Today:
-            </Typography> 
+        <div className={styles.quickStatsContainer}>
+            <UserCard />
+            <DailyTasksCard />
+            <WeatherCard />
+            <Card className={dashboardStyles.dashboard_card} elevation={6} >
+                <Typography variant="h5" component="h5" sx={{ fontWeight: 'bold' }}>
+                    Done Tasks Today:
+                </Typography>
 
-        </Card>
-    </div>
+            </Card>
+        </div>
 
     )
 }
