@@ -8,9 +8,8 @@ export const useUsers = () =>
   useQuery<IUser[]>({
     queryKey: ['users'],
     queryFn: async () => {
-      const res = await fetchWithAuth(`${BackendUrl}${Endpoints.getUsers}`);
-      if (!res.ok) throw new Error("Failed to fetch users");
-      return res.json();
+      const res: IUser[] = await fetchWithAuth(`${BackendUrl}${Endpoints.getUsers}`);
+      return res;
     },
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
@@ -22,15 +21,13 @@ export const useCreateOrUpdateUser = () => {
     mutationFn: async (user: IUser & { isEditing?: boolean }) => {
       const userWithoutEmail = omit(user, ['email']);
       const endpoint = user.isEditing ? `${Endpoints.updateUser}` : Endpoints.createUser;
-      const res = await fetchWithAuth(`${BackendUrl}${endpoint}`, {
+      const res: IUser = await fetchWithAuth(`${BackendUrl}${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userWithoutEmail),
       });
-      if (!res.ok) throw new Error("Failed to submit user");
-      const userData: IUser = await res.json();
-      localStorage.setItem('user', JSON.stringify(userData));
-      return userData;
+      localStorage.setItem('user', JSON.stringify(res));
+      return res;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['users'] });

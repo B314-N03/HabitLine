@@ -18,17 +18,17 @@ export const useCreateOrUpdateDailyTask = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (dailyTask: IDailyTask & { isEditing?: boolean }) => {
-        const {isEditing, ...rest} = dailyTask
-        const payload = isEditing ? rest : omit(rest, ['id'])
-        const endpoint = dailyTask.isEditing ? Endpoints.updateDailyTask : Endpoints.createDailyTask;
-        return await fetchWithAuth(`${BackendUrl}${endpoint}`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-        });
+      const { isEditing, ...rest } = dailyTask
+      const payload = isEditing ? rest : omit(rest, ['id'])
+      const endpoint = dailyTask.isEditing ? Endpoints.updateDailyTask : Endpoints.createDailyTask;
+      return await fetchWithAuth(`${BackendUrl}${endpoint}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
     },
     onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['daily_tasks'] });
+      queryClient.invalidateQueries({ queryKey: ['daily_tasks'] });
     },
   });
 };
@@ -41,9 +41,7 @@ export const useDeleteDailyTask = () => {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });
-      if (!res.ok) throw new Error("Failed to delete daily_task");
-      console.log(res);
-      return res.json();
+      return res;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['daily_tasks'] });

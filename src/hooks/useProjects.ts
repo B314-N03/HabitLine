@@ -42,9 +42,7 @@ const useDeleteProject = () => {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });
-      if (!res.ok) throw new Error("Failed to delete project");
-      console.log(res);
-      return res.json();
+      return res;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['projects'] });

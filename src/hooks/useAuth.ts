@@ -43,15 +43,8 @@ const useRegister = () => {
         body: JSON.stringify({ email, password }),
       });
 
-      if (!res.ok) {
-        // Optional: parse error message from response body
-        const errorData = await res.json().catch(() => null);
-        throw new Error(errorData?.message || "Registration failed");
-      }
+      const data = await res;
 
-      const data = await res.json();
-
-      // Optionally, store JWT if your backend sends it on registration
       if (data.token) {
         localStorage.setItem("token", data.token);
       }

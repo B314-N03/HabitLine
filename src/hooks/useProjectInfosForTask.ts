@@ -10,7 +10,7 @@ const useProjectInfosForTask = (projectKey: string) => {
   );
   return {
     title: project?.title,
-    color:  project?.projectColor
+    color: project?.projectColor
   };
 };
 

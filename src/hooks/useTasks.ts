@@ -18,20 +18,19 @@ const useCreateOrUpdateTask = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (task: ITaskFrontend & { isEditing?: boolean }) => {
-        const {isEditing, ...rest} = task
-        const payload = isEditing ? rest : omit(rest, ['id'])
-        const endpoint = task.isEditing ? Endpoints.updateTask : Endpoints.createTask;
-        const res = await fetchWithAuth(`${BackendUrl}${endpoint}`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-        });
-        if (!res.ok) throw new Error("Failed to submit task");
-        return res.json();
+      const { isEditing, ...rest } = task
+      const payload = isEditing ? rest : omit(rest, ['id'])
+      const endpoint = task.isEditing ? Endpoints.updateTask : Endpoints.createTask;
+      const res = await fetchWithAuth(`${BackendUrl}${endpoint}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      return res
     },
     onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['tasks'] });
-        queryClient.invalidateQueries({ queryKey: ['projects'] });
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
     },
   });
 };
@@ -44,9 +43,7 @@ const useDeleteTask = () => {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });
-      if (!res.ok) throw new Error("Failed to delete task");
-      console.log(res);
-      return res.json();
+      return res;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });

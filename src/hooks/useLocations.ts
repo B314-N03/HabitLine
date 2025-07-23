@@ -42,13 +42,27 @@ export const useLocations = (query: string) => {
         );
 
         const data = await res.json();
-        const cities: CityOption[] = data.data.map((item: { name: string; country: string, latitude: number, longitude: number }) => ({
+
+        if (!Array.isArray(data?.data)) {
+          console.warn('Unexpected API response format:', data);
+          setResults([]);
+          return;
+        }
+
+        const cities: CityOption[] = data.data.map((item: {
+          name: string;
+          country: string;
+          latitude: number;
+          longitude: number;
+        }) => ({
           city: item.name,
           country: item.country,
           lat: item.latitude.toString(),
           lon: item.longitude.toString(),
         }));
+
         setResults(cities);
+
       } catch (error) {
         if (typeof error === 'object' && error !== null && 'name' in error && (error as { name: string }).name !== 'AbortError') {
           console.error('Error fetching cities:', error);
