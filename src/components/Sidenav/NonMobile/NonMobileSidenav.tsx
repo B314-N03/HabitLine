@@ -1,15 +1,15 @@
-import { Drawer} from "@mui/material";
+import { Drawer } from "@mui/material";
 import { drawerWidth } from "../const";
 import { DrawerWebapp } from "../Drawer/Drawer";
 
 
 function NonMobileSideNav() {
-  return(
+  return (
     <Drawer
       variant="permanent"
       sx={{
         display: { xs: 'none', sm: 'block' },
-        '& .MuiDrawer-paper': { 
+        '& .MuiDrawer-paper': {
           boxSizing: 'border-box',
           width: drawerWidth,
           height: `100%`,
@@ -21,7 +21,7 @@ function NonMobileSideNav() {
       }}
       open
     >
-      <DrawerWebapp />
+      <DrawerWebapp isMobile={false} />
     </Drawer>
   );
 }

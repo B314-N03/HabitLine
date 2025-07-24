@@ -8,19 +8,19 @@ function MobileSideNav() {
     const [, setIsClosing] = useState(false);
 
     const handleDrawerClose = () => {
-    setIsClosing(true);
-    setMobileOpen(false);
+        setIsClosing(true);
+        setMobileOpen(false);
     };
 
     const handleDrawerTransitionEnd = () => {
-    setIsClosing(false);
+        setIsClosing(false);
     };
-    
-    
+
+
     return (
         <Box
             component="nav"
-            sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+            sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }, display: { xs: 'block', sm: 'none' } }}
             aria-label="mailbox folders"
         >
             <Drawer
@@ -35,14 +35,14 @@ function MobileSideNav() {
                 }}
                 slotProps={{
                     root: {
-                    keepMounted: true,
+                        keepMounted: true,
                     },
                 }}
             >
-                <DrawerWebapp />
+                <DrawerWebapp isMobile />
             </Drawer>
         </Box>
-  )
+    )
 }
 
 export default MobileSideNav

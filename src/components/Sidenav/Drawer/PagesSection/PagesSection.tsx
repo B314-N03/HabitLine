@@ -4,14 +4,15 @@ import type { ISideNavPage } from "../../../../Interfaces/ISideNavPage"
 import { pages } from "../../const"
 import styles from "../drawer.module.scss"
 import StyledDivider from "../../../Widgets/StyledDivider/StyledDivider"
+import type { DrawerProps } from "../Drawer"
 
 
-function PagesSection() {
+function PagesSection({ isMobile }: DrawerProps) {
     return (
         <List>
-            <Typography variant="h6" sx={{ padding: '15px ', fontWeight: 'bold' }}>
+            {!isMobile && <Typography variant="h6" sx={{ padding: '15px ', fontWeight: 'bold' }}>
                 Pages
-            </Typography>
+            </Typography>}
             {pages.map((page: ISideNavPage) => (
                 <NavLink key={page.title} to={page.path} style={{ textDecoration: 'none', color: 'var(--text-main)' }}>
                     <ListItem key={page.title} disablePadding>
@@ -19,12 +20,12 @@ function PagesSection() {
                             <ListItemIcon sx={{ color: 'var(--text-main)' }}>
                                 {page.icon}
                             </ListItemIcon>
-                            <ListItemText primary={page.title} />
+                            {!isMobile && <ListItemText primary={page.title} />}
                         </ListItemButton>
                     </ListItem>
                 </NavLink>
             ))}
-            
+
             <StyledDivider orientation="horizontal" />
 
         </List>

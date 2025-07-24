@@ -9,8 +9,9 @@ import { useContext, useEffect } from "react"
 import { ThemeContext } from "../../../../providers/ThemeProvider"
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import type { DrawerProps } from "../Drawer"
 
-function ToolingSection() {
+function ToolingSection({ isMobile }: DrawerProps) {
     const logout = useLogout();
     const { theme, toggleTheme } = useContext(ThemeContext);
     const handleLogout = () => {
@@ -35,9 +36,9 @@ function ToolingSection() {
         <List>
             <StyledDivider orientation="horizontal" />
 
-            <Typography variant="h6" sx={{ padding: '15px ', fontWeight: 'bold' }}>
+            {!isMobile && <Typography variant="h6" sx={{ padding: '15px ', fontWeight: 'bold' }}>
                 Tooling
-            </Typography>
+            </Typography>}
             {tooling.map((page: ISideNavTooling) => {
                 const isButton = page.type === 'button';
                 return isButton ? (
@@ -46,7 +47,7 @@ function ToolingSection() {
                             <ListItemIcon sx={{ color: 'var(--text-main)' }}>
                                 {page.icon}
                             </ListItemIcon>
-                            <ListItemText primary={page.title} />
+                            {!isMobile && <ListItemText primary={page.title} />}
                         </ListItemButton>
                     </ListItem>
                 ) :
@@ -57,7 +58,7 @@ function ToolingSection() {
                                     <ListItemIcon sx={{ color: 'var(--text-main)' }}>
                                         {page.icon}
                                     </ListItemIcon>
-                                    <ListItemText primary={page.title} />
+                                    {!isMobile && <ListItemText primary={page.title} />}
                                 </ListItemButton>
                             </ListItem>
                         </NavLink>
