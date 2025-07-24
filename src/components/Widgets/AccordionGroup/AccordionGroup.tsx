@@ -33,9 +33,9 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
   color: 'var(--text-main)',
   flexDirection: 'row-reverse',
   [`& .${accordionSummaryClasses.expandIconWrapper}.${accordionSummaryClasses.expanded}`]:
-    {
-      transform: 'rotate(90deg)',
-    },
+  {
+    transform: 'rotate(90deg)',
+  },
   [`& .${accordionSummaryClasses.content}`]: {
     marginLeft: theme.spacing(1),
   },
@@ -53,6 +53,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 export interface AccordionItem {
   title: string;
   content: React.ReactNode;
+  disabled: boolean;
 }
 
 interface AccordionGroupProps {
@@ -70,14 +71,32 @@ export default function AccordionGroup({
       setExpanded(newExpanded ? panel : false);
     };
 
+  // sort the items by title
+  const sortedItems = items.sort((a, b) => {
+    if (a.disabled && !b.disabled) {
+      return 1;
+    }
+    if (!a.disabled && b.disabled) {
+      return -1;
+    }
+    return 0;
+  });
+
+  // set the first item to be expanded
+  React.useEffect(() => {
+    if (sortedItems.length > 0) {
+      setExpanded(`panel${sortedItems[0].title}`);
+    }
+  }, [sortedItems]);
+
   return (
     <div>
-      {items.map((item: AccordionItem) => (
+      {sortedItems.map((item: AccordionItem) => (
         <Accordion
           key={item.title}
           expanded={expanded === `panel${item.title}`}
           onChange={handleChange(`panel${item.title}`)}
-          disabled={item.title.includes("No Tasks")}
+          disabled={item.disabled}
         >
           <AccordionSummary aria-controls={`panel${item.title}-content`} id={`panel${item.title}-header`}>
             <Typography>{item.title} </Typography>

@@ -41,7 +41,7 @@ function WeatherCard() {
             })
 
 
-    }, [userlocation]);
+    }, [userlocation, lat, lon]);
     return (
         <Card className={`${baseStyles.dashboard_card} ${styles.weatherCard}`} elevation={6} sx={{ flex: ".5 !important" }}>
             <div className={styles.weatherContent}>

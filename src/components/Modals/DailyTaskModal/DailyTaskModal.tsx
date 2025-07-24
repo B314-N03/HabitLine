@@ -19,7 +19,7 @@ function DailyTaskModal({
     title,
     dailyTask,
     isEditing = false,
-} : DailyTaskModalProps) {
+}: DailyTaskModalProps) {
     const mutation = useCreateOrUpdateDailyTask();
     const id = dailyTask.id;
     const [titleState, setTitleState] = useState(dailyTask.title);
@@ -42,18 +42,18 @@ function DailyTaskModal({
             displayedButtons={["cancel", "save", "delete"]}
             showFooter
             onSave={handleSave}
-            onDelete={() => {}}
+            onDelete={() => { }}
         >
             <div className={styles.dailyTaskModalContent}>
-            <Input
-                placeholder="Title"
-                value={titleState}
-                onChange={(e) => setTitleState(e.target.value)}
-                className={styles.titleInput}
-                title="Title of the daily task"
-            />
+                <Input
+                    placeholder="Title"
+                    value={titleState}
+                    onChange={(e) => setTitleState(e.target.value)}
+                    className={styles.titleInput}
+                    title="Title of the daily task"
+                />
             </div>
-          
+
 
         </BaseModal>
     )

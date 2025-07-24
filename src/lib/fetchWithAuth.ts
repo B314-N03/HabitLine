@@ -41,7 +41,7 @@ export const fetchWithAuth = async (
   });
 
   if (!res.ok) {
-    throw new Error(`Request failed: ${res.status}`);
+    throw new Error(`Request failed for ${url}: ${res.status}`);
   }
 
   return res.json();

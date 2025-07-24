@@ -45,10 +45,22 @@ function Tasks() {
 
   const accordionItems: AccordionItem[] = projects.map((project: IProject) => {
     const projectTasks = tasks.filter((task: ITask) => task.projectId === project.id);
+    const taskSummary =
+      project.openTasks + project.doneTasks > 0
+        ? `(${project.openTasks} open task${project.openTasks > 1 ? 's' : ''})`
+        : '(No Tasks)';
     return {
       title:
-        `${project.title} ${project.openTasks + project.doneTasks > 0 ? `(${project.openTasks} open task${project.openTasks > 1 ? 's' : " "})` : "(No Tasks)"}`,
-      content: <ProjectBoard tasks={projectTasks} key={project.id} setOpenTaskModal={setOpenTaskModal} setTaskToView={setTaskToView} />,
+        // this displays the title of the project and the number of tasks in the project
+        `${project.title} ${taskSummary}`,
+      content:
+        <ProjectBoard
+          tasks={projectTasks}
+          key={project.id}
+          setOpenTaskModal={setOpenTaskModal}
+          setTaskToView={setTaskToView}
+        />,
+      disabled: project.openTasks === 0,
     };
   });
 

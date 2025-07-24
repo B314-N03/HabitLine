@@ -9,9 +9,9 @@ import DashboardSkeleton from "./SkeletonView"
 import { useDailyTasks } from "../../hooks/useDailyTasks"
 
 function Dashboard() {
-  const {data: tasks, isLoading: isLoadingTasks} = useTasks()
-  const {data: projects, isLoading: isLoadingProjects} = useProjects()
-  const {data: dailyTasks, isLoading: isLoadingDailyTasks} = useDailyTasks()
+  const { data: tasks, isLoading: isLoadingTasks } = useTasks()
+  const { data: projects, isLoading: isLoadingProjects } = useProjects()
+  const { data: dailyTasks, isLoading: isLoadingDailyTasks } = useDailyTasks()
   const [isLoadingData, setIsLoadingData] = useState(true)
   useMemo(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
@@ -27,10 +27,10 @@ function Dashboard() {
   return (
     <main className={styles.dashboard_container}>
       {
-        isLoadingData 
-        ? 
+        isLoadingData
+          ?
           <DashboardSkeleton />
-        :
+          :
           <>
             <MostUrgentTasks />
             <QuickStats />

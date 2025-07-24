@@ -20,9 +20,9 @@ function TaskModal({
     modalTitle,
     isEditing = false,
     task,
-    setOpenSnackBar = () => {},
-    setSnackBarMessage = () => {},
-} : TaskModalProps) {
+    setOpenSnackBar = () => { },
+    setSnackBarMessage = () => { },
+}: TaskModalProps) {
     const id = task.id;
     const [titleState, setTitleState] = useState(task.title);
     const [descriptionState, setDescriptionState] = useState(task.description);
@@ -57,7 +57,7 @@ function TaskModal({
                 status: currentTaskState,
                 comments: commentState,
                 isEditing
-            }, 
+            },
             {
                 onSuccess: () => {
                     setTitleState('');
@@ -67,19 +67,21 @@ function TaskModal({
                     setCurrentTaskState('to_do');
                     setProjectState('');
                     onClose();
-                    if(setOpenSnackBar) setOpenSnackBar(true);
-                    if(setSnackBarMessage) setSnackBarMessage(`Task ${isEditing ? 'updated' : 'created'} successfully`);
+                    if (setOpenSnackBar) setOpenSnackBar(true);
+                    if (setSnackBarMessage) setSnackBarMessage(`Task ${isEditing ? 'updated' : 'created'} successfully`);
                 },
-            },   
+            },
         )
     }
-    const handleDelete = () => 
-    deleteMutation.mutate(
-        id, 
-        { onSuccess: () => {
-            onClose()
-        }}
-    );
+    const handleDelete = () =>
+        deleteMutation.mutate(
+            id,
+            {
+                onSuccess: () => {
+                    onClose()
+                }
+            }
+        );
 
     const handleCancel = () => {
         setTitleState('');
@@ -101,7 +103,7 @@ function TaskModal({
     }
 
     const handleEditComment = (index: number, newComment: string) => {
-        setCommentState((prevComments: string[]) => 
+        setCommentState((prevComments: string[]) =>
             prevComments.map((comment, i) => (i === index ? newComment : comment))
         );
     }
@@ -140,7 +142,7 @@ function TaskModal({
                 onEditComment={handleEditComment}
                 isEditing={isEditing}
             />
-         
+
 
         </BaseModal>
     )

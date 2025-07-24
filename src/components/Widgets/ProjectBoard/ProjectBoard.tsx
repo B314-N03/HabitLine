@@ -1,5 +1,5 @@
 import type { DropResult } from "@hello-pangea/dnd";
-import { DragDropContext, Droppable, Draggable} from "@hello-pangea/dnd";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import type { ITask, TaskStatus } from "../../../Interfaces/ITask";
 import styles from "./project_board.module.scss";
 import { useEffect, useState } from "react";
@@ -27,8 +27,8 @@ const allStatuses: TaskStatus[] = [
   "done",
 ];
 
-function ProjectBoard({ tasks, setTaskToView, setOpenTaskModal}: ProjectBoardProps) {
- 
+function ProjectBoard({ tasks, setTaskToView, setOpenTaskModal }: ProjectBoardProps) {
+
   const mutation = useCreateOrUpdateTask();
   const [columns, setColumns] = useState(() =>
     allStatuses.reduce((acc, status) => {
@@ -36,7 +36,7 @@ function ProjectBoard({ tasks, setTaskToView, setOpenTaskModal}: ProjectBoardPro
       return acc;
     }, {} as Record<TaskStatus, ITask[]>)
   );
-  
+
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination } = result;
@@ -47,7 +47,7 @@ function ProjectBoard({ tasks, setTaskToView, setOpenTaskModal}: ProjectBoardPro
     const [movedTask] = sourceCol.splice(source.index, 1);
     movedTask.status = destination.droppableId as TaskStatus;
     destCol.splice(destination.index, 0, movedTask);
-    mutation.mutate({...movedTask, isEditing: true});
+    mutation.mutate({ ...movedTask, isEditing: true });
     setColumns({
       ...columns,
       [source.droppableId]: sourceCol,
@@ -70,52 +70,55 @@ function ProjectBoard({ tasks, setTaskToView, setOpenTaskModal}: ProjectBoardPro
   };
 
   return (
-    <div className={styles.board}>
-      <DragDropContext onDragEnd={onDragEnd}>
-        {allStatuses.map((status) => (
-          <Droppable droppableId={status} key={status}>
-            {(provided) => (
-              <div
-                className={styles.column}
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-              >
-                <h4 className={styles.columnTitle}>
-                  {`${formatStatusLabel(status)} ${columns[status].length}`}
-                </h4>
-                {columns[status].map((task, index) => (
-                  <Draggable draggableId={task.id} index={index} key={task.id}>
-                    {(provided) => (
-                      <div
-                        className={styles.card}
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                      >
-                        <TaskCard
-                          id={task.id}
-                          taskType={task.taskType}
-                          priority={task.priority}
-                          title={task.title}
-                          description={task.description}
-                          createdAt={task.createdAt}
-                          updatedAt={task.lastUpdatedAt}
-                          handleClick={() => handleCardClick(task)}
-                          projectId={task.projectId}
-                          variant="xsmall"
-                          showProject={false}
-                        />
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        ))}
-      </DragDropContext>
-     
+    <div className={styles.boardWrapper}>
+
+      <div className={styles.board}>
+        <DragDropContext onDragEnd={onDragEnd}>
+          {allStatuses.map((status) => (
+            <Droppable droppableId={status} key={status}>
+              {(provided) => (
+                <div
+                  className={styles.column}
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  <h4 className={styles.columnTitle}>
+                    {`${formatStatusLabel(status)} ${columns[status].length}`}
+                  </h4>
+                  {columns[status].map((task, index) => (
+                    <Draggable draggableId={task.id} index={index} key={task.id}>
+                      {(provided) => (
+                        <div
+                          className={styles.card}
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <TaskCard
+                            id={task.id}
+                            taskType={task.taskType}
+                            priority={task.priority}
+                            title={task.title}
+                            description={task.description}
+                            createdAt={task.createdAt}
+                            updatedAt={task.lastUpdatedAt}
+                            handleClick={() => handleCardClick(task)}
+                            projectId={task.projectId}
+                            variant="xsmall"
+                            showProject={false}
+                          />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          ))}
+        </DragDropContext>
+
+      </div>
     </div>
   );
 }
