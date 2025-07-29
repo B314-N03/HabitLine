@@ -39,7 +39,7 @@ function MobileSideNav() {
                     },
                 }}
             >
-                <DrawerWebapp isMobile />
+                <DrawerWebapp hideText />
             </Drawer>
         </Box>
     )

@@ -1,9 +1,16 @@
-.appBar{
+.appBar {
     background: var(--bg-main) !important;
     color: black;
     padding: 0 20px;
     display: flex;
-    width: calc(100% - 240px) !important;
     align-items: center;
     justify-content: space-between;
+}
+
+.sidenavExpanded {
+    width: calc(100% - 240px) !important;
+}
+
+.sidenavCollapsed {
+    width: calc(100% - 64px) !important;
 }

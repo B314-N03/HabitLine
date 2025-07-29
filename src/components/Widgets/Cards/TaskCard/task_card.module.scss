@@ -10,16 +10,17 @@
   overflow: unset !important;
   cursor: pointer;
   justify-content: space-between;
-  p{
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      line-clamp: 2;
-      -webkit-box-orient: vertical;  
-      overflow: hidden;
+
+  p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
 
-.taskCardTitle{
+.taskCardTitle {
   font-weight: bold;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -29,50 +30,57 @@
   height: 70px;
   margin-bottom: 15px;
 }
-.xsmall{
+
+.xsmall {
   width: 100%;
 }
 
-.small{
-    width: 250px;
+.small {
+  width: 250px;
+
+  @media screen and (min-width: 1200px) {
+    width: 300px;
+  }
 }
 
-.medium{
-    width: 400px; 
+.medium {
+  width: 400px;
 }
 
-.large{
-    width: 500px; 
+.large {
+  width: 500px;
 }
 
 
 
 .taskDetails {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    .taskDetailsItem { 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-  
-      gap: 0.5rem;
-      font-size: 0.875rem !important;
-      color: var(--text-secondary);
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 
-.taskDetailsFooter{
+  .taskDetailsItem {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 0 0 0;
-    border-top: 1px solid var(--divider-border-color);
-    .taskDetailsFooterItem{
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.875rem !important;
-        color: var(--text-secondary);
-    }
+    justify-content: space-between;
+
+    gap: 0.5rem;
+    font-size: 0.875rem !important;
+    color: var(--text-secondary);
+  }
+}
+
+.taskDetailsFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0 0 0;
+  border-top: 1px solid var(--divider-border-color);
+
+  .taskDetailsFooterItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem !important;
+    color: var(--text-secondary);
+  }
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,6 +12,7 @@ import ProjectModal from '../../Modals/ProjectModal/ProjectModal';
 import { dailyTaskModalNewTaskData, taskModalNewTaskData } from '../../Helpers/modalBoilerPlateData';
 import DailyTaskModal from '../../Modals/DailyTaskModal/DailyTaskModal';
 import { useMe } from '../../../hooks/useAuth';
+import { ThemeContext } from '../../../providers/ThemeProvider';
 
 function HeaderInsideWebapp() {
   const { data: user } = useMe();
@@ -23,6 +24,7 @@ function HeaderInsideWebapp() {
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [snackBarMessage, setSnackBarMessage] = useState('');
   const [openDailyTaskModal, setOpenDailyTaskModal] = useState(false);
+  const { hideSidenavText } = useContext(ThemeContext)
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -33,7 +35,7 @@ function HeaderInsideWebapp() {
 
 
   return (
-    <AppBar position="fixed" className={styles.appBar}>
+    <AppBar position="fixed" className={`${styles.appBar} ${!hideSidenavText ? styles.sidenavExpanded : styles.sidenavCollapsed}`}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
 

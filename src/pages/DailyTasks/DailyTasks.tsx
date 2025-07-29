@@ -6,6 +6,7 @@ import { AddButton } from "../../components/Widgets/Buttons/AddButton"
 import DailyTaskDisplay from "../../components/Widgets/DailyTaskDisplay/DailyTaskDisplay"
 import DailyTaskModal from "../../components/Modals/DailyTaskModal/DailyTaskModal"
 import { dailyTaskModalNewTaskData } from "../../components/Helpers/modalBoilerPlateData"
+import { MainWrapper } from "../../components/Helpers/Wrappers/MainWrapper/MainWrapper"
 
 
 function DailyTasks() {
@@ -17,7 +18,7 @@ function DailyTasks() {
         setOpenModal(false)
     }
     return (
-        <main>
+        <MainWrapper>
             <div className={styles.dailyTasksContainer}>
                 <Typography variant="h4" className={styles.dailyTasksTitle} >
                     Daily Tasks
@@ -50,7 +51,7 @@ function DailyTasks() {
                 title="Create Daily Task"
                 dailyTask={dailyTaskModalNewTaskData}
             />
-        </main>
+        </MainWrapper>
     )
 }
 

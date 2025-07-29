@@ -9,8 +9,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import CalendarViewWeekIcon from '@mui/icons-material/CalendarViewWeek';
 import ChecklistIcon from '@mui/icons-material/Checklist';
+import { ArrowCircleLeft } from '@mui/icons-material';
 
 export const drawerWidth = 240;
+export const drawerWidthClosed = 64;
 
 export const pages: ISideNavPage[] = [
     {
@@ -37,16 +39,22 @@ export const pages: ISideNavPage[] = [
 
 export const tooling: ISideNavTooling[] = [
     {
-        title: 'Settings',
-        icon: React.createElement(SettingsIcon),
-        path: '/settings',
-        type: 'link'
-    },
-    {
         title: 'Toggle Theme',
         icon: React.createElement(ChangeCircleIcon),
         path: '/toggle-theme',
         type: 'button'
+    },
+    {
+        title: 'Collapse Sidenav',
+        icon: React.createElement(ArrowCircleLeft),
+        path: '/collapse-sidenav',
+        type: 'button'
+    },
+    {
+        title: 'Settings',
+        icon: React.createElement(SettingsIcon),
+        path: '/settings',
+        type: 'link'
     },
     {
         title: 'Changelogs',

@@ -1,9 +1,12 @@
 import { Drawer } from "@mui/material";
-import { drawerWidth } from "../const";
+import { drawerWidth, drawerWidthClosed } from "../const";
 import { DrawerWebapp } from "../Drawer/Drawer";
+import { useContext } from "react";
+import { ThemeContext } from "../../../providers/ThemeProvider";
 
 
 function NonMobileSideNav() {
+  const { hideSidenavText: hideText } = useContext(ThemeContext);
   return (
     <Drawer
       variant="permanent"
@@ -11,7 +14,7 @@ function NonMobileSideNav() {
         display: { xs: 'none', sm: 'block' },
         '& .MuiDrawer-paper': {
           boxSizing: 'border-box',
-          width: drawerWidth,
+          width: !hideText ? drawerWidth : drawerWidthClosed,
           height: `100%`,
           backgroundColor: 'var(--bg-main)',
           paddingBottom: '10px',
@@ -21,7 +24,7 @@ function NonMobileSideNav() {
       }}
       open
     >
-      <DrawerWebapp isMobile={false} />
+      <DrawerWebapp />
     </Drawer>
   );
 }

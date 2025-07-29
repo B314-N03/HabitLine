@@ -5,38 +5,41 @@ import { tooling } from "../../const"
 import styles from "../drawer.module.scss"
 import StyledDivider from "../../../Widgets/StyledDivider/StyledDivider"
 import { useLogout } from "../../../../hooks/useAuth"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useMemo } from "react"
 import { ThemeContext } from "../../../../providers/ThemeProvider"
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import type { DrawerProps } from "../Drawer"
+import { ArrowCircleLeft } from "@mui/icons-material"
 
-function ToolingSection({ isMobile }: DrawerProps) {
+function ToolingSection({ hideText, toggleSidenavText }: { hideText: boolean, toggleSidenavText: () => void }) {
     const logout = useLogout();
     const { theme, toggleTheme } = useContext(ThemeContext);
-    const handleLogout = () => {
-        logout();
-    }
 
-    const handleToggleTheme = (e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        toggleTheme();
-    }
-    tooling.find(tool => tool.title === 'Logout')!.onClick = handleLogout;
+    tooling.find(tool => tool.title === 'Logout')!.onClick = logout;
+
 
     tooling.find(tool => tool.title === 'Toggle Theme')!.icon = theme === 'dark' ?
         <LightModeIcon /> : <DarkModeIcon />;
+
     useEffect(() => {
         tooling.find(tool => tool.title === 'Toggle Theme')!.icon = theme === 'dark' ?
             <LightModeIcon /> : <DarkModeIcon />;
     }, [theme]);
-    tooling.find(tool => tool.title === 'Toggle Theme')!.onClick = handleToggleTheme;
+
+    tooling.find(tool => tool.title === 'Toggle Theme')!.onClick = toggleTheme;
+
+    tooling.find(tool => tool.title === 'Collapse Sidenav')!.onClick = () => toggleSidenavText();
+
+    useMemo(() => {
+        tooling.find(tool => tool.title === 'Collapse Sidenav')!.icon = !hideText ?
+            <ArrowCircleLeft /> : <ArrowCircleLeft sx={{ transform: 'rotate(180deg)' }} />
+    }, [hideText]);
 
     return (
         <List>
             <StyledDivider orientation="horizontal" />
 
-            {!isMobile && <Typography variant="h6" sx={{ padding: '15px ', fontWeight: 'bold' }}>
+            {!hideText && <Typography variant="h6" sx={{ padding: '15px ', fontWeight: 'bold' }}>
                 Tooling
             </Typography>}
             {tooling.map((page: ISideNavTooling) => {
@@ -47,7 +50,7 @@ function ToolingSection({ isMobile }: DrawerProps) {
                             <ListItemIcon sx={{ color: 'var(--text-main)' }}>
                                 {page.icon}
                             </ListItemIcon>
-                            {!isMobile && <ListItemText primary={page.title} />}
+                            {!hideText && <ListItemText primary={page.title} />}
                         </ListItemButton>
                     </ListItem>
                 ) :
@@ -58,7 +61,7 @@ function ToolingSection({ isMobile }: DrawerProps) {
                                     <ListItemIcon sx={{ color: 'var(--text-main)' }}>
                                         {page.icon}
                                     </ListItemIcon>
-                                    {!isMobile && <ListItemText primary={page.title} />}
+                                    {!hideText && <ListItemText primary={page.title} />}
                                 </ListItemButton>
                             </ListItem>
                         </NavLink>

@@ -54,7 +54,7 @@ function LoginCard(props: CardProps) {
           onSuccess: (data) => {
             // Handle successful registration, e.g., redirect or show success message
             console.log('Registration successful:', data);
-            setShowSetupAccountModal(true); // Open account setup modal
+            setShowSetupAccountModal(true);
           },
           onError: (error) => {
             // Handle registration error

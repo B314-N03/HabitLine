@@ -3,29 +3,24 @@ import styles from "./drawer.module.scss";
 import PagesSection from "./PagesSection/PagesSection";
 import ToolingSection from "./ToolingSection/ToolingSection";
 import HabitLineLogo from "../../../assets/Images/HabitLineLogo.png";
-import StyledDivider from "../../Widgets/StyledDivider/StyledDivider";
+import { useContext } from "react";
+import { ThemeContext } from "../../../providers/ThemeProvider";
 
-export type DrawerProps = {
-    isMobile: boolean
-}
-
-export function DrawerWebapp({ isMobile }: DrawerProps) {
+export function DrawerWebapp() {
+    const { hideSidenavText: hideText, toggleSidenavText } = useContext(ThemeContext);
     return (
         <>
             <div className={styles.logoContainer}>
                 <img src={HabitLineLogo} alt="Logo" width="25" height="25" />
-                <Typography variant="h5" sx={{ textAlign: 'center', fontWeight: 'bold' }}>
+                {!hideText && <Typography variant="h5" sx={{ textAlign: 'center', fontWeight: 'bold' }}>
                     Habit Line
-                </Typography>
+                </Typography>}
             </div>
-            <StyledDivider orientation="horizontal" />
 
             <div className={styles.drawerContentContainer}>
+                <PagesSection hideText={hideText} />
 
-
-                <PagesSection isMobile={isMobile} />
-
-                <ToolingSection isMobile={isMobile} />
+                <ToolingSection hideText={hideText} toggleSidenavText={toggleSidenavText} />
 
             </div>
         </>

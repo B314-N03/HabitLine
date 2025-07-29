@@ -7,6 +7,7 @@ import QuickStats from "./QuickStats/QuickStats"
 import styles from "./dashboard.module.scss"
 import DashboardSkeleton from "./SkeletonView"
 import { useDailyTasks } from "../../hooks/useDailyTasks"
+import { MainWrapper } from "../../components/Helpers/Wrappers/MainWrapper/MainWrapper"
 
 function Dashboard() {
   const { data: tasks, isLoading: isLoadingTasks } = useTasks()
@@ -25,19 +26,21 @@ function Dashboard() {
   }, [tasks, projects, isLoadingTasks, isLoadingProjects, dailyTasks, isLoadingDailyTasks])
 
   return (
-    <main className={styles.dashboard_container}>
-      {
-        isLoadingData
-          ?
-          <DashboardSkeleton />
-          :
-          <>
-            <MostUrgentTasks />
-            <QuickStats />
-            <ActiveProjects />
-          </>
-      }
-    </main>
+    <MainWrapper>
+      <div className={styles.dashboard_container}>
+        {
+          isLoadingData
+            ?
+            <DashboardSkeleton />
+            :
+            <>
+              <MostUrgentTasks />
+              <QuickStats />
+              <ActiveProjects />
+            </>
+        }
+      </div>
+    </MainWrapper>
   )
 }
 

@@ -1,9 +1,10 @@
+import { MainWrapper } from "../../components/Helpers/Wrappers/MainWrapper/MainWrapper"
 
 function Analytics() {
   return (
-    <main>
-        Analytics
-    </main>
+    <MainWrapper>
+      Analytics
+    </MainWrapper>
   )
 }
 

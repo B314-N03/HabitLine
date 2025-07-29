@@ -9,6 +9,7 @@ import ProjectBoard from "../../components/Widgets/ProjectBoard/ProjectBoard";
 import AccordionGroup from "../../components/Widgets/AccordionGroup/AccordionGroup";
 import TaskModal from "../../components/Modals/TaskModal/TaskModal";
 import SuccessSnackbar from "../../components/Widgets/Snackbars/SuccessSnackbar";
+import { MainWrapper } from "../../components/Helpers/Wrappers/MainWrapper/MainWrapper";
 
 function Tasks() {
   const { data: projects, isLoading } = useProjects();
@@ -65,7 +66,7 @@ function Tasks() {
   });
 
   return (
-    <main>
+    <MainWrapper>
       <AccordionGroup items={accordionItems} />
       <TaskModal
         isOpen={openTaskModal}
@@ -81,7 +82,7 @@ function Tasks() {
         setOpenSnackBar={setOpenSnackBar}
         snackBarMessage={snackBarMessage}
       />
-    </main>
+    </MainWrapper>
   );
 }
 

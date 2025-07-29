@@ -1,7 +1,12 @@
-:root{
+html {
+    background-color: #121212;
+}
+
+
+:root {
     --color-primary: #006daa;
     --color-secondary: #0353a4;
-    --color-tertiary: #3b8d99 ;
+    --color-tertiary: #3b8d99;
     --color-quaternary: #b9d6f2;
     --color-quinary: #061a40;
     --color-senary: #7ed321;
@@ -18,15 +23,15 @@
     --font-size-xxlarge: 32px;
     --font-size-xxxlarge: 40px;
     --font-size-biggest: 48px;
-    
+
     --line-height-small: 1.2;
     --line-height-medium: 1.5;
     --line-height-large: 1.75;
 
 }
 
-.light-theme{
-    --bg-main:#ffffff;
+.light-theme {
+    --bg-main: #ffffff;
     --bg-secondary: #535353;
     --text-main: #000000;
     --divider-border-color: rgba(0, 0, 0, 0.12);
@@ -43,7 +48,7 @@
     --color-decimal: #535252;
 }
 
-#root{
+#root {
     width: 100vw;
     min-height: 100vh;
     height: 100%;
@@ -51,19 +56,18 @@
 }
 
 
-body{
+body {
     // font-family: Roboto !important;
     margin: 0;
     overflow-x: hidden;
 
 }
 
-main{
-    width: calc(100% - 240px);
+main {
     height: 100%;
     margin-top: 64px;
-    margin-left: 240px;
     padding: 20px;
+
     @media (max-width: 599px) {
         width: 100%;
         height: calc(100% - 64px);
@@ -72,115 +76,134 @@ main{
     }
 }
 
+main.sidenav-expanded {
+    width: calc(100% - 240px);
+    margin-left: 240px;
+}
+
+main.sidenav-collapsed {
+    width: calc(100% - 64px);
+    margin-left: 64px;
+}
+
+
 
 /* Global scrollbar styling */
 
 /* Firefox */
 * {
-  scrollbar-width: thin;
-  scrollbar-color: grey transparent;
+    scrollbar-width: thin;
+    scrollbar-color: grey transparent;
 }
 
 /* Webkit browsers */
 *::-webkit-scrollbar {
-  width: 8px;
-  height: 8px; /* for horizontal scrollbar if any */
-  background: transparent; /* track transparent */
+    width: 8px;
+    height: 8px;
+    /* for horizontal scrollbar if any */
+    background: transparent;
+    /* track transparent */
 }
 
 *::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 8px;
+    background: transparent;
+    border-radius: 8px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: black;
-  border-radius: 8px;
+    background-color: black;
+    border-radius: 8px;
 }
 
 /* Optional: Hover effect */
 *::-webkit-scrollbar-thumb:hover {
-  background-color: darkgrey;
+    background-color: darkgrey;
 }
 
 
 
-h1{
+h1 {
     font-size: var(--font-size-xxxlarge);
     margin-block: 0;
 }
 
-h2{
+h2 {
     font-size: var(--font-size-xxlarge);
     margin-block: 0;
 }
 
-h3{
+h3 {
     font-size: var(--font-size-xlarge);
     margin-block: 0;
 }
 
-h4{
+h4 {
     font-size: var(--font-size-large);
     margin-block: 0;
 }
 
-h5{
+h5 {
     font-size: var(--font-size-medium);
     margin-block: 0;
 }
 
-h6{
+h6 {
     font-size: var(--font-size-small);
     margin-block: 0;
 }
 
-p{
+p {
     font-size: var(--font-size-medium);
 }
 
-.bg-{
-    &primary{
+.bg- {
+    &primary {
         background-color: var(--color-primary) !important;
     }
 
-    &secondary{
+    &secondary {
         background-color: var(--color-secondary) !important;
     }
 
-    &tertiary{
+    &tertiary {
         background-color: var(--color-tertiary) !important;
     }
 
-    &quaternary{
+    &quaternary {
         background-color: var(--color-quaternary) !important;
     }
 
-    &skeleton{
+    &skeleton {
         background-color: var(--color-decimal) !important;
     }
 }
 
-.w{
-    &Full{
+.w {
+    &Full {
         width: 100% !important;
     }
-    &75{
+
+    &75 {
         width: 75% !important;
     }
-    &50{
+
+    &50 {
         width: 50% !important;
     }
-    &33{
+
+    &33 {
         width: 33% !important;
     }
-    &25{
+
+    &25 {
         width: 25% !important;
     }
-    &10{
+
+    &10 {
         width: 10% !important;
     }
-    &5{
+
+    &5 {
         width: 5% !important;
     }
 }

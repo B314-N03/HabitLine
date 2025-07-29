@@ -8,5 +8,5 @@ export interface ISideNavPage {
 
 export interface ISideNavTooling extends ISideNavPage {
     type: 'link' | 'button';
-    onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+    onClick?: () => void;
 }
