@@ -1,3 +1,4 @@
+import type { IComment } from "./IComment";
 
 
 export type TaskPriority = 'Low' | 'Medium' | 'High' | 'Critical';
@@ -12,7 +13,7 @@ export interface ITaskFrontend {
     taskType: TaskType;
     projectId: string;
     status: TaskStatus;
-    comments: string[]
+    comments: Partial<IComment>[]
 }
 
 export interface ITask {
@@ -26,8 +27,8 @@ export interface ITask {
     taskType: TaskType;
     projectId: string;
     status: TaskStatus;
-    comments: string[]
-} 
+    comments: IComment[]
+}
 
 
 export interface IProjectTasks {

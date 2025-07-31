@@ -3,9 +3,10 @@ import styles from './comment_section.module.scss'
 import { Input, Typography } from '@mui/material';
 import IconButtonHL from '../../../Widgets/Buttons/IconButton';
 import { Icons } from '../../../../assets/JSX_Icons/Icons';
+import type { ITaskFrontend } from '../../../../Interfaces/ITask';
 
 interface CommentSectionProps {
-    comments: string[];
+    comments: ITaskFrontend['comments'];
     onAddComment: (comment: string) => void;
     onDeleteComment: (index: number) => void;
     onEditComment: (index: number, newComment: string) => void;
@@ -19,6 +20,8 @@ function CommentSection({
 }: CommentSectionProps) {
     const [commentInput, setCommentInput] = useState('');
     const [editingCommentIndex, setEditingCommentIndex] = useState<number | null>(null);
+    const [editingCommentInput, setEditingCommentInput] = useState('');
+
     return (
         <div className={styles.commentSection}>
             <Typography variant='h4' className={styles.commentSectionTitle}>Comments</Typography>
@@ -33,26 +36,32 @@ function CommentSection({
 
                                 {editingCommentIndex === index ?
                                     <Input
-                                        value={comment}
-                                        onChange={(e) => onEditComment(index, e.target.value)}
+                                        value={editingCommentInput}
+                                        onChange={(e) => setEditingCommentInput(e.target.value)}
                                         className={styles.commentInput}
-                                    /> 
-                                : 
-                                    <p className={styles.commentInput}>{comment}</p>
+                                    />
+                                    :
+                                    <p className={styles.commentInput}>{comment.content}</p>
                                 }
                                 <div className={styles.commentActions}>
-                                    {editingCommentIndex !== index 
-                                    ? 
-                                        <IconButtonHL 
-                                            variant="contained"
-                                            onClick={() => {setEditingCommentIndex(index)}}
-                                            title='Edit'
-                                            icon={<Icons.EditIcon />}
-                                        /> 
-                                    : 
+                                    {editingCommentIndex !== index
+                                        ?
                                         <IconButtonHL
                                             variant="contained"
-                                            onClick={() => {onEditComment(index, comment); setEditingCommentIndex(null)}}
+                                            onClick={() => {
+                                                setEditingCommentIndex(index);
+                                                setEditingCommentInput(comment.content || '');
+                                            }}
+                                            title='Edit'
+                                            icon={<Icons.EditIcon />}
+                                        />
+                                        :
+                                        <IconButtonHL
+                                            variant="contained"
+                                            onClick={() => {
+                                                onEditComment(index, editingCommentInput);
+                                                setEditingCommentIndex(null)
+                                            }}
                                             title='Save'
                                             color='success'
                                             icon={<Icons.CheckMarkIcon />}
@@ -60,7 +69,7 @@ function CommentSection({
                                     }
                                     <IconButtonHL
                                         variant="contained"
-                                        onClick={() => {onDeleteComment(index); setEditingCommentIndex(null)}}
+                                        onClick={() => { onDeleteComment(index); setEditingCommentIndex(null) }}
                                         color="error"
                                         title='Delete'
                                         icon={<Icons.TrashIcon />}
@@ -69,21 +78,21 @@ function CommentSection({
                             </div>
                         </div>
                     ))
-                :
-                <p>No comments yet.</p>
+                    :
+                    <p>No comments yet.</p>
                 }
             </div>
             <div className={styles.commentSectionInput}>
-                
-                <Input 
+
+                <Input
                     value={commentInput}
                     onChange={(e) => setCommentInput(e.target.value)}
                     className={styles.commentInput}
                     multiline
                 />
-                <IconButtonHL 
+                <IconButtonHL
                     variant="contained"
-                    onClick={() => {onAddComment(commentInput); setCommentInput('')}}
+                    onClick={() => { onAddComment(commentInput); setCommentInput('') }}
                     title='Add Comment'
                     icon={<Icons.AddIcon />}
                 />

@@ -3,6 +3,8 @@ import { useCreateOrUpdateTask, useDeleteTask } from "../../../hooks/useTasks";
 import type { ITask } from "../../../Interfaces/ITask";
 import TaskForm from "../../Forms/TaskForm/TaskForm";
 import BaseModal from "../BaseModal/BaseModal";
+import { useMe } from "../../../hooks/useAuth";
+import type { IComment } from "../../../Interfaces/IComment";
 
 interface TaskModalProps {
     isOpen: boolean;
@@ -23,6 +25,8 @@ function TaskModal({
     setOpenSnackBar = () => { },
     setSnackBarMessage = () => { },
 }: TaskModalProps) {
+    const { data: user } = useMe();
+    const userId = user?.id || '';
     const id = task.id;
     const [titleState, setTitleState] = useState(task.title);
     const [descriptionState, setDescriptionState] = useState(task.description);
@@ -30,9 +34,13 @@ function TaskModal({
     const [priorityState, setPriorityState] = useState(task.priority);
     const [projectState, setProjectState] = useState(task.projectId);
     const [currentTaskState, setCurrentTaskState] = useState(task.status);
-    const [commentState, setCommentState] = useState(task.comments);
+    const [commentState, setCommentState] = useState<Partial<IComment>[]>(task.comments);
     const mutation = useCreateOrUpdateTask();
     const deleteMutation = useDeleteTask();
+
+    useEffect(() => {
+        console.log(commentState)
+    }, [commentState, task]);
 
     useEffect(() => {
         if (isOpen && task) {
@@ -66,6 +74,7 @@ function TaskModal({
                     setTaskTypeState('Bug');
                     setCurrentTaskState('to_do');
                     setProjectState('');
+                    setCommentState([]);
                     onClose();
                     if (setOpenSnackBar) setOpenSnackBar(true);
                     if (setSnackBarMessage) setSnackBarMessage(`Task ${isEditing ? 'updated' : 'created'} successfully`);
@@ -95,17 +104,19 @@ function TaskModal({
     }
 
     const handleAddComment = (comment: string) => {
-        setCommentState((prevComments: string[]) => [...prevComments, comment]);
+        setCommentState((prevComments: Partial<IComment>[]) => [...prevComments, { content: comment, author: userId, task_id: id }]);
     }
 
     const handleDeleteComment = (index: number) => {
-        setCommentState((prevComments: string[]) => prevComments.filter((_, i) => i !== index));
+        setCommentState((prevComments: Partial<IComment>[]) => prevComments.filter((_, i) => i !== index));
     }
 
     const handleEditComment = (index: number, newComment: string) => {
-        setCommentState((prevComments: string[]) =>
-            prevComments.map((comment, i) => (i === index ? newComment : comment))
-        );
+        setCommentState((prevComments: Partial<IComment>[]) => {
+            const updatedComments = [...prevComments];
+            updatedComments[index] = { ...updatedComments[index], content: newComment };
+            return updatedComments;
+        });
     }
 
     return (

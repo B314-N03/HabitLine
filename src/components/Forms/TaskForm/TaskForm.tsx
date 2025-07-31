@@ -24,7 +24,7 @@ interface TaskFormProps {
     setProjectState: (value: ITaskFrontend['projectId']) => void;
     currentTaskState: ITaskFrontend['status'];
     setCurrentTaskState: (value: ITaskFrontend['status']) => void;
-    comments: string[];
+    comments: ITaskFrontend['comments'];
     onAddComment: (comment: string) => void;
     onDeleteComment: (index: number) => void;
     onEditComment: (index: number, newComment: string) => void;
@@ -51,16 +51,16 @@ function TaskForm({
     onDeleteComment,
     onEditComment,
     isEditing = false
-} : TaskFormProps) {
+}: TaskFormProps) {
     const createdAtDate = formatDateHumanFriendly(createdAt, true);
     const updatedAtDate = formatDateHumanFriendly(lastUpdatedAt, true);
     return (
-    <form className={styles.taskform}>
+        <form className={styles.taskform}>
             <div className={styles.taskFormHeader}>
                 <StyledTextField
                     label="Title"
                     value={titleState}
-                    onChange={(e) => setTitleState(e.target.value)} 
+                    onChange={(e) => setTitleState(e.target.value)}
                     className={styles.taskFormHeaderTitle}
                     sx={{ width: '30%' }}
                 />
@@ -73,9 +73,9 @@ function TaskForm({
                     </div>
                 </div>}
             </div>
-            
+
             <div className={styles.taskformInputs}>
-                <TaskTypeInput 
+                <TaskTypeInput
                     title="Task Type"
                     value={taskTypeState}
                     setState={setTaskTypeState}
@@ -102,19 +102,19 @@ function TaskForm({
 
             </div>
 
-            <RichTextEditor 
+            <RichTextEditor
                 editorValue={descriptionState}
                 setEditorValue={setDescriptionState}
             />
 
-           {isEditing && <CommentSection 
+            {isEditing && <CommentSection
                 comments={comments}
                 onAddComment={onAddComment}
                 onDeleteComment={onDeleteComment}
                 onEditComment={onEditComment}
             />}
-    </form>
-  )
+        </form>
+    )
 }
 
 export default TaskForm
