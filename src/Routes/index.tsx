@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
+import Calendar from "../pages/Calendar/Calendar";
 
 const Dashboard = lazy(() => import("../pages/Dashboard/Dashboard"));
 const Tasks = lazy(() => import("../pages/Tasks/Tasks"));
@@ -32,6 +33,11 @@ function RoutesComponent() {
           <Route path="/daily-tasks" element={
             <ProtectedRoute>
               <DailyTasks />
+            </ProtectedRoute>
+          } />
+          <Route path="/calendar" element={
+            <ProtectedRoute>
+              <Calendar />
             </ProtectedRoute>
           } />
           <Route path="*" element={<div />} />

@@ -26,6 +26,11 @@ export const pages: ISideNavPage[] = [
         path: '/tasks'
     },
     {
+        title: 'Calendar',
+        icon: React.createElement(CalendarViewWeekIcon),
+        path: '/calendar'
+    },
+    {
         title: 'Daily Tasks',
         icon: React.createElement(ChecklistIcon),
         path: '/daily-tasks'
