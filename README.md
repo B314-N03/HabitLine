@@ -2,7 +2,7 @@
 
 **HabitLine** is a web application designed to help users build and maintain daily habits through a visually engaging timeline interface. Built with React, TypeScript, and Vite, HabitLine offers a responsive and interactive user experience.
 
-![HabitLineShowcase](https://github.com/user-attachments/assets/05deca8b-59a1-4bb3-8a38-21c46c4a71d5)
+<img width="1911" height="1072" alt="grafik" src="https://github.com/user-attachments/assets/3863301a-a65c-41d8-8ce6-e57f07f2ced6" />
 
 ## 🚀 Features
 
