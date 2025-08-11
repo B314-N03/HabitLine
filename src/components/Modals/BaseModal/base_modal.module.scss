@@ -1,4 +1,4 @@
-.modal_content{
+.modal_content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -12,42 +12,62 @@
     flex-direction: column;
     gap: 1rem;
 }
-.large{
+
+.thin- {
+    &small {
+        width: 20vw;
+        height: 30vh;
+    }
+
+    &medium {
+        width: 30vw;
+        height: 50vh;
+    }
+
+    &large {
+        width: 40vw;
+        height: 75vh;
+    }
+}
+
+.large {
     width: 70vw;
     height: 75vh;
 }
-.medium{
+
+.medium {
     width: 50vw;
     height: 50vh;
 }
-.small{
+
+.small {
     width: 35vw;
     height: 40vh;
 }
 
-.fit_content{
+.fit_content {
     width: fit-content;
     height: fit-content;
 }
 
-.modal_header{
+.modal_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.modal_close{
+.modal_close {
     cursor: pointer;
     font-weight: bold;
 }
 
-.modal_body{
+.modal_body {
     flex: 1;
     overflow-y: auto;
 }
 
 
-.modal_footer_buttons{
+.modal_footer_buttons {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;

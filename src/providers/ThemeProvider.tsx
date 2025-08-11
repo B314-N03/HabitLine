@@ -13,7 +13,7 @@ const ThemeContext = createContext<IThemeContext>({
 const ThemeProviderHL: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [theme, setTheme] = useState<"light" | "dark">(() => {
         const savedTheme = localStorage.getItem("theme");
-        return savedTheme ? JSON.parse(savedTheme) : "light";
+        return savedTheme ? JSON.parse(savedTheme) : "dark";
     });
     const [hideSidenavText, setHideSidenavText] = useState(false);
     const location = useLocation();

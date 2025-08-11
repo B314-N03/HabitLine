@@ -53,6 +53,7 @@ html {
     min-height: 100vh;
     height: 100%;
     background-color: var(--bg-main);
+    overflow: hidden;
 }
 
 
@@ -67,6 +68,7 @@ main {
     height: 100%;
     margin-top: 64px;
     padding: 20px;
+    overflow-y: auto;
 
     @media (max-width: 599px) {
         width: 100%;
@@ -148,11 +150,13 @@ h5 {
 }
 
 h6 {
+    color: var(--text-main);
     font-size: var(--font-size-small);
     margin-block: 0;
 }
 
 p {
+    // color: var(--text-main);
     font-size: var(--font-size-medium);
 }
 
@@ -209,9 +213,7 @@ p {
 }
 
 
-// Styles for schedule-x calendar
 .sx-react-calendar-wrapper {
     max-width: 100vw;
-    height: 800px;
-    max-height: 90vh;
+    height: calc(90vh - 80px);
 }

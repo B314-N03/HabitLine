@@ -9,7 +9,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import CalendarViewWeekIcon from '@mui/icons-material/CalendarViewWeek';
 import ChecklistIcon from '@mui/icons-material/Checklist';
-import { ArrowCircleLeft } from '@mui/icons-material';
+import { ArrowCircleLeft, CalendarMonth } from '@mui/icons-material';
 
 export const drawerWidth = 240;
 export const drawerWidthClosed = 64;
@@ -27,7 +27,7 @@ export const pages: ISideNavPage[] = [
     },
     {
         title: 'Calendar',
-        icon: React.createElement(CalendarViewWeekIcon),
+        icon: React.createElement(CalendarMonth),
         path: '/calendar'
     },
     {

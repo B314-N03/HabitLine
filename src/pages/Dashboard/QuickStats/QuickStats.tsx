@@ -4,11 +4,13 @@ import dashboardStyles from "../dashboard.module.scss"
 import UserCard from "./UserCard/UserCard"
 import WeatherCard from "./WeatherCard/WeatherCard"
 import DailyTasksCard from "./DailyTasksCard/DailyTasksCard"
+import CalendarCard from "./CalendarCard/CalendarCard"
 
 function QuickStats() {
     return (
         <div className={styles.quickStatsContainer}>
             <UserCard />
+            {/* <CalendarCard /> */}
             <DailyTasksCard />
             <WeatherCard />
             <Card className={dashboardStyles.dashboard_card} elevation={6} >
