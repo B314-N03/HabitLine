@@ -3,14 +3,16 @@ import { fetchWithAuth } from "../lib/fetchWithAuth";
 import { BackendUrl, Endpoints } from "../Endpoints/const";
 import { type CalendarEvent } from "../Interfaces/ICalendarEvent";
 
-const useCalendarEvents = () => {
+const useCalendarEvents = () =>
     useQuery<CalendarEvent[]>({
         queryKey: ['calendarEvents'],
         queryFn: async () => {
             return await fetchWithAuth(`${BackendUrl}${Endpoints.getCalendarEvents}`);
-        }
+        },
+        staleTime: 1000 * 60 * 5,
+        refetchOnWindowFocus: false,
     });
-}
+
 
 const useCreateOrUpdateCalendarEvent = () => {
     const queryClient = useQueryClient();

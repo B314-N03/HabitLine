@@ -25,11 +25,11 @@ export const Endpoints = {
     deleteProject: "/api/projects/delete/",
 
 
-    getCalendarEvents: "/api/calendar/events",
-    getCalendarEvent: "/api/calendar/events/",
-    createCalendarEvent: "/api/calendar/events/create",
-    updateCalendarEvent: "/api/calendar/events/update",
-    deleteCalendarEvent: "/api/calendar/events/delete/",
+    getCalendarEvents: "/api/calendar-events",
+    getCalendarEvent: "/api/calendar-events/",
+    createCalendarEvent: "/api/calendar-events/create",
+    updateCalendarEvent: "/api/calendar-events/update",
+    deleteCalendarEvent: "/api/calendar-events/delete/",
 
     login: "/api/auth/login",
     register: "/api/auth/register",

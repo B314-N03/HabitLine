@@ -3,12 +3,12 @@ import BaseModal from "../BaseModal/BaseModal";
 import { MenuItem } from "@mui/material";
 import type { CalendarEvent } from "../../../Interfaces/ICalendarEvent";
 import StyledTextField from "../../StyledComponents/StyledTextField/StyledTextField";
+import { useCreateOrUpdateCalendarEvent } from "../../../hooks/useCalendarEvents";
 
 interface EventModalProps {
     isOpen: boolean;
     onClose: () => void;
     modalTitle?: string;
-    onSave: (event: CalendarEvent) => void;
     isEditing?: boolean;
     initialEvent?: Partial<CalendarEvent>;
 }
@@ -23,17 +23,17 @@ function EventModal({
     isOpen,
     onClose,
     modalTitle = "Add Event",
-    onSave,
     isEditing = false,
     initialEvent = {},
 }: EventModalProps) {
+    const id = initialEvent.id || "";
     const [title, setTitle] = useState(initialEvent.title || "");
     const [start, setStart] = useState(initialEvent.start || "");
     const [end, setEnd] = useState(initialEvent.end || "");
     const [calendarId, setCalendarId] = useState(initialEvent.calendarId || "work");
     const [people, setPeople] = useState<string[]>(initialEvent.people || []);
     const [newPerson, setNewPerson] = useState<string>("");
-
+    const mutation = useCreateOrUpdateCalendarEvent();
     useEffect(() => {
         setTitle(initialEvent.title || "");
         setStart(initialEvent.start || "");
@@ -44,21 +44,24 @@ function EventModal({
     }, [initialEvent]);
 
     const handleSave = () => {
-        onSave({
-            id: initialEvent.id || Date.now().toString(),
-            title,
-            start,
-            end,
-            calendarId,
-            people,
-        });
-        setTitle("");
-        setStart("");
-        setEnd("");
-        setCalendarId("work");
-        setPeople([]);
-        setNewPerson("");
-        onClose();
+        mutation.mutate(
+            { id, title, start, end, calendarId, people },
+            {
+                onSuccess: () => {
+                    setTitle("");
+                    setStart("");
+                    setEnd("");
+                    setCalendarId("work");
+                    setPeople([]);
+                    setNewPerson("");
+                    onClose();
+                },
+                onError: (error) => {
+                    console.error("Error saving event:", error);
+                },
+            }
+        );
+
     };
 
     const handleCancel = () => {
@@ -70,6 +73,7 @@ function EventModal({
         setNewPerson("");
         onClose();
     };
+
 
     return (
         <BaseModal

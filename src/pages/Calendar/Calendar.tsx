@@ -15,9 +15,10 @@ import { ThemeContext } from '../../providers/ThemeProvider'
 import EventModal from '../../components/Modals/EventModal/EventModal'
 import type { CalendarEvent } from '../../Interfaces/ICalendarEvent'
 import { mockCalendarEvents, mockCalendars } from './const'
-import { Button, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import styles from './calendar.module.scss'
 import { AddButton } from '../../components/Widgets/Buttons/AddButton'
+import { useCalendarEvents } from '../../hooks/useCalendarEvents'
 function Calendar() {
     const eventsService = useState(() => createEventsServicePlugin())[0]
     const [openEventModal, setOpenEventModal] = useState(false)
@@ -25,7 +26,11 @@ function Calendar() {
     const [eventToView, setEventToView] = useState<CalendarEvent | null>(null)
     const { theme } = useContext(ThemeContext)
     const [events, setEvents] = useState(mockCalendarEvents)
+    const { data: calendarEvents } = useCalendarEvents()
 
+    useEffect(() => {
+        console.log('Calendar events:', calendarEvents)
+    }, [calendarEvents]);
     const calendar = useCalendarApp({
         callbacks: {
             onDoubleClickEvent: (event) => {
@@ -72,7 +77,7 @@ function Calendar() {
     useEffect(() => {
         eventsService.getAll()
         calendar?.setTheme(theme === 'dark' ? 'dark' : 'light')
-    }, [theme, eventsService])
+    }, [theme, eventsService, calendar])
 
     return (
         <MainWrapper>
@@ -106,10 +111,7 @@ function Calendar() {
                     setOpenEventModal(false)
                 }}
                 modalTitle={modalTitle}
-                onSave={(event) => {
-                    console.log('Event saved:', event)
-                }}
-                isEditing={false}
+                isEditing={!!eventToView?.id}
                 initialEvent={eventToView || {
                     title: '',
                     start: '',
@@ -117,7 +119,6 @@ function Calendar() {
                     calendarId: 'work',
                     id: '',
                 }}
-            // initialEvent={calendar?.eventModal.initialEvent}
             />
         </MainWrapper>
     )
