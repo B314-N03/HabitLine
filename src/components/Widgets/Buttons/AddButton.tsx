@@ -7,10 +7,12 @@ interface AddButtonProps {
     variant?: "text" | "outlined" | "contained";
     size?: "small" | "medium" | "large";
     title: string;
+    customClassName?: string;
+    customStyles?: React.CSSProperties;
 }
 
 export const AddButton = (
-    { onClick, disabled = false, variant = "contained", size = "medium", title }: AddButtonProps
+    { onClick, disabled = false, variant = "contained", size = "medium", title, customClassName, customStyles }: AddButtonProps
 ) => {
     return (
         <Button
@@ -19,9 +21,11 @@ export const AddButton = (
             onClick={onClick}
             disabled={disabled}
             startIcon={<PlusIcon />}
+            className={customClassName}
+            style={customStyles}
         >
             {title}
         </Button>
-            
+
     );
 }

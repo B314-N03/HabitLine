@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 import TextField, { type TextFieldProps } from '@mui/material/TextField';
 
-const CssTextField = styled(TextField)({
+const CssTextField = styled(TextField)(({ theme }) => ({
     '& .MuiOutlinedInput-notchedOutline': {
         borderRadius: '8px !important',
         color: 'var(--text-main) !important',
@@ -16,10 +16,16 @@ const CssTextField = styled(TextField)({
     '& .MuiInputBase-input': {
         color: 'var(--text-main) !important',
     },
-});
+    '& .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline': {
+        borderColor: `${theme.palette.error.main} !important`,
+    },
+}));
 
 export default function StyledTextField({
+    hasError = false,
     ...props
-}: TextFieldProps) {
-    return <CssTextField {...props} />;
+}: TextFieldProps & { hasError?: boolean }) {
+
+
+    return <CssTextField error={hasError} {...props} />;
 }

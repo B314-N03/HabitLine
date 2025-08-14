@@ -72,3 +72,8 @@
     justify-content: flex-end;
     gap: 1rem;
 }
+
+.disabledButton {
+    opacity: 0.3;
+    pointer-events: none;
+}

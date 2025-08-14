@@ -70,11 +70,11 @@ function BaseModal({
                         }
                         {displayedButtons.includes("delete") &&
                             <IconButtonHL
-                                disabled={!isEditing}
                                 onClick={onDelete}
                                 title="Delete"
                                 icon={<DeleteBin />}
                                 color="error"
+                                customClass={!isEditing ? styles.disabledButton : ""}
                             />
                         }
                         {displayedButtons.includes("save") &&

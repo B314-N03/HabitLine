@@ -12,25 +12,21 @@ import '@schedule-x/theme-default/dist/index.css'
 import { useContext, useEffect, useState } from 'react'
 import { MainWrapper } from '../../components/Helpers/Wrappers/MainWrapper/MainWrapper'
 import { ThemeContext } from '../../providers/ThemeProvider'
-import EventModal from '../../components/Modals/EventModal/EventModal'
 import type { CalendarEvent } from '../../Interfaces/ICalendarEvent'
-import { mockCalendarEvents, mockCalendars } from './const'
 import { Typography } from '@mui/material'
 import styles from './calendar.module.scss'
 import { AddButton } from '../../components/Widgets/Buttons/AddButton'
 import { useCalendarEvents } from '../../hooks/useCalendarEvents'
+import { useCalendarTypes } from '../../hooks/useCalendarTypes'
+import CalendarEventModal from '../../components/Modals/CalendarEventModal/CalendarEventModal'
 function Calendar() {
     const eventsService = useState(() => createEventsServicePlugin())[0]
     const [openEventModal, setOpenEventModal] = useState(false)
     const [modalTitle, setModalTitle] = useState('Add Event')
     const [eventToView, setEventToView] = useState<CalendarEvent | null>(null)
     const { theme } = useContext(ThemeContext)
-    const [events, setEvents] = useState(mockCalendarEvents)
     const { data: calendarEvents } = useCalendarEvents()
-
-    useEffect(() => {
-        console.log('Calendar events:', calendarEvents)
-    }, [calendarEvents]);
+    const { data: calendars = {} } = useCalendarTypes()
     const calendar = useCalendarApp({
         callbacks: {
             onDoubleClickEvent: (event) => {
@@ -62,14 +58,14 @@ function Calendar() {
 
         },
         views: [createViewDay(), createViewWeek(), createViewMonthGrid(), createViewMonthAgenda()],
-        events: events,
+        events: calendarEvents,
         plugins: [eventsService, createDragAndDropPlugin(), createEventModalPlugin()],
         isDark: theme === 'dark',
         dayBoundaries: {
             start: '06:00',
             end: '18:00',
         },
-        calendars: mockCalendars,
+        calendars: calendars,
 
 
     })
@@ -105,7 +101,7 @@ function Calendar() {
                 />
             </div>
             <ScheduleXCalendar calendarApp={calendar} />
-            <EventModal
+            <CalendarEventModal
                 isOpen={openEventModal}
                 onClose={() => {
                     setOpenEventModal(false)

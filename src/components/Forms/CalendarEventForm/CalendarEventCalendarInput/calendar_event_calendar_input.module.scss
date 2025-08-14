@@ -1,0 +1,29 @@
+.calendarEventCalendarInput {
+    width: 70%;
+    display: flex;
+    gap: 8px;
+    position: relative;
+}
+
+
+.noCalendars{
+    width: 100%;
+    height: 100%;
+    color: var(--color-red);    
+    border-radius: 8px;
+}
+
+.addButton {
+    width: 40%;
+    height: calc(100% - 8px);
+    border-radius: 8px;
+}
+
+.addNewCalendar{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin-top: 16px;
+    z-index: 1000;
+}
