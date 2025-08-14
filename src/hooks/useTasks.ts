@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { BackendUrl, Endpoints } from "../Endpoints/const";
+import { Endpoints } from "../Endpoints/const";
 import type { ITask, ITaskFrontend } from "../Interfaces/ITask";
 import { omit } from "../components/Helpers/Omit";
 import { fetchWithAuth } from "../lib/fetchWithAuth";
@@ -8,7 +8,7 @@ const useTasks = () =>
   useQuery<ITask[]>({
     queryKey: ['tasks'],
     queryFn: async () => {
-      return await fetchWithAuth(`${BackendUrl}${Endpoints.getTasks}`);
+      return await fetchWithAuth(Endpoints.getTasks);
     },
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
@@ -21,7 +21,7 @@ const useCreateOrUpdateTask = () => {
       const { isEditing, ...rest } = task
       const payload = isEditing ? rest : omit(rest, ['id'])
       const endpoint = task.isEditing ? Endpoints.updateTask : Endpoints.createTask;
-      const res = await fetchWithAuth(`${BackendUrl}${endpoint}`, {
+      const res = await fetchWithAuth(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -39,7 +39,7 @@ const useDeleteTask = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id: string) => {
-      const res = await fetchWithAuth(`${BackendUrl}${Endpoints.deleteTask}${id}`, {
+      const res = await fetchWithAuth(`${Endpoints.deleteTask}${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });

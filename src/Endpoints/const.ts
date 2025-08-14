@@ -31,6 +31,13 @@ export const Endpoints = {
     updateCalendarEvent: "/api/calendar-events/update",
     deleteCalendarEvent: "/api/calendar-events/delete/",
 
+
+    getCalendars: "/api/calendar-types",
+    getCalendar: "/api/calendars-types/",
+    createCalendar: "/api/calendars-types/create",
+    updateCalendar: "/api/calendars-types/update",
+    deleteCalendar: "/api/calendars-types/delete/",
+
     login: "/api/auth/login",
     register: "/api/auth/register",
     forgotPassword: "/api/auth/forgot-password",

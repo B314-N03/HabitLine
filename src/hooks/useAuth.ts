@@ -37,7 +37,7 @@ const useRegister = () => {
 
   return useMutation({
     mutationFn: async ({ email, password }: { email: string; password: string }) => {
-      const res = await fetchWithAuth(`${BackendUrl}${Endpoints.register}`, {
+      const res = await fetchWithAuth(Endpoints.register, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -75,7 +75,7 @@ const useMe = () =>
       const token = localStorage.getItem("token");
       if (!token) throw new Error("Not authenticated");
 
-      const user = await fetchWithAuth(`${BackendUrl}${Endpoints.me}`)
+      const user = await fetchWithAuth(Endpoints.me)
 
       return user;
     },

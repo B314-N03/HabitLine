@@ -35,7 +35,7 @@ export const fetchWithAuth = async (
     "Content-Type": "application/json",
   };
 
-  const res = await fetch(url, {
+  const res = await fetch(`${BackendUrl}${url}`, {
     ...options,
     headers,
   });

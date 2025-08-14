@@ -16,7 +16,7 @@ export const useLocations = (query: string) => {
   const API_KEY = import.meta.env.VITE_API_KEY_RAPIDAPI ?? '';
   if (!API_KEY) {
     console.warn(
-      '⚠️  Env var VITE_API_KEY_RAPIDAPI is not defined – requests will fail'
+      '⚠️  Env var VITE_API_KEY_RAPIDAPI is not defined - requests will fail'
     );
   }
   useEffect(() => {

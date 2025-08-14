@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { BackendUrl, Endpoints } from "../Endpoints/const";
+import { Endpoints } from "../Endpoints/const";
 import { omit } from "../components/Helpers/Omit";
 import type { IDailyTask } from "../Interfaces/IDailyTask";
 import { fetchWithAuth } from "../lib/fetchWithAuth";
@@ -8,7 +8,7 @@ export const useDailyTasks = () =>
   useQuery<IDailyTask[]>({
     queryKey: ['daily_tasks'],
     queryFn: async () => {
-      return await fetchWithAuth(`${BackendUrl}${Endpoints.getDailyTasks}`);
+      return await fetchWithAuth(Endpoints.getDailyTasks);
     },
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
@@ -21,7 +21,7 @@ export const useCreateOrUpdateDailyTask = () => {
       const { isEditing, ...rest } = dailyTask
       const payload = isEditing ? rest : omit(rest, ['id'])
       const endpoint = dailyTask.isEditing ? Endpoints.updateDailyTask : Endpoints.createDailyTask;
-      return await fetchWithAuth(`${BackendUrl}${endpoint}`, {
+      return await fetchWithAuth(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -37,7 +37,7 @@ export const useDeleteDailyTask = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id: string) => {
-      const res = await fetchWithAuth(`${BackendUrl}${Endpoints.deleteDailyTask}${id}`, {
+      const res = await fetchWithAuth(`${Endpoints.deleteDailyTask}${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });
