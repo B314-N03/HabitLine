@@ -6,7 +6,10 @@ import CalendarEventTitleInput from './CalendarEventTitleInput/CalendarEventTitl
 import CalendarEventCalendarInput from './CalendarEventCalendarInput/CalendarEventCalendarInput';
 import CalendarEventPersonsInput from './CalendarEventPersonsInput/CalendarEventPersonsInput';
 import IconButtonHL from '../../Widgets/Buttons/IconButton';
-import { LockClock } from '@mui/icons-material';
+import { EditCalendar, Timer } from '@mui/icons-material';
+import { FormatToScheduleXDate } from '../../Helpers/FormatToScheduleXDate';
+import CalendarEventStartSuggestion from './CalendarEventStartSuggestion/CalendarEventStartSuggestion';
+import CalendarEventDurationSuggestion from './CalendarEventDurationSuggestion/CalendarEventDurationSuggestion';
 
 interface CalendarEventFormProps {
     title: string;
@@ -28,24 +31,8 @@ interface CalendarEventFormProps {
 
 function CalendarEventForm({ title, setTitle, startDate, setStartDate, endDate, setEndDate, calendarId, setCalendarId, people, setPeople, newPerson, setNewPerson, calendars, showAddNewCalendar, setShowAddNewCalendar }: CalendarEventFormProps) {
 
-    const eventDurationSuggestion = [
-        {
-            label: "15 min",
-            value: 15
-        },
-        {
-            label: "30 min",
-            value: 30
-        },
-        {
-            label: "1 hour",
-            value: 60
-        },
-        {
-            label: "2 hours",
-            value: 120
-        },
-    ]
+
+
 
     const handleEventDurationClick = (value: number) => {
         const start = new Date(startDate);
@@ -55,6 +42,12 @@ function CalendarEventForm({ title, setTitle, startDate, setStartDate, endDate, 
         setEndDate(endTimeStr);
     }
 
+    const handleEventStartClick = (value: string) => {
+        setStartDate(value);
+        const start = new Date(value);
+        start.setMinutes(start.getMinutes() + 60);
+        setEndDate(FormatToScheduleXDate(start));
+    }
     return (
         <div className={styles.calendarEventForm}>
             <CalendarEventTitleInput title={title} setTitle={setTitle} />
@@ -63,17 +56,8 @@ function CalendarEventForm({ title, setTitle, startDate, setStartDate, endDate, 
                     <CalendarEventDateTimeInput label="Start" date={startDate} setDate={setStartDate} />
                     <CalendarEventDateTimeInput label="End" date={endDate} setDate={setEndDate} />
                 </div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 8 }}>
-                    {eventDurationSuggestion.map((suggestion) => (
-                        <IconButtonHL
-                            variant='outlined'
-                            icon={<LockClock />}
-                            key={suggestion.label}
-                            customClass={styles.eventDurationSuggestion}
-                            title={suggestion.label}
-                            onClick={() => handleEventDurationClick(suggestion.value)} />
-                    ))}
-                </div>
+                <CalendarEventStartSuggestion handleEventStartClick={handleEventStartClick} />
+                <CalendarEventDurationSuggestion handleEventDurationClick={handleEventDurationClick} />
             </div>
             <div style={{ display: "flex", gap: 16 }}>
                 <CalendarEventCalendarInput

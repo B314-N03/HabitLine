@@ -1,0 +1,17 @@
+.doneTask {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+}
+
+.noTasks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 100%;
+    color: #888;
+    font-weight: bold;
+}

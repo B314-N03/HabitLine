@@ -38,9 +38,7 @@ function TaskModal({
     const mutation = useCreateOrUpdateTask();
     const deleteMutation = useDeleteTask();
 
-    useEffect(() => {
-        console.log(commentState)
-    }, [commentState, task]);
+    
 
     useEffect(() => {
         if (isOpen && task) {

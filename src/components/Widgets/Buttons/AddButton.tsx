@@ -6,7 +6,7 @@ interface AddButtonProps {
     disabled?: boolean;
     variant?: "text" | "outlined" | "contained";
     size?: "small" | "medium" | "large";
-    title: string;
+    title?: string;
     customClassName?: string;
     customStyles?: React.CSSProperties;
 }
@@ -24,7 +24,7 @@ export const AddButton = (
             className={customClassName}
             style={customStyles}
         >
-            {title}
+            {title?.length ? title : null}
         </Button>
 
     );

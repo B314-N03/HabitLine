@@ -57,7 +57,7 @@ function CalendarEventCalendarInput({
                 customClassName={styles.addButton}
             />
             {showAddNewCalendar && (
-                <CalendarTypeForm customClassName={styles.addNewCalendar} />
+                <CalendarTypeForm customClassName={styles.addNewCalendar} isEditing={false} />
             )}
         </div>
     )

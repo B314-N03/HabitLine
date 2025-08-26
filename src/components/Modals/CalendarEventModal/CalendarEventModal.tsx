@@ -10,7 +10,9 @@ interface CalendarEventModalProps {
     onClose: () => void;
     modalTitle?: string;
     isEditing?: boolean;
-    initialEvent?: Partial<CalendarEvent>;
+    initialEvent: CalendarEvent;
+    setShowSuccessSnackbar?: (show: boolean) => void;
+    setSnackbarMessage?: (message: string) => void;
 }
 
 
@@ -19,9 +21,11 @@ function CalendarEventModal({
     onClose,
     modalTitle = "Add Event",
     isEditing = false,
-    initialEvent = {},
+    initialEvent,
+    setShowSuccessSnackbar = () => { },
+    setSnackbarMessage = () => { },
 }: CalendarEventModalProps) {
-    const id = initialEvent.id || "";
+    const id = initialEvent.id;
     const [title, setTitle] = useState(initialEvent.title || "");
     const [start, setStart] = useState(initialEvent.start || "");
     const [end, setEnd] = useState(initialEvent.end || "");
@@ -42,8 +46,11 @@ function CalendarEventModal({
     }, [initialEvent]);
 
     const handleSave = () => {
+        const formatedDate = (date: string) => {
+            return date.replace('T', ' ')
+        }
         mutation.mutate(
-            { id, title, start, end, calendarId, people },
+            { id, title, start: formatedDate(start), end: formatedDate(end), calendarId, people, isEditing },
             {
                 onSuccess: () => {
                     setTitle("");
@@ -53,6 +60,9 @@ function CalendarEventModal({
                     setPeople([]);
                     setNewPerson("");
                     onClose();
+                    setShowSuccessSnackbar(true);
+                    const message = isEditing ? "Event updated successfully!" : "Event created successfully!";
+                    setSnackbarMessage(message);
                 },
                 onError: (error) => {
                     console.error("Error saving event:", error);

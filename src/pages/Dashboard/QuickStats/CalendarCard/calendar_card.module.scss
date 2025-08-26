@@ -1,10 +1,17 @@
-.calendarEvent{
+.calendarEventsContainer {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.calendarEvent {
     display: flex;
     flex-direction: column;
     padding: 10px;
     margin: 5px;
     border-radius: 8px;
     color: white;
+    max-height: 150px;
 }
 
 .noEvents {
@@ -13,4 +20,14 @@
     justify-content: center;
     height: 100%;
     color: #888;
+}
+
+.addButton {
+    position: absolute;
+    right: 10px;
+    min-width: 40px !important;
+
+    &>span {
+        margin: 0;
+    }
 }

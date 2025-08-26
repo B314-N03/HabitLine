@@ -18,7 +18,7 @@ export default function SuccessSnackbar({ openSnackBar, setOpenSnackBar, snackBa
       <Alert
         onClose={() => setOpenSnackBar(false)}
         severity="success"
-        sx={{ width: '100%' }}
+        sx={{ width: '100%', zIndex: 999 }}
       >
         {snackBarMessage}
       </Alert>

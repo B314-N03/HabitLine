@@ -9,9 +9,11 @@ import { useCreateOrUpdateCalendarType } from "../../../hooks/useCalendarTypes";
 
 interface CalendarTypeFormProps {
     customClassName?: string;
+    id?: string;
+    isEditing?: boolean;
 }
 
-function CalendarTypeForm({ customClassName }: CalendarTypeFormProps) {
+function CalendarTypeForm({ customClassName, id = "", isEditing }: CalendarTypeFormProps) {
     const [calendarTypeTitle, setCalendarTypeTitle] = useState("");
     const [calendarTypeColor, setCalendarTypeColor] = useState<`#${string}`>("#000000");
     const [calendarTypeDescription, setCalendarTypeDescription] = useState("");
@@ -20,6 +22,7 @@ function CalendarTypeForm({ customClassName }: CalendarTypeFormProps) {
     const handleSave = () => {
         mutation.mutate(
             {
+                id,
                 label: calendarTypeTitle,
                 darkColors: {
                     main: calendarTypeColor,
@@ -32,6 +35,7 @@ function CalendarTypeForm({ customClassName }: CalendarTypeFormProps) {
                     onContainer: calendarTypeColor
                 },
                 colorName: calendarTypeTitle,
+                isEditing: isEditing || false,
             },
             {
                 onSuccess: () => {

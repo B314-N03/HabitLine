@@ -19,6 +19,11 @@ import { AddButton } from '../../components/Widgets/Buttons/AddButton'
 import { useCalendarEvents } from '../../hooks/useCalendarEvents'
 import { useCalendarTypes } from '../../hooks/useCalendarTypes'
 import CalendarEventModal from '../../components/Modals/CalendarEventModal/CalendarEventModal'
+import { createCurrentTimePlugin } from '@schedule-x/current-time'
+import { FormatToScheduleXDate } from '../../components/Helpers/FormatToScheduleXDate'
+import SuccessSnackbar from '../../components/Widgets/Snackbars/SuccessSnackbar'
+
+
 function Calendar() {
     const eventsService = useState(() => createEventsServicePlugin())[0]
     const [openEventModal, setOpenEventModal] = useState(false)
@@ -27,6 +32,8 @@ function Calendar() {
     const { theme } = useContext(ThemeContext)
     const { data: calendarEvents } = useCalendarEvents()
     const { data: calendars = {} } = useCalendarTypes()
+    const [showSuccessSnackbar, setShowSuccessSnackbar] = useState(false)
+    const [snackbarMessage, setSnackbarMessage] = useState('')
     const calendar = useCalendarApp({
         callbacks: {
             onDoubleClickEvent: (event) => {
@@ -59,11 +66,11 @@ function Calendar() {
         },
         views: [createViewDay(), createViewWeek(), createViewMonthGrid(), createViewMonthAgenda()],
         events: calendarEvents,
-        plugins: [eventsService, createDragAndDropPlugin(), createEventModalPlugin()],
+        plugins: [eventsService, createDragAndDropPlugin(), createEventModalPlugin(), createCurrentTimePlugin()],
         isDark: theme === 'dark',
         dayBoundaries: {
             start: '06:00',
-            end: '18:00',
+            end: '24:00',
         },
         calendars: calendars,
 
@@ -84,16 +91,12 @@ function Calendar() {
                     title='Add Event'
                     size="large"
                     onClick={() => {
-                        const date = new Date();
-                        const startTime = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
-                        const endTime = new Date(date.getTime() + 60 * 60 * 1000); // +1 hour
-                        const endTimeStr = `${endTime.getFullYear()}-${(endTime.getMonth() + 1).toString().padStart(2, '0')}-${endTime.getDate().toString().padStart(2, '0')} ${endTime.getHours().toString().padStart(2, '0')}:${endTime.getMinutes().toString().padStart(2, '0')}`;
                         setOpenEventModal(true)
                         setModalTitle('Add Event')
                         setEventToView({
                             title: '',
-                            start: startTime,
-                            end: endTimeStr,
+                            start: FormatToScheduleXDate(new Date()),
+                            end: FormatToScheduleXDate(new Date(new Date().getTime() + 60 * 60 * 1000)),
                             calendarId: 'work',
                             id: '',
                         })
@@ -115,6 +118,14 @@ function Calendar() {
                     calendarId: 'work',
                     id: '',
                 }}
+                setShowSuccessSnackbar={setShowSuccessSnackbar}
+                setSnackbarMessage={setSnackbarMessage}
+            />
+            <SuccessSnackbar
+                openSnackBar={showSuccessSnackbar}
+                setOpenSnackBar={setShowSuccessSnackbar}
+                snackBarMessage={snackbarMessage}
+
             />
         </MainWrapper>
     )
