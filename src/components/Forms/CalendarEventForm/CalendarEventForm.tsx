@@ -5,8 +5,6 @@ import CalendarEventDateTimeInput from './CalendarEventDateTimeInput/CalendarEve
 import CalendarEventTitleInput from './CalendarEventTitleInput/CalendarEventTitleInput';
 import CalendarEventCalendarInput from './CalendarEventCalendarInput/CalendarEventCalendarInput';
 import CalendarEventPersonsInput from './CalendarEventPersonsInput/CalendarEventPersonsInput';
-import IconButtonHL from '../../Widgets/Buttons/IconButton';
-import { EditCalendar, Timer } from '@mui/icons-material';
 import { FormatToScheduleXDate } from '../../Helpers/FormatToScheduleXDate';
 import CalendarEventStartSuggestion from './CalendarEventStartSuggestion/CalendarEventStartSuggestion';
 import CalendarEventDurationSuggestion from './CalendarEventDurationSuggestion/CalendarEventDurationSuggestion';
@@ -37,13 +35,12 @@ function CalendarEventForm({ title, setTitle, startDate, setStartDate, endDate, 
     const handleEventDurationClick = (value: number) => {
         const start = new Date(startDate);
         start.setMinutes(start.getMinutes() + value);
-        const pad = (n: number) => n.toString().padStart(2, '0');
-        const endTimeStr = `${start.getFullYear()}-${pad(start.getMonth() + 1)}-${pad(start.getDate())} ${pad(start.getHours())}:${pad(start.getMinutes())}`;
+        const endTimeStr = FormatToScheduleXDate(start);
         setEndDate(endTimeStr);
     }
 
-    const handleEventStartClick = (value: string) => {
-        setStartDate(value);
+    const handleEventStartClick = (value: string, setStart: boolean) => {
+        if (setStart) setStartDate(value);
         const start = new Date(value);
         start.setMinutes(start.getMinutes() + 60);
         setEndDate(FormatToScheduleXDate(start));

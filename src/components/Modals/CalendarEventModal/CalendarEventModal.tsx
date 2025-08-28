@@ -29,7 +29,7 @@ function CalendarEventModal({
     const [title, setTitle] = useState(initialEvent.title || "");
     const [start, setStart] = useState(initialEvent.start || "");
     const [end, setEnd] = useState(initialEvent.end || "");
-    const [calendarId, setCalendarId] = useState(initialEvent.calendarId || "work");
+    const [calendarId, setCalendarId] = useState(initialEvent.calendarId || "");
     const [people, setPeople] = useState<string[]>(initialEvent.people || []);
     const [newPerson, setNewPerson] = useState<string>("");
     const mutation = useCreateOrUpdateCalendarEvent();
@@ -37,32 +37,44 @@ function CalendarEventModal({
     const { data: calendars = [] } = useCalendarTypes();
     const [showAddNewCalendar, setShowAddNewCalendar] = useState(false);
     useEffect(() => {
+        if (!isOpen || !initialEvent) return;
         setTitle(initialEvent.title || "");
         setStart(initialEvent.start || "");
         setEnd(initialEvent.end || "");
-        setCalendarId(initialEvent.calendarId || "work");
+        setCalendarId(initialEvent.calendarId || "");
         setPeople(initialEvent.people || []);
         setNewPerson("");
-    }, [initialEvent]);
+    }, [isOpen, initialEvent]);
 
     const handleSave = () => {
         const formatedDate = (date: string) => {
             return date.replace('T', ' ')
         }
+        console.log(id)
         mutation.mutate(
-            { id, title, start: formatedDate(start), end: formatedDate(end), calendarId, people, isEditing },
+            {
+                id,
+                title,
+                start: formatedDate(start),
+                end: formatedDate(end),
+                calendarId,
+                people,
+                isEditing
+            },
             {
                 onSuccess: () => {
                     setTitle("");
                     setStart("");
                     setEnd("");
-                    setCalendarId("work");
+                    setCalendarId("");
                     setPeople([]);
                     setNewPerson("");
                     onClose();
-                    setShowSuccessSnackbar(true);
-                    const message = isEditing ? "Event updated successfully!" : "Event created successfully!";
-                    setSnackbarMessage(message);
+                    if (setShowSuccessSnackbar) {
+                        setShowSuccessSnackbar(true);
+                        const message = isEditing ? "Event updated successfully!" : "Event created successfully!";
+                        setSnackbarMessage(message);
+                    }
                 },
                 onError: (error) => {
                     console.error("Error saving event:", error);
@@ -81,7 +93,7 @@ function CalendarEventModal({
                     setTitle("");
                     setStart("");
                     setEnd("");
-                    setCalendarId("work");
+                    setCalendarId("");
                     setPeople([]);
                     setNewPerson("");
                     onClose();
@@ -97,7 +109,7 @@ function CalendarEventModal({
         setTitle("");
         setStart("");
         setEnd("");
-        setCalendarId("work");
+        setCalendarId("");
         setPeople([]);
         setNewPerson("");
         setShowAddNewCalendar(false);

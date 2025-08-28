@@ -34,14 +34,14 @@ function CalendarCard() {
                 Calendar:
             </Typography>
             <AddButton onClick={() => setOpenEventModal(true)} title="" variant="outlined" customClassName={styles.addButton} />
-            {todayEvents?.length === 0 &&
-                <div className={styles.noEvents}>
-                    <Typography variant="h5" component="h5" sx={{ fontWeight: 'bold' }}>
-                        No Events Today!
-                    </Typography>
-                </div>
-            }
             <div className={styles.calendarEventsContainer}>
+                {todayEvents?.length === 0 &&
+                    <div className={styles.noEvents}>
+                        <Typography variant="h5" component="h5" sx={{ fontWeight: 'bold' }}>
+                            No Events Today!
+                        </Typography>
+                    </div>
+                }
                 {todayEvents?.map((calendarEvent) => {
                     const calendarId = (calendarEvent.calendarId ?? 'personal') as keyof typeof mockCalendars;
                     return (

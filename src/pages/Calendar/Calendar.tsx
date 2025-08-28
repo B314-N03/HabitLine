@@ -30,7 +30,7 @@ function Calendar() {
     const [modalTitle, setModalTitle] = useState('Add Event')
     const [eventToView, setEventToView] = useState<CalendarEvent | null>(null)
     const { theme } = useContext(ThemeContext)
-    const { data: calendarEvents } = useCalendarEvents()
+    const { data: calendarEvents = [] } = useCalendarEvents()
     const { data: calendars = {} } = useCalendarTypes()
     const [showSuccessSnackbar, setShowSuccessSnackbar] = useState(false)
     const [snackbarMessage, setSnackbarMessage] = useState('')

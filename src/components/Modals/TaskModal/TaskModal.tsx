@@ -38,7 +38,7 @@ function TaskModal({
     const mutation = useCreateOrUpdateTask();
     const deleteMutation = useDeleteTask();
 
-    
+
 
     useEffect(() => {
         if (isOpen && task) {
@@ -74,8 +74,11 @@ function TaskModal({
                     setProjectState('');
                     setCommentState([]);
                     onClose();
-                    if (setOpenSnackBar) setOpenSnackBar(true);
-                    if (setSnackBarMessage) setSnackBarMessage(`Task ${isEditing ? 'updated' : 'created'} successfully`);
+                    if (setOpenSnackBar && setSnackBarMessage) {
+                        setOpenSnackBar(true);
+                        const message = isEditing ? "Task updated successfully!" : "Task created successfully!";
+                        setSnackBarMessage(message);
+                    }
                 },
             },
         )
@@ -84,7 +87,15 @@ function TaskModal({
         deleteMutation.mutate(
             id,
             {
+
                 onSuccess: () => {
+                    setTitleState('');
+                    setDescriptionState('');
+                    setPriorityState('Low');
+                    setTaskTypeState('Bug');
+                    setCurrentTaskState('to_do');
+                    setProjectState('');
+                    setCommentState([]);
                     onClose()
                 }
             }
